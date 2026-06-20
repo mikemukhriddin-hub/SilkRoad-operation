@@ -375,6 +375,7 @@ let activeCategory = 'all';
 let searchQuery = '';
 let selectedRegion = 'all';
 let selectedPrice = 'all';
+let hasToggledLang = false;
 
 // DOM Elements
 const catalogGrid = document.getElementById('catalog-grid');
@@ -428,8 +429,12 @@ function updateCategoryTabText(tabId, text) {
 function translateUI() {
     const dict = translations[currentLanguage];
 
-    // Language Button
-    btnLangSelector.innerText = dict.langBtn;
+    // Language Button - initially "Tillar" (Languages/Языки), then toggled to UZ/EN/RU
+    if (hasToggledLang) {
+        btnLangSelector.innerText = dict.langBtn;
+    } else {
+        btnLangSelector.innerText = currentLanguage === 'uz' ? 'Tillar' : (currentLanguage === 'en' ? 'Languages' : 'Языки');
+    }
 
     // Header Links
     document.getElementById('link-catalog').innerText = dict.linkCatalog;
@@ -851,6 +856,7 @@ searchInput.addEventListener('keypress', (e) => {
 
 // Language Switch Event Listener (UZ -> EN -> RU -> UZ)
 btnLangSelector.addEventListener('click', () => {
+    hasToggledLang = true;
     if (currentLanguage === 'uz') {
         currentLanguage = 'en';
     } else if (currentLanguage === 'en') {
