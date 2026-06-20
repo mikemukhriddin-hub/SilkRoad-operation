@@ -1371,3 +1371,36 @@ html {
 .review-table tr:last-child {
     border-bottom: none;
 }
+
+/* Date range side-by-side inputs */
+.form-group-range {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-group-range .form-group {
+    flex: 1;
+}
+
+/* Guide Languages list inside cards */
+.card-languages {
+    display: flex;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+.lang-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    background-color: var(--border-light);
+    color: var(--text-muted);
+    border: 1px solid var(--border-light);
+}
+
+.lang-badge.active {
+    background-color: var(--primary-cobalt-light);
+    color: white;
+    border-color: var(--primary-cobalt-light);
+}

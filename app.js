@@ -1,4 +1,4 @@
-// SilkRoad Travel Operations Platform - Application Logic with Bilingual & Russian (UZ/EN/RU) Support
+// SilkRoad Travel Operations Platform - Application Logic with UZ/EN/RU Language & Guides/Assistance Support
 
 // Mock Services Data
 const servicesData = [
@@ -93,7 +93,7 @@ const servicesData = [
         price: 220,
         rating: 5.0,
         reviews: 58,
-        region: "khiva", // serves western region
+        region: "khiva",
         priceCategory: "premium",
         image: "assets/minivan.png"
     },
@@ -118,36 +118,112 @@ const servicesData = [
         image: "assets/minivan.png"
     },
 
-    // --- GUIDES ---
+    // --- GUIDES (IN-PERSON & VIRTUAL) ---
     {
         id: "guide-samarkand-person",
         category: "guides",
-        titleUz: "Samarqand Tarixiy Obidalari Bo'yicha Gid (In-person)",
+        guideType: "in-person",
+        titleUz: "Samarqand Tarixiy Obidalari Bo'yicha Gid (Jonli)",
         titleEn: "In-Person Historical Guide in Samarkand",
         titleRu: "Исторический гид по Самарканду (Очно)",
-        descriptionUz: "Registon, Go'ri Amir va Shahi Zinda bo'ylab professional gid hamrohligi. O'zbek, ingliz va rus tillarida chuqur tarixiy ma'lumotlar va qiziqarli afsonalar bilan tanishasiz.",
-        descriptionEn: "Professional guide accompaniment through Registan, Gur-e-Amir, and Shah-i-Zinda. Deep historical insights and fascinating legends in Uzbek, English, and Russian.",
-        descriptionRu: "Профессиональное сопровождение по Регистану, Гур-Эмиру и Шахи-Зинда. Глубокие исторические сведения и легенды на узбекском, английском и русском языках.",
+        descriptionUz: "Registon, Go'ri Amir va Shahi Zinda bo'ylab professional gid hamrohligi. Chuqur tarixiy ma'lumotlar va qiziqarli afsonalar bilan tanishasiz.",
+        descriptionEn: "Professional guide accompaniment through Registan, Gur-e-Amir, and Shah-i-Zinda. Deep historical insights and fascinating legends.",
+        descriptionRu: "Профессиональное сопровождение по Регистану, Гур-Эмиру и Шахи-Зинда. Глубокие исторические сведения и легенды.",
         price: 40,
         rating: 4.8,
         reviews: 215,
         region: "samarkand",
+        spokenLanguages: ["UZ", "EN", "RU"],
+        priceCategory: "budget",
+        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000"
+    },
+    {
+        id: "guide-bukhara-nigora",
+        category: "guides",
+        guideType: "in-person",
+        titleUz: "Buxoro Madaniy-Me'moriy Ekskursiya Gidi (Nigora)",
+        titleEn: "Bukhara Cultural Tour Guide (Nigora)",
+        titleRu: "Гид по культуре и архитектуре Бухары (Нигора)",
+        descriptionUz: "Labi Hovuz, Ark va minoralar bo'ylab qadimiy Buxoro sirlarini ochuvchi madaniy sayohat. Gastro-tavsiyalar va shinam yurish yo'nalishi.",
+        descriptionEn: "Walk through Lyabi-Khauz, Ark Citadel, and ancient Bukhara dome markets. Cultural details, gastro tips, and cosy walking routes.",
+        descriptionRu: "Прогулка по Ляби-Хаузу, крепости Арк и древним купольным рынкам Бухары. Культурные детали, гастро-советы и уютные пешие маршруты.",
+        price: 45,
+        rating: 4.9,
+        reviews: 148,
+        region: "bukhara",
+        spokenLanguages: ["EN", "RU", "FR"],
+        priceCategory: "budget",
+        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000"
+    },
+    {
+        id: "guide-tashkent-dilshod",
+        category: "guides",
+        guideType: "in-person",
+        titleUz: "Toshkent Gastro & Chorsu Bozor Turi (Dilshod)",
+        titleEn: "Tashkent Gastro & Chorsu Bazaar Guide (Dilshod)",
+        titleRu: "Гастро-гид по Ташкенту и базару Чорсу (Дильшод)",
+        descriptionUz: "Eski shahar, Chorsu bozori va milliy taomlar markazlari bo'ylab osh marosimi va qiziqarli ko'cha shashlikxonalari bo'yicha gastronomik sayohat.",
+        descriptionEn: "Gastronomic tour around Old City, Chorsu Bazaar, and local food spots. Authentic plov experience and hidden shashlik venues.",
+        descriptionRu: "Гастрономический тур по Старому городу, базару Чорсу и местным заведениям. Аутентичный плов и скрытые шашлычные.",
+        price: 35,
+        rating: 4.7,
+        reviews: 92,
+        region: "tashkent",
+        spokenLanguages: ["UZ", "EN", "RU"],
+        priceCategory: "budget",
+        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000"
+    },
+    {
+        id: "guide-khiva-malika",
+        category: "guides",
+        guideType: "in-person",
+        titleUz: "Ichan-Qal'a Ertaklar Shahri Gidi (Malika)",
+        titleEn: "Ichan-Kala Fairy Tale City Guide (Malika)",
+        titleRu: "Гид по сказочному городу Ичан-Кала (Малика)",
+        descriptionUz: "Xiva eski shahri, minoralar, saroylar va qadimiy madrasalar bo'ylab professional tarixiy sayohat. Xorazm milliy hunarmandchiligi bilan tanishtirish.",
+        descriptionEn: "Historical tour inside the walls of Ichan-Kala, minarets, palaces, and ancient mosques. Introduction to Khorezm national crafts.",
+        descriptionRu: "Исторический тур за стенами Ичан-Калы, минареты, дворцы и древние мечети. Знакомство с хорезмскими народными ремеслами.",
+        price: 50,
+        rating: 5.0,
+        reviews: 73,
+        region: "khiva",
+        spokenLanguages: ["UZ", "EN", "RU", "FR"],
         priceCategory: "budget",
         image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000"
     },
     {
         id: "guide-online-virtual",
         category: "guides",
-        titleUz: "Virtual Gid - Online Hamrohlik xizmati",
-        titleEn: "Virtual Guide - Online Assistance Service",
-        titleRu: "Виртуальный гид - Онлайн поддержка в путешествии",
-        descriptionUz: "Uzbekistan bo'ylab sayohat davomida Telegram yoki WhatsApp orqali 24/7 video va audio aloqada bo'ladigan gid. Transport rejalashtirish, tarjimalar va mahalliy maslahatlar beradi.",
-        descriptionEn: "24/7 guide available via video and audio connection on Telegram or WhatsApp during your trip in Uzbekistan. Assists with transport, translations, and local tips.",
-        descriptionRu: "Гид на связи 24/7 по видео и аудио через Telegram или WhatsApp во время поездки по Узбекистану. Помощь с транспортом, переводом и местными советами.",
+        guideType: "virtual",
+        titleUz: "Virtual Gid - 24/7 Online Masofaviy Ko'mak",
+        titleEn: "Virtual Guide - 24/7 Remote Assistance",
+        titleRu: "Виртуальный гид - 24/7 Онлайн поддержка",
+        descriptionUz: "Telegram yoki WhatsApp orqali 24/7 lokal muammolarni hal qilish, narxlarni kelishish, tarjimonlik qilish va eng yaxshi lokal joylarni tavsiya etish xizmati.",
+        descriptionEn: "24/7 remote support via Telegram or WhatsApp. Local problem solving, price negotiations, translation, and custom local travel recommendations.",
+        descriptionRu: "Круглосуточная поддержка 24/7 через Telegram или WhatsApp. Решение локальных вопросов, помощь с ценами, перевод и рекомендации местных мест.",
         price: 15,
-        rating: 4.7,
+        rating: 4.9,
         reviews: 340,
         region: "tashkent",
+        spokenLanguages: ["UZ", "EN", "RU"],
+        priceCategory: "budget",
+        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000"
+    },
+    {
+        id: "guide-virtual-bukhara-expert",
+        category: "guides",
+        guideType: "virtual",
+        titleUz: "Virtual Buxoro Eksperti (Masofaviy ko'mak)",
+        titleEn: "Virtual Bukhara Expert (Remote Assist)",
+        titleRu: "Виртуальный эксперт по Бухаре (Онлайн)",
+        descriptionUz: "Buxoro shahrida sayohat paytida onlayn narxlarni solishtirish, hunarmandlar rastasida muomala qilish va haqiqiy milliy ustaxonalarni masofadan topish bo'yicha ko'mak.",
+        descriptionEn: "Online help during your Bukhara trip. Craft market translations, souvenir price negotiating, and remote search for authentic pottery workshops.",
+        descriptionRu: "Онлайн помощь в Бухаре. Перевод на ремесленных рынках, торговля за сувениры и удаленный поиск аутентичных гончарных мастерских.",
+        price: 12,
+        rating: 4.8,
+        reviews: 65,
+        region: "bukhara",
+        spokenLanguages: ["EN", "RU", "FR"],
         priceCategory: "budget",
         image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000"
     },
@@ -333,13 +409,18 @@ const translations = {
         subCatMinivan: "Miniven / Mikroavtobus (4-15 kishi)",
         subCatSuv: "Yo'ltanlamas / Jip (4x4)",
 
+        // Guides Format
+        formatAll: "Barchasi",
+        formatInPerson: "In-Person (Jonli hamrohlik)",
+        formatVirtual: "Virtual (Masofaviy ko'mak)",
+
         // Wizard steps translations
         wizardStepNode1: "Vaqt",
         wizardStepNode2: "Yo'lovchi",
         wizardStepNode3: "Kontaktlar",
         wizardStepNode4: "Tasdiqlash",
         lblFormChildSeat: "Bolalar o'rindig'i kerakmi? (Bepul)",
-        lblFormUsername: "Ismingiz va Telegram username (ixtiyoriy)",
+        lblFormUsername: "Ismingiz va Telegram/WhatsApp username",
         lblReviewTitle: "Buyurtma tafsilotlarini tekshiring",
         lblReviewService: "Xizmat:",
         lblReviewDatetime: "Sana va vaqt:",
@@ -350,11 +431,19 @@ const translations = {
         lblReviewPrice: "Jami qiymat:",
         btnWizardBack: "Orqaga",
         btnWizardNext: "Keyingisi",
-        btnGeneratePdfReceipt: "📄 PDF Chek yuklab olish",
-        alertReceiptGenerated: "PDF Chek yuklab olindi (MOCK receipt.txt yuklandi)",
+        btnGeneratePdfReceipt: "📄 PDF Vaucher yuklab olish",
+        alertReceiptGenerated: "PDF Vaucher yuklab olindi (MOCK voucher_SR.txt yuklandi)",
         msgYes: "Ha",
         msgNo: "Yo'q",
-        msgNotSpecified: "Kiritilmagan"
+        msgNotSpecified: "Kiritilmagan",
+
+        // Guide wizard specific
+        lblFormStartChange: "Boshlanish sanasi",
+        lblFormEndChange: "Tugash sanasi",
+        lblFormGuideLang: "Muloqot tili",
+        lblFormMessengerType: "Afzal ko'rilgan messenjer",
+        lblReviewGuideLang: "Muloqot tili:",
+        lblReviewMessenger: "Aloqa messenjeri:"
     },
     en: {
         langBtn: "🌐 EN",
@@ -432,13 +521,18 @@ const translations = {
         subCatMinivan: "Minivan / Minibus (4-15 pax)",
         subCatSuv: "Off-Road / SUV (4x4)",
 
+        // Guides Format
+        formatAll: "All",
+        formatInPerson: "In-Person (Live Guide)",
+        formatVirtual: "Virtual (Online Assistant)",
+
         // Wizard steps translations
         wizardStepNode1: "Time",
         wizardStepNode2: "Passengers",
         wizardStepNode3: "Contacts",
         wizardStepNode4: "Review",
         lblFormChildSeat: "Child safety seat required? (Free)",
-        lblFormUsername: "Your name and Telegram username (optional)",
+        lblFormUsername: "Your name and Telegram/WhatsApp username",
         lblReviewTitle: "Verify Booking Details",
         lblReviewService: "Service:",
         lblReviewDatetime: "Date & Time:",
@@ -449,11 +543,19 @@ const translations = {
         lblReviewPrice: "Total cost:",
         btnWizardBack: "Back",
         btnWizardNext: "Next",
-        btnGeneratePdfReceipt: "📄 Download PDF Receipt",
-        alertReceiptGenerated: "PDF Receipt downloaded (MOCK receipt.txt saved)",
+        btnGeneratePdfReceipt: "📄 Download PDF Voucher",
+        alertReceiptGenerated: "PDF Voucher downloaded (MOCK voucher_SR.txt saved)",
         msgYes: "Yes",
         msgNo: "No",
-        msgNotSpecified: "Not specified"
+        msgNotSpecified: "Not specified",
+
+        // Guide wizard specific
+        lblFormStartChange: "Start Date",
+        lblFormEndChange: "End Date",
+        lblFormGuideLang: "Communication Language",
+        lblFormMessengerType: "Preferred Messenger",
+        lblReviewGuideLang: "Spoken Language:",
+        lblReviewMessenger: "Contact Messenger:"
     },
     ru: {
         langBtn: "🌐 RU",
@@ -531,13 +633,18 @@ const translations = {
         subCatMinivan: "Минивэн / Микроавтобус (4-15 чел.)",
         subCatSuv: "Внедорожник / Джип (4x4)",
 
+        // Guides Format
+        formatAll: "Все",
+        formatInPerson: "Очно (Живое сопровождение)",
+        formatVirtual: "Онлайн (Виртуальный гид)",
+
         // Wizard steps translations
         wizardStepNode1: "Время",
         wizardStepNode2: "Пассажиры",
         wizardStepNode3: "Контакты",
         wizardStepNode4: "Подтверждение",
         lblFormChildSeat: "Нужно детское кресло? (Бесплатно)",
-        lblFormUsername: "Ваше имя и Telegram username (необязательно)",
+        lblFormUsername: "Ваше имя и Telegram/WhatsApp username",
         lblReviewTitle: "Проверьте детали заказа",
         lblReviewService: "Услуга:",
         lblReviewDatetime: "Дата и время:",
@@ -548,11 +655,19 @@ const translations = {
         lblReviewPrice: "Общая стоимость:",
         btnWizardBack: "Назад",
         btnWizardNext: "Далее",
-        btnGeneratePdfReceipt: "📄 Скачать PDF чек",
-        alertReceiptGenerated: "PDF Чек скачан (MOCK receipt.txt сохранен)",
+        btnGeneratePdfReceipt: "📄 Скачать PDF ваучер",
+        alertReceiptGenerated: "PDF Ваучер скачан (MOCK voucher_SR.txt сохранен)",
         msgYes: "Да",
         msgNo: "Нет",
-        msgNotSpecified: "Не указано"
+        msgNotSpecified: "Не указано",
+
+        // Guide wizard specific
+        lblFormStartChange: "Дата начала",
+        lblFormEndChange: "Дата окончания",
+        lblFormGuideLang: "Язык общения",
+        lblFormMessengerType: "Предпочтительный мессенджер",
+        lblReviewGuideLang: "Язык общения:",
+        lblReviewMessenger: "Мессенджер:"
     }
 };
 
@@ -560,7 +675,7 @@ const translations = {
 let currentLanguage = localStorage.getItem('silkroad_lang') || 'uz';
 let itinerary = JSON.parse(localStorage.getItem('silkroad_itinerary')) || [];
 let activeCategory = 'all';
-let activeSubCategory = 'all'; // specifically for transport sub-categories
+let activeSubCategory = 'all'; // specifically for transport / guides sub-categories
 let searchQuery = '';
 let selectedRegion = 'all';
 let selectedPrice = 'all';
@@ -614,6 +729,12 @@ const formNotes = document.getElementById('form-notes');
 const formContact = document.getElementById('form-contact');
 const formUsername = document.getElementById('form-username');
 const formChildSeat = document.getElementById('form-child-seat');
+
+// Guides Wizard specific inputs
+const formStartDate = document.getElementById('form-start-date');
+const formEndDate = document.getElementById('form-end-date');
+const formGuideLang = document.getElementById('form-guide-lang');
+const formMessengerType = document.getElementById('form-messenger-type');
 
 // PDF Mock Receipt button
 const btnGeneratePdfReceipt = document.getElementById('btn-generate-pdf-receipt');
@@ -724,12 +845,20 @@ function translateUI() {
     document.getElementById('lbl-form-username').innerText = dict.lblFormUsername;
     document.getElementById('btn-generate-pdf-receipt').innerText = dict.btnGeneratePdfReceipt;
 
+    // Guide Specific wizard labels
+    document.getElementById('lbl-form-start-date').innerText = dict.lblFormStartChange;
+    document.getElementById('lbl-form-end-date').innerText = dict.lblFormEndChange;
+    document.getElementById('lbl-form-guide-lang').innerText = dict.lblFormGuideLang;
+    document.getElementById('lbl-form-messenger-type').innerText = dict.lblFormMessengerType;
+
     // Wizard Review Table Labels
     document.getElementById('lbl-review-title').innerText = dict.lblReviewTitle;
     document.getElementById('lbl-review-service').innerText = dict.lblReviewService;
     document.getElementById('lbl-review-datetime').innerText = dict.lblReviewDatetime;
     document.getElementById('lbl-review-guests').innerText = dict.lblReviewGuests;
     document.getElementById('lbl-review-child-seat').innerText = dict.lblReviewChildSeat;
+    document.getElementById('lbl-review-guide-lang').innerText = dict.lblReviewGuideLang;
+    document.getElementById('lbl-review-messenger').innerText = dict.lblReviewMessenger;
     document.getElementById('lbl-review-contact').innerText = dict.lblReviewContact;
     document.getElementById('lbl-review-name').innerText = dict.lblReviewName;
     document.getElementById('lbl-review-price').innerText = dict.lblReviewPrice;
@@ -752,22 +881,31 @@ function translateUI() {
     }
 
     // Refresh secondary sub-category buttons
-    if (activeCategory === 'transport') {
+    if (activeCategory === 'transport' || activeCategory === 'guides') {
         renderSubCategories();
     }
 }
 
-// Render Sub-category Tabs (For Transport specifically)
+// Render Sub-category Tabs (For Transport & Guides specifically)
 function renderSubCategories() {
     const dict = translations[currentLanguage];
     subCategoriesFilterArea.innerHTML = '';
 
-    const subCats = [
-        { id: "all", label: dict.subCatAll },
-        { id: "sedan", label: dict.subCatSedan },
-        { id: "minivan", label: dict.subCatMinivan },
-        { id: "suv", label: dict.subCatSuv }
-    ];
+    let subCats = [];
+    if (activeCategory === 'transport') {
+        subCats = [
+            { id: "all", label: dict.subCatAll },
+            { id: "sedan", label: dict.subCatSedan },
+            { id: "minivan", label: dict.subCatMinivan },
+            { id: "suv", label: dict.subCatSuv }
+        ];
+    } else if (activeCategory === 'guides') {
+        subCats = [
+            { id: "all", label: dict.formatAll },
+            { id: "in-person", label: dict.formatInPerson },
+            { id: "virtual", label: dict.formatVirtual }
+        ];
+    }
 
     subCats.forEach(sc => {
         const btn = document.createElement('button');
@@ -788,13 +926,15 @@ function renderSubCategories() {
     subCategoriesFilterArea.style.display = 'flex';
 }
 
-// Render Catalog Cards (with Skeleton Loader Simulation)
+// Render Catalog Cards (with Priority Language-based sorting for Guides)
 function renderCatalog() {
     const dict = translations[currentLanguage];
 
     // Hide or Show secondary sub-category tabs
-    if (activeCategory === 'transport') {
-        if (subCategoriesFilterArea.innerHTML === '') {
+    if (activeCategory === 'transport' || activeCategory === 'guides') {
+        if (subCategoriesFilterArea.innerHTML === '' || 
+           (activeCategory === 'transport' && subCategoriesFilterArea.firstChild.getAttribute('data-subcategory') === 'in-person') ||
+           (activeCategory === 'guides' && subCategoriesFilterArea.firstChild.getAttribute('data-subcategory') === 'sedan')) {
             renderSubCategories();
         } else {
             subCategoriesFilterArea.style.display = 'flex';
@@ -825,11 +965,16 @@ function renderCatalog() {
     // Simulate API delay
     setTimeout(() => {
         // Filter services based on state
-        const filtered = servicesData.filter(item => {
+        let filtered = servicesData.filter(item => {
             const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
             
-            // Secondary subcategory filtering for transport
-            const matchesSubCategory = activeSubCategory === 'all' || (item.category === 'transport' && item.subCategory === activeSubCategory);
+            // Secondary subcategory filtering for transport & guides
+            let matchesSubCategory = true;
+            if (activeCategory === 'transport') {
+                matchesSubCategory = activeSubCategory === 'all' || item.subCategory === activeSubCategory;
+            } else if (activeCategory === 'guides') {
+                matchesSubCategory = activeSubCategory === 'all' || item.guideType === activeSubCategory;
+            }
 
             // Dynamic fields based on current language
             let title = item.titleUz;
@@ -842,7 +987,7 @@ function renderCatalog() {
                 description = item.descriptionRu;
             }
 
-            // Route search matching (e.g. Samarqand matches "Samarqand ↔ Buxoro")
+            // Route search matching
             const matchesSearch = searchQuery === '' || 
                 title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                 description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -858,6 +1003,16 @@ function renderCatalog() {
 
             return matchesCategory && matchesSubCategory && matchesSearch && matchesRegion && matchesPrice;
         });
+
+        // PRIORITY LANGUAGE-BASED SORTING FOR GUIDES
+        if (activeCategory === 'guides') {
+            const priorityLang = currentLanguage.toUpperCase(); // e.g. UZ, EN, RU
+            filtered.sort((a, b) => {
+                const aSpeaks = (a.spokenLanguages && a.spokenLanguages.includes(priorityLang)) ? 1 : 0;
+                const bSpeaks = (b.spokenLanguages && b.spokenLanguages.includes(priorityLang)) ? 1 : 0;
+                return bSpeaks - aSpeaks; // speaks language comes first
+            });
+        }
 
         // Update Result text
         resultsCountText.innerText = `${filtered.length} ${dict.resultsCount}`;
@@ -893,6 +1048,17 @@ function renderCatalog() {
             // Map region translations
             const regionName = dict[`opt${item.region.charAt(0).toUpperCase() + item.region.slice(1)}`] || item.region;
 
+            // Generate languages badge capsules for Guides
+            let langBadgesHTML = '';
+            if (item.category === 'guides' && item.spokenLanguages) {
+                langBadgesHTML = `<div class="card-languages">`;
+                item.spokenLanguages.forEach(l => {
+                    const isActive = l.toLowerCase() === currentLanguage ? 'active' : '';
+                    langBadgesHTML += `<span class="lang-badge ${isActive}">${l}</span>`;
+                });
+                langBadgesHTML += `</div>`;
+            }
+
             card.innerHTML = `
                 <div class="card-image-wrapper">
                     <img src="${item.image}" alt="${title}" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=600'">
@@ -901,7 +1067,8 @@ function renderCatalog() {
                 <div class="card-content">
                     <div class="card-category">${regionName.toUpperCase()} • RATING ★${item.rating} (${item.reviews})</div>
                     <h3 class="card-title">${title}</h3>
-                    <p class="card-description">${description}</p>
+                    ${langBadgesHTML}
+                    <p class="card-description" style="margin-top: 0.5rem;">${description}</p>
                     <div class="card-footer">
                         <div class="card-price">
                             <span class="price-label">${dict.priceLabel}</span>
@@ -961,17 +1128,59 @@ function openBookingModal(itemId) {
 
     // Reset Form fields
     formDate.value = '';
+    formStartDate.value = '';
+    formEndDate.value = '';
     formQuantity.value = '1';
     formNotes.value = '';
     formUsername.value = '';
     formChildSeat.checked = false;
 
-    // Show or hide transport-specific options (Child seat)
-    const childSeatRow = document.getElementById('form-child-seat-group');
-    if (item.category === 'transport') {
-        childSeatRow.style.display = 'block';
+    // STEP 1 Form Layout Adjustments
+    const singleDateDiv = document.getElementById('form-single-date-group');
+    const rangeDateDiv = document.getElementById('form-date-range-group');
+
+    if (item.category === 'guides' && item.guideType === 'virtual') {
+        singleDateDiv.style.display = 'none';
+        rangeDateDiv.style.display = 'flex';
+        formStartDate.setAttribute('required', 'required');
+        formEndDate.setAttribute('required', 'required');
+        formDate.removeAttribute('required');
     } else {
-        childSeatRow.style.display = 'none';
+        singleDateDiv.style.display = 'block';
+        rangeDateDiv.style.display = 'none';
+        formDate.setAttribute('required', 'required');
+        formStartDate.removeAttribute('required');
+        formEndDate.removeAttribute('required');
+    }
+
+    // STEP 2 Form Layout Adjustments
+    const quantityDiv = document.getElementById('form-quantity-group');
+    const childSeatDiv = document.getElementById('form-child-seat-group');
+    const guideLangDiv = document.getElementById('form-guide-lang-group');
+
+    if (item.category === 'transport') {
+        quantityDiv.style.display = 'block';
+        childSeatDiv.style.display = 'block';
+        guideLangDiv.style.display = 'none';
+    } else if (item.category === 'guides') {
+        quantityDiv.style.display = 'none';
+        childSeatDiv.style.display = 'none';
+        guideLangDiv.style.display = 'block';
+
+        // Populate spoken languages only
+        formGuideLang.innerHTML = '';
+        if (item.spokenLanguages) {
+            item.spokenLanguages.forEach(l => {
+                const opt = document.createElement('option');
+                opt.value = l.toLowerCase();
+                opt.text = l;
+                formGuideLang.appendChild(opt);
+            });
+        }
+    } else {
+        quantityDiv.style.display = 'block';
+        childSeatDiv.style.display = 'none';
+        guideLangDiv.style.display = 'none';
     }
 
     // Reset Wizard steps
@@ -1021,20 +1230,50 @@ function updateWizardUI() {
 
 // Wizard Next Button Trigger
 btnWizardNext.addEventListener('click', () => {
+    if (!selectedServiceForBooking) return;
+    const item = selectedServiceForBooking;
+
     // Validate current step input
     if (currentStep === 1) {
-        if (!formDate.value) {
-            formDate.reportValidity();
-            return;
+        if (item.category === 'guides' && item.guideType === 'virtual') {
+            if (!formStartDate.value) {
+                formStartDate.reportValidity();
+                return;
+            }
+            if (!formEndDate.value) {
+                formEndDate.reportValidity();
+                return;
+            }
+            // Start must be before end date
+            const startVal = new Date(formStartDate.value);
+            const endVal = new Date(formEndDate.value);
+            if (endVal < startVal) {
+                formEndDate.setCustomValidity(currentLanguage === 'uz' ? "Tugash sanasi boshlanishidan oldin bo'lishi mumkin emas!" : "End date cannot be before start date!");
+                formEndDate.reportValidity();
+                return;
+            } else {
+                formEndDate.setCustomValidity("");
+            }
+        } else {
+            if (!formDate.value) {
+                formDate.reportValidity();
+                return;
+            }
         }
     } else if (currentStep === 2) {
-        if (!formQuantity.value || parseInt(formQuantity.value) < 1) {
-            formQuantity.reportValidity();
-            return;
+        if (item.category !== 'guides') {
+            if (!formQuantity.value || parseInt(formQuantity.value) < 1) {
+                formQuantity.reportValidity();
+                return;
+            }
         }
     } else if (currentStep === 3) {
         if (!formContact.value) {
             formContact.reportValidity();
+            return;
+        }
+        if (!formUsername.value.trim()) {
+            formUsername.reportValidity();
             return;
         }
         
@@ -1063,18 +1302,36 @@ function populateReviewSummary() {
     const item = selectedServiceForBooking;
     const title = currentLanguage === 'uz' ? item.titleUz : (currentLanguage === 'en' ? item.titleEn : item.titleRu);
     
-    // Service
+    // Service Title
     document.getElementById('review-service-title').innerText = title;
 
-    // Date
-    const dateObj = new Date(formDate.value);
-    const formattedDate = isNaN(dateObj.getTime())
-        ? formDate.value
-        : dateObj.toLocaleDateString(currentLanguage === 'uz' ? 'uz-UZ' : 'en-US') + ' ' + dateObj.toLocaleTimeString(currentLanguage === 'uz' ? 'uz-UZ' : 'en-US', {hour: '2-digit', minute:'2-digit'});
-    document.getElementById('review-datetime-val').innerText = formattedDate;
+    // Date / Date Range
+    let dateStr = '';
+    let diffDays = 1;
+    if (item.category === 'guides' && item.guideType === 'virtual') {
+        const start = new Date(formStartDate.value);
+        const end = new Date(formEndDate.value);
+        const diffTime = Math.abs(end - start);
+        diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // inclusive
+        
+        const startStr = start.toLocaleDateString(currentLanguage === 'uz' ? 'uz-UZ' : 'en-US');
+        const endStr = end.toLocaleDateString(currentLanguage === 'uz' ? 'uz-UZ' : 'en-US');
+        dateStr = `${startStr} ➔ ${endStr} (${diffDays} ${currentLanguage === 'uz' ? 'kun' : (currentLanguage === 'en' ? 'days' : 'дней')})`;
+    } else {
+        const dateObj = new Date(formDate.value);
+        dateStr = isNaN(dateObj.getTime())
+            ? formDate.value
+            : dateObj.toLocaleDateString(currentLanguage === 'uz' ? 'uz-UZ' : 'en-US') + ' ' + dateObj.toLocaleTimeString(currentLanguage === 'uz' ? 'uz-UZ' : 'en-US', {hour: '2-digit', minute:'2-digit'});
+    }
+    document.getElementById('review-datetime-val').innerText = dateStr;
 
-    // Guests
-    document.getElementById('review-guests-val').innerText = `${formQuantity.value} ${dict.itineraryItemGuests}`;
+    // Guests / Quantity
+    if (item.category === 'guides') {
+        // guides rate is per day/booking, not guests multiplied
+        document.getElementById('review-guests-val').innerText = currentLanguage === 'uz' ? "1 ta guruh" : (currentLanguage === 'en' ? "1 group booking" : "1 групповая бронь");
+    } else {
+        document.getElementById('review-guests-val').innerText = `${formQuantity.value} ${dict.itineraryItemGuests}`;
+    }
 
     // Child seat (Transport only)
     const childSeatRow = document.getElementById('review-child-seat-row');
@@ -1085,66 +1342,110 @@ function populateReviewSummary() {
         childSeatRow.style.display = 'none';
     }
 
-    // Contact details
+    // Guide language (Guides only)
+    const guideLangRow = document.getElementById('review-guide-lang-row');
+    if (item.category === 'guides') {
+        guideLangRow.style.display = 'table-row';
+        document.getElementById('review-guide-lang-val').innerText = formGuideLang.value.toUpperCase();
+    } else {
+        guideLangRow.style.display = 'none';
+    }
+
+    // Messenger & Name
+    const messengerRow = document.getElementById('review-messenger-row');
+    messengerRow.style.display = 'table-row';
+    document.getElementById('review-messenger-val').innerText = formMessengerType.value.toUpperCase();
+    
     document.getElementById('review-contact-val').innerText = formContact.value;
+    document.getElementById('review-name-val').innerText = formUsername.value.trim();
 
-    // Name
-    document.getElementById('review-name-val').innerText = formUsername.value.trim() || dict.msgNotSpecified;
-
-    // Price calculation: transport is fixed price per route; others are price * qty
+    // Price calculation
     let total = item.price;
-    if (item.category !== 'transport') {
+    if (item.category === 'guides' && item.guideType === 'virtual') {
+        total = item.price * diffDays;
+    } else if (item.category !== 'transport' && item.category !== 'guides') {
         total = item.price * parseInt(formQuantity.value);
     }
     document.getElementById('review-price-val').innerText = `$${total.toFixed(2)}`;
 }
 
-// Generate PDF Mock receipt file download
+// Generate PDF / Text Tour Voucher
 btnGeneratePdfReceipt.addEventListener('click', () => {
     if (!selectedServiceForBooking) return;
     const item = selectedServiceForBooking;
     const dict = translations[currentLanguage];
 
     const title = currentLanguage === 'uz' ? item.titleUz : (currentLanguage === 'en' ? item.titleEn : item.titleRu);
-    const qty = formQuantity.value;
-    const date = formDate.value;
     const contact = formContact.value;
-    const name = formUsername.value || dict.msgNotSpecified;
-    const childSeatVal = formChildSeat.checked ? dict.msgYes : dict.msgNo;
+    const name = formUsername.value.trim();
+    const messenger = formMessengerType.value.toUpperCase();
 
+    let dateStr = '';
     let total = item.price;
-    if (item.category !== 'transport') {
-        total = item.price * parseInt(qty);
+    if (item.category === 'guides' && item.guideType === 'virtual') {
+        const start = new Date(formStartDate.value);
+        const end = new Date(formEndDate.value);
+        const diffTime = Math.abs(end - start);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+        total = item.price * diffDays;
+        dateStr = `${formStartDate.value} to ${formEndDate.value} (${diffDays} days)`;
+    } else {
+        dateStr = formDate.value;
+        if (item.category !== 'transport' && item.category !== 'guides') {
+            total = item.price * parseInt(formQuantity.value);
+        }
     }
 
-    const receiptContent = `
+    const isGuide = item.category === 'guides';
+    const filename = isGuide ? `voucher_SR-${Date.now().toString().slice(-4)}.txt` : `receipt_SR-${Date.now().toString().slice(-4)}.txt`;
+    
+    const docHeader = isGuide ? "SILKROAD TOURIST VOUCHER" : "SILKROAD SERVICE RECEIPT";
+
+    let detailsStr = '';
+    if (isGuide) {
+        detailsStr = `
+Guide Type:    ${item.guideType.toUpperCase()}
+Language:      ${formGuideLang.value.toUpperCase()}
+Messenger:     ${messenger} (${name})
+Date/Period:   ${dateStr}
+        `;
+    } else {
+        detailsStr = `
+Quantity:      ${formQuantity.value}
+Child Seat:    ${formChildSeat.checked ? dict.msgYes : dict.msgNo}
+Messenger:     ${messenger} (${name})
+Date & Time:   ${dateStr}
+        `;
+    }
+
+    const docContent = `
 ========================================
-       SILKROAD OPERATIONS RECEIPT
+       ${docHeader}
 ========================================
-Receipt ID:    #SR-${Date.now().toString().slice(-6)}
+Booking ID:    #SR-${Date.now().toString().slice(-6)}
 Service:       ${title}
-Date & Time:   ${date}
-Quantity:      ${qty} ${dict.itineraryItemGuests}
-Contact:       ${contact}
-Customer:      ${name}
-Child Seat:    ${childSeatVal}
+Location:      ${item.region.toUpperCase()}
+----------------------------------------
+${detailsStr.trim()}
+Contact phone: ${contact}
 ----------------------------------------
 TOTAL PRICE:   $${total.toFixed(2)}
 ========================================
-Thank you for booking with us!
+Thank you for booking with SilkRoad Operations!
+Automatic notification sent to guide/operator.
 Welcome to Uzbekistan!
     `;
 
-    // Download file
-    const blob = new Blob([receiptContent], {type: "text/plain;charset=utf-8"});
+    // Trigger file download
+    const blob = new Blob([docContent], {type: "text/plain;charset=utf-8"});
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = `receipt_SR-${Date.now().toString().slice(-4)}.txt`;
+    link.download = filename;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
 
-    alert(dict.alertReceiptGenerated);
+    alert(isGuide ? "PDF Vaucher yuklab olindi (MOCK voucher.txt)" : dict.alertReceiptGenerated);
 });
 
 // Close Modal
@@ -1162,9 +1463,27 @@ bookingForm.addEventListener('submit', (e) => {
     const title = currentLanguage === 'uz' ? item.titleUz : (currentLanguage === 'en' ? item.titleEn : item.titleRu);
     const qty = parseInt(formQuantity.value);
     
+    let dateVal = '';
     let total = item.price;
-    if (item.category !== 'transport') {
-        total = item.price * qty;
+    if (item.category === 'guides' && item.guideType === 'virtual') {
+        const start = new Date(formStartDate.value);
+        const end = new Date(formEndDate.value);
+        const diffTime = Math.abs(end - start);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+        total = item.price * diffDays;
+        dateVal = `${formStartDate.value} ➔ ${formEndDate.value}`;
+    } else {
+        dateVal = formDate.value;
+        if (item.category !== 'transport' && item.category !== 'guides') {
+            total = item.price * qty;
+        }
+    }
+
+    // Custom notes and contact details for Itinerary representation
+    let customNotes = formNotes.value;
+    if (formChildSeat.checked) customNotes += " [Child Seat]";
+    if (item.category === 'guides') {
+        customNotes += ` [Lang: ${formGuideLang.value.toUpperCase()}]`;
     }
 
     const bookingItem = {
@@ -1172,11 +1491,11 @@ bookingForm.addEventListener('submit', (e) => {
         serviceId: item.id,
         title: title,
         basePrice: item.price,
-        quantity: qty,
+        quantity: item.category === 'guides' ? 1 : qty,
         totalItemPrice: total,
-        date: formDate.value,
-        notes: formNotes.value + (formChildSeat.checked ? " [Child Seat Requested]" : ""),
-        contact: formContact.value + (formUsername.value ? ` (${formUsername.value})` : '')
+        date: dateVal,
+        notes: customNotes.trim(),
+        contact: `${formContact.value} (Messenger: ${formMessengerType.value.toUpperCase()}: ${formUsername.value.trim()})`
     };
 
     itinerary.push(bookingItem);
@@ -1331,7 +1650,7 @@ categoryTabs.forEach(tab => {
         targetTab.classList.add('active');
 
         activeCategory = targetTab.getAttribute('data-category');
-        activeSubCategory = 'all'; // reset transport subcategory
+        activeSubCategory = 'all'; // reset transport / guide subcategory
         
         // Update Title dynamically based on active category
         const catName = targetTab.textContent.trim();

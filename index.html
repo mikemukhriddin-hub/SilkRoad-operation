@@ -200,15 +200,25 @@
 
                     <!-- STEP 1: Date & Time -->
                     <div class="step-panel active" data-step="1" id="step-panel-1">
-                        <div class="form-group">
+                        <div class="form-group" id="form-single-date-group">
                             <label for="form-date" id="lbl-form-date">Sana va vaqt</label>
                             <input type="datetime-local" id="form-date" required>
+                        </div>
+                        <div class="form-group-range" id="form-date-range-group" style="display: none;">
+                            <div class="form-group">
+                                <label for="form-start-date" id="lbl-form-start-date">Boshlanish sanasi</label>
+                                <input type="date" id="form-start-date">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-end-date" id="lbl-form-end-date">Tugash sanasi</label>
+                                <input type="date" id="form-end-date">
+                            </div>
                         </div>
                     </div>
 
                     <!-- STEP 2: Passengers & Add-ons -->
                     <div class="step-panel" data-step="2" id="step-panel-2">
-                        <div class="form-group">
+                        <div class="form-group" id="form-quantity-group">
                             <label for="form-quantity" id="lbl-form-quantity">Yo'lovchilar soni / Miqdor</label>
                             <input type="number" id="form-quantity" min="1" max="100" value="1" required>
                         </div>
@@ -218,6 +228,10 @@
                                 <span class="checkmark"></span>
                                 <span id="lbl-form-child-seat">Bolalar o'rindig'i kerakmi? (Bepul)</span>
                             </label>
+                        </div>
+                        <div class="form-group" id="form-guide-lang-group" style="display: none;">
+                            <label for="form-guide-lang" id="lbl-form-guide-lang">Muloqot tili</label>
+                            <select id="form-guide-lang"></select>
                         </div>
                     </div>
 
@@ -232,8 +246,15 @@
                             <input type="text" id="form-contact" placeholder="+998 90 123 45 67" required>
                         </div>
                         <div class="form-group">
-                            <label for="form-username" id="lbl-form-username">Ismingiz va Telegram username (ixtiyoriy)</label>
-                            <input type="text" id="form-username" placeholder="Masalan: Muxriddin @mikemukhriddin">
+                            <label for="form-messenger-type" id="lbl-form-messenger-type">Afzal ko'rilgan messenjer</label>
+                            <select id="form-messenger-type">
+                                <option value="telegram">Telegram</option>
+                                <option value="whatsapp">WhatsApp</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-username" id="lbl-form-username">Ismingiz va Telegram/WhatsApp username</label>
+                            <input type="text" id="form-username" placeholder="Masalan: Muxriddin @mikemukhriddin" required>
                         </div>
                     </div>
 
@@ -257,6 +278,14 @@
                                 <tr id="review-child-seat-row" style="display:none;">
                                     <td id="lbl-review-child-seat">Bolalar o'rindig'i:</td>
                                     <td id="review-child-seat-val" class="val">-</td>
+                                </tr>
+                                <tr id="review-guide-lang-row" style="display:none;">
+                                    <td id="lbl-review-guide-lang">Muloqot tili:</td>
+                                    <td id="review-guide-lang-val" class="val">-</td>
+                                </tr>
+                                <tr id="review-messenger-row" style="display:none;">
+                                    <td id="lbl-review-messenger">Aloqa messenjeri:</td>
+                                    <td id="review-messenger-val" class="val">-</td>
                                 </tr>
                                 <tr>
                                     <td id="lbl-review-contact">Aloqa raqami:</td>
