@@ -1404,3 +1404,36 @@ html {
     color: white;
     border-color: var(--primary-cobalt-light);
 }
+
+/* Fully Booked Badge and card states */
+.fully-booked-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: var(--accent-terracotta);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    z-index: 2;
+}
+
+.card.fully-booked {
+    opacity: 0.85;
+}
+
+.card.fully-booked .card-image {
+    filter: grayscale(40%) blur(0.5px);
+}
+
+.card.fully-booked .btn-book:disabled {
+    background-color: var(--text-muted);
+    border-color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+

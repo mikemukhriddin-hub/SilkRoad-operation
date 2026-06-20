@@ -274,6 +274,7 @@ const servicesData = [
     {
         id: "hotel-heritage-bukhara",
         category: "hotels",
+        subCategory: "boutique",
         titleUz: "Silk Road Heritage Boutique Hotel (Buxoro)",
         titleEn: "Silk Road Heritage Boutique Hotel (Bukhara)",
         titleRu: "Boutique отель Silk Road Heritage (Бухара)",
@@ -285,11 +286,14 @@ const servicesData = [
         reviews: 230,
         region: "bukhara",
         priceCategory: "mid",
-        image: "assets/hotel.png"
+        image: "assets/hotel.png",
+        total_rooms: 6,
+        coordinates: "39.7747, 64.4224"
     },
     {
         id: "hotel-yurt-aydarkul",
         category: "hotels",
+        subCategory: "yurt",
         titleUz: "Aydarkul Cho'l Yurt Lageri - An'anaviy yashash",
         titleEn: "Aydarkul Desert Yurt Camp - Traditional Stay",
         titleRu: "Пустынный юртовый лагерь на озере Айдаркуль",
@@ -301,7 +305,47 @@ const servicesData = [
         reviews: 112,
         region: "samarkand",
         priceCategory: "mid",
-        image: "assets/hotel.png"
+        image: "assets/hotel.png",
+        total_rooms: 10,
+        coordinates: "40.1012, 64.3804"
+    },
+    {
+        id: "hotel-modern-tashkent",
+        category: "hotels",
+        subCategory: "modern",
+        titleUz: "Registan Plaza Modern Hotel (Samarqand)",
+        titleEn: "Registan Plaza Modern Hotel (Samarkand)",
+        titleRu: "Отель Registan Plaza Modern (Самарканд)",
+        descriptionUz: "Samarqand markazida joylashgan klassik va zamonaviy uslubdagi premium mehmonxona. Katta basseyn, spa markazi va xalqaro konferents-zallarga ega.",
+        descriptionEn: "Premium modern hotel with classical elements located in the center of Samarkand. Features swimming pool, wellness center, and international conference halls.",
+        descriptionRu: "Современный отель премиум-класса в центре Самарканда. К услугам гостей бассейн, спа-центр и конференц-залы.",
+        price: 120,
+        rating: 4.7,
+        reviews: 145,
+        region: "samarkand",
+        priceCategory: "mid",
+        image: "assets/hotel.png",
+        total_rooms: 45,
+        coordinates: "39.6508, 66.9654"
+    },
+    {
+        id: "hotel-hostel-samarkand",
+        category: "hotels",
+        subCategory: "hostel",
+        titleUz: "Bukhara Old Town Hostel - Shinam va Arzon",
+        titleEn: "Bukhara Old Town Hostel - Cosy & Budget",
+        titleRu: "Хостел Bukhara Old Town - уютно и недорого",
+        descriptionUz: "Buxoro eski shahar qismidagi arzon, shinam va yosh sayyohlar uchun mos hostel. Bepul Wi-Fi, umumiy oshxona va hovlida choyxo'rlik qilish imkoniyati.",
+        descriptionEn: "Budget friendly and cozy hostel in Bukhara old city, perfect for backpackers. Features free Wi-Fi, shared kitchen, and courtyard tea sessions.",
+        descriptionRu: "Бюджетный и уютный хостел в старой части Бухары. Бесплатный Wi-Fi, общая кухня и внутренний дворик для чаепития.",
+        price: 18,
+        rating: 4.6,
+        reviews: 64,
+        region: "bukhara",
+        priceCategory: "budget",
+        image: "assets/hotel.png",
+        total_rooms: 3,
+        coordinates: "39.7735, 64.4182"
     },
 
     // --- RESTAURANTS ---
@@ -518,7 +562,30 @@ const translations = {
         emptyStateDesc: "Qidiruv parametrlarini o'zgartirib ko'ring yoki filtrlarni tozalang.",
         btnEmptyReset: "Filtrlarni tozalash",
         btnEmptyViewAll: "Barcha xizmatlarni ko'rish",
-        recommendedTitle: "Sizga yoqishi mumkin (Tavsiyalar)"
+        recommendedTitle: "Sizga yoqishi mumkin (Tavsiyalar)",
+
+        // Hotel translations
+        subCatBoutique: "Butik Mehmonxonalar",
+        subCatYurt: "Yurt Lagerlari",
+        subCatModern: "Zamonaviy Mehmonxonalar",
+        subCatHostel: "Hostellar / Guest Houses",
+        lblFormHotelCheckIn: "Check-in (Kirish sanasi)",
+        lblFormHotelCheckOut: "Check-out (Chiqish sanasi)",
+        lblSearchHotelDates: "Sana oralig'i (Kirish-Chiqish)",
+        lblFormHotelRooms: "Xonalar soni",
+        lblFormHotelAdults: "Kattalar soni",
+        lblFormHotelChildren: "Bolalar soni",
+        lblHotelAddonsTitle: "Qo'shimcha xizmatlar (Alohida to'lanadi):",
+        lblHotelAddonCamel: "Tuya minish (Camel riding) - $15 / kishi",
+        lblHotelAddonDinner: "Milliy dasturxon (National dinner) - $20 / kishi",
+        lblHotelAddonMusic: "Jonli musiqa (Live music around campfire) - $10 / kishi",
+        lblReviewHotelRooms: "Xonalar soni:",
+        lblReviewHotelNights: "Tunlar soni:",
+        lblReviewHotelAddons: "Qo'shimcha xizmatlar:",
+        errNoRoomsAvailable: "Tanlangan sanalarda bo'sh xona yo'q!",
+        errRoomsExceedCapacity: "Siz tanlagan sanalarda faqat {avail} ta bo'sh xona mavjud!",
+        errCheckOutBeforeCheckIn: "Chiqish sanasi kirish sanasidan oldin bo'lishi mumkin emas!",
+        lblFullyBooked: "Bo'sh joy yo'q"
     },
     en: {
         langBtn: "🌐 EN",
@@ -645,7 +712,30 @@ const translations = {
         emptyStateDesc: "Try changing your search parameters or reset filters.",
         btnEmptyReset: "Reset Filters",
         btnEmptyViewAll: "View All Services",
-        recommendedTitle: "Recommended for You"
+        recommendedTitle: "Recommended for You",
+
+        // Hotel translations
+        subCatBoutique: "Boutique Hotels",
+        subCatYurt: "Yurt Camps",
+        subCatModern: "Modern Hotels",
+        subCatHostel: "Hostels / Guest Houses",
+        lblFormHotelCheckIn: "Check-in Date",
+        lblFormHotelCheckOut: "Check-out Date",
+        lblSearchHotelDates: "Dates Range (Check-in/Out)",
+        lblFormHotelRooms: "Rooms quantity",
+        lblFormHotelAdults: "Adults count",
+        lblFormHotelChildren: "Children count",
+        lblHotelAddonsTitle: "Additional services (Paid separately):",
+        lblHotelAddonCamel: "Camel riding - $15 / person",
+        lblHotelAddonDinner: "National dinner - $20 / person",
+        lblHotelAddonMusic: "Live music - $10 / person",
+        lblReviewHotelRooms: "Rooms quantity:",
+        lblReviewHotelNights: "Nights count:",
+        lblReviewHotelAddons: "Additional services:",
+        errNoRoomsAvailable: "No rooms available for the selected dates!",
+        errRoomsExceedCapacity: "Only {avail} rooms available on the selected dates!",
+        errCheckOutBeforeCheckIn: "Check-out date cannot be before check-in date!",
+        lblFullyBooked: "Fully Booked"
     },
     ru: {
         langBtn: "🌐 RU",
@@ -772,7 +862,30 @@ const translations = {
         emptyStateDesc: "Попробуйте изменить параметры поиска или сбросить фильтры.",
         btnEmptyReset: "Сбросить фильтры",
         btnEmptyViewAll: "Показать все услуги",
-        recommendedTitle: "Рекомендуем вам"
+        recommendedTitle: "Рекомендуем вам",
+
+        // Hotel translations
+        subCatBoutique: "Бутик-отели",
+        subCatYurt: "Юртовые лагеря",
+        subCatModern: "Современные отели",
+        subCatHostel: "Хостелы / Гостевые дома",
+        lblFormHotelCheckIn: "Дата заезда",
+        lblFormHotelCheckOut: "Дата выезда",
+        lblSearchHotelDates: "Даты (Заезд-Выезд)",
+        lblFormHotelRooms: "Количество номеров",
+        lblFormHotelAdults: "Количество взрослых",
+        lblFormHotelChildren: "Количество детей",
+        lblHotelAddonsTitle: "Дополнительные услуги (Оплачиваются отдельно):",
+        lblHotelAddonCamel: "Катание на верблюдах - $15 / чел.",
+        lblHotelAddonDinner: "Национальный ужин - $20 / чел.",
+        lblHotelAddonMusic: "Живая музыка - $10 / чел.",
+        lblReviewHotelRooms: "Количество номеров:",
+        lblReviewHotelNights: "Количество ночей:",
+        lblReviewHotelAddons: "Дополнительные услуги:",
+        errNoRoomsAvailable: "Нет свободных номеров на выбранные даты!",
+        errRoomsExceedCapacity: "На выбранные даты доступно только {avail} номеров!",
+        errCheckOutBeforeCheckIn: "Дата выезда не может быть раньше даты заезда!",
+        lblFullyBooked: "Нет мест"
     }
 };
 
@@ -786,6 +899,65 @@ let selectedRegion = 'all';
 let selectedPrice = 'all';
 let currentStep = 1;
 let selectedServiceForBooking = null;
+
+// Mock reservations list for hotels
+const mockReservations = [
+    {
+        serviceId: "hotel-yurt-aydarkul",
+        checkIn: "2026-09-15",
+        checkOut: "2026-09-18",
+        rooms: 10 // Aydarkul Camp will be fully booked on these dates
+    },
+    {
+        serviceId: "hotel-heritage-bukhara",
+        checkIn: "2026-09-10",
+        checkOut: "2026-09-12",
+        rooms: 4
+    }
+];
+
+// Check room availability for a hotel during a date range
+function getAvailableRooms(hotel, checkInStr, checkOutStr) {
+    if (hotel.total_rooms === undefined) return 10;
+    if (!checkInStr || !checkOutStr) return hotel.total_rooms;
+    const checkIn = new Date(checkInStr);
+    const checkOut = new Date(checkOutStr);
+    if (isNaN(checkIn.getTime()) || isNaN(checkOut.getTime()) || checkOut <= checkIn) {
+        return hotel.total_rooms;
+    }
+
+    // Count rooms booked in mockReservations
+    let bookedRooms = 0;
+    mockReservations.forEach(res => {
+        if (res.serviceId === hotel.id) {
+            const resIn = new Date(res.checkIn);
+            const resOut = new Date(res.checkOut);
+            // Check for overlap: max(start1, start2) < min(end1, end2)
+            const overlap = Math.max(checkIn, resIn) < Math.min(checkOut, resOut);
+            if (overlap) {
+                bookedRooms += res.rooms;
+            }
+        }
+    });
+
+    // Count rooms booked in current itinerary
+    itinerary.forEach(item => {
+        if (item.serviceId === hotel.id && item.date) {
+            const dates = item.date.split('➔');
+            if (dates.length === 2) {
+                const itemIn = new Date(dates[0].trim());
+                const itemOut = new Date(dates[1].trim());
+                const overlap = Math.max(checkIn, itemIn) < Math.min(checkOut, itemOut);
+                if (overlap) {
+                    bookedRooms += item.quantity;
+                }
+            }
+        }
+    });
+
+    const avail = hotel.total_rooms - bookedRooms;
+    return avail < 0 ? 0 : avail;
+}
 
 // DOM Elements
 const catalogGrid = document.getElementById('catalog-grid');
@@ -996,8 +1168,40 @@ function translateUI() {
         }
     }
 
+    // Hotel Specific search labels
+    const lblSearchHotelDates = document.getElementById('lbl-search-hotel-dates');
+    if (lblSearchHotelDates) lblSearchHotelDates.innerText = dict.lblSearchHotelDates;
+
+    // Hotel Specific wizard labels
+    const lblFormHotelCheckin = document.getElementById('lbl-form-hotel-checkin');
+    if (lblFormHotelCheckin) lblFormHotelCheckin.innerText = dict.lblFormHotelCheckIn;
+    const lblFormHotelCheckout = document.getElementById('lbl-form-hotel-checkout');
+    if (lblFormHotelCheckout) lblFormHotelCheckout.innerText = dict.lblFormHotelCheckOut;
+    const lblFormHotelRooms = document.getElementById('lbl-form-hotel-rooms');
+    if (lblFormHotelRooms) lblFormHotelRooms.innerText = dict.lblFormHotelRooms;
+    const lblFormHotelAdults = document.getElementById('lbl-form-hotel-adults');
+    if (lblFormHotelAdults) lblFormHotelAdults.innerText = dict.lblFormHotelAdults;
+    const lblFormHotelChildren = document.getElementById('lbl-form-hotel-children');
+    if (lblFormHotelChildren) lblFormHotelChildren.innerText = dict.lblFormHotelChildren;
+    const lblHotelAddonsTitle = document.getElementById('lbl-hotel-addons-title');
+    if (lblHotelAddonsTitle) lblHotelAddonsTitle.innerText = dict.lblHotelAddonsTitle;
+    const lblHotelAddonCamel = document.getElementById('lbl-hotel-addon-camel');
+    if (lblHotelAddonCamel) lblHotelAddonCamel.innerText = dict.lblHotelAddonCamel;
+    const lblHotelAddonDinner = document.getElementById('lbl-hotel-addon-dinner');
+    if (lblHotelAddonDinner) lblHotelAddonDinner.innerText = dict.lblHotelAddonDinner;
+    const lblHotelAddonMusic = document.getElementById('lbl-hotel-addon-music');
+    if (lblHotelAddonMusic) lblHotelAddonMusic.innerText = dict.lblHotelAddonMusic;
+
+    // Review labels
+    const lblReviewHotelRooms = document.getElementById('lbl-review-hotel-rooms');
+    if (lblReviewHotelRooms) lblReviewHotelRooms.innerText = dict.lblReviewHotelRooms;
+    const lblReviewHotelNights = document.getElementById('lbl-review-hotel-nights');
+    if (lblReviewHotelNights) lblReviewHotelNights.innerText = dict.lblReviewHotelNights;
+    const lblReviewHotelAddons = document.getElementById('lbl-review-hotel-addons');
+    if (lblReviewHotelAddons) lblReviewHotelAddons.innerText = dict.lblReviewHotelAddons;
+
     // Refresh secondary sub-category buttons
-    if (activeCategory === 'transport' || activeCategory === 'guides') {
+    if (activeCategory === 'transport' || activeCategory === 'guides' || activeCategory === 'hotels') {
         renderSubCategories();
     }
 }
@@ -1020,6 +1224,14 @@ function renderSubCategories() {
             { id: "all", label: dict.formatAll },
             { id: "in-person", label: dict.formatInPerson },
             { id: "virtual", label: dict.formatVirtual }
+        ];
+    } else if (activeCategory === 'hotels') {
+        subCats = [
+            { id: "all", label: dict.subCatAll },
+            { id: "boutique", label: dict.subCatBoutique },
+            { id: "yurt", label: dict.subCatYurt },
+            { id: "modern", label: dict.subCatModern },
+            { id: "hostel", label: dict.subCatHostel }
         ];
     }
 
@@ -1062,10 +1274,11 @@ function renderCatalog() {
     const dict = translations[currentLanguage];
 
     // Hide or Show secondary sub-category tabs
-    if (activeCategory === 'transport' || activeCategory === 'guides') {
+    if (activeCategory === 'transport' || activeCategory === 'guides' || activeCategory === 'hotels') {
         if (subCategoriesFilterArea.innerHTML === '' || 
            (activeCategory === 'transport' && subCategoriesFilterArea.firstChild.getAttribute('data-subcategory') === 'in-person') ||
-           (activeCategory === 'guides' && subCategoriesFilterArea.firstChild.getAttribute('data-subcategory') === 'sedan')) {
+           (activeCategory === 'guides' && subCategoriesFilterArea.firstChild.getAttribute('data-subcategory') === 'sedan') ||
+           (activeCategory === 'hotels' && !['all','boutique','yurt','modern','hostel'].includes(subCategoriesFilterArea.firstChild.getAttribute('data-subcategory')))) {
             renderSubCategories();
         } else {
             subCategoriesFilterArea.style.display = 'flex';
@@ -1073,6 +1286,12 @@ function renderCatalog() {
     } else {
         subCategoriesFilterArea.style.display = 'none';
         activeSubCategory = 'all';
+    }
+
+    // Toggle Hotel Search dates visibility
+    const searchHotelDatesGroup = document.getElementById('search-hotel-dates-group');
+    if (searchHotelDatesGroup) {
+        searchHotelDatesGroup.style.display = activeCategory === 'hotels' ? 'flex' : 'none';
     }
 
     // Show Skeletons first
@@ -1099,12 +1318,14 @@ function renderCatalog() {
         let filtered = servicesData.filter(item => {
             const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
             
-            // Secondary subcategory filtering for transport & guides
+            // Secondary subcategory filtering for transport, guides & hotels
             let matchesSubCategory = true;
             if (activeCategory === 'transport') {
                 matchesSubCategory = activeSubCategory === 'all' || item.subCategory === activeSubCategory;
             } else if (activeCategory === 'guides') {
                 matchesSubCategory = activeSubCategory === 'all' || item.guideType === activeSubCategory;
+            } else if (activeCategory === 'hotels') {
+                matchesSubCategory = activeSubCategory === 'all' || item.subCategory === activeSubCategory;
             }
 
             // Dynamic fields based on current language
@@ -1279,10 +1500,6 @@ function renderCatalog() {
 
         // Append Cards
         filtered.forEach(item => {
-            const card = document.createElement('article');
-            card.className = `card category-${item.category}`;
-            card.id = `card-${item.id}`;
-
             let title = item.titleUz;
             let description = item.descriptionUz;
             if (currentLanguage === 'en') {
@@ -1307,13 +1524,31 @@ function renderCatalog() {
                 langBadgesHTML += `</div>`;
             }
 
+            // Room inventory check
+            let isFullyBooked = false;
+            let availRoomsText = '';
+            const searchCheckIn = document.getElementById('search-hotel-checkin') ? document.getElementById('search-hotel-checkin').value : '';
+            const searchCheckOut = document.getElementById('search-hotel-checkout') ? document.getElementById('search-hotel-checkout').value : '';
+            if (item.category === 'hotels') {
+                const avail = getAvailableRooms(item, searchCheckIn, searchCheckOut);
+                isFullyBooked = (avail <= 0);
+                if (searchCheckIn && searchCheckOut) {
+                    availRoomsText = `<span style="font-size: 0.75rem; color: ${isFullyBooked ? 'var(--accent-terracotta)' : 'var(--accent-emerald)'}; font-weight: 600; display: block; margin-top: 0.25rem;">${currentLanguage === 'uz' ? `${avail} ta bo'sh xona` : (currentLanguage === 'en' ? `${avail} rooms available` : `${avail} своб. номеров`)}</span>`;
+                }
+            }
+
+            const card = document.createElement('article');
+            card.className = `card category-${item.category} ${isFullyBooked ? 'fully-booked' : ''}`;
+            card.id = `card-${item.id}`;
+
             card.innerHTML = `
                 <div class="card-image-wrapper">
                     <img src="${item.image}" alt="${title}" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=600'">
                     <span class="card-badge">${item.category === 'crafts' ? dict.badgeMasterclass : dict[`tab${item.category.charAt(0).toUpperCase() + item.category.slice(1)}`] || item.category}</span>
+                    ${isFullyBooked ? `<span class="fully-booked-badge">${dict.lblFullyBooked}</span>` : ''}
                 </div>
                 <div class="card-content">
-                    <div class="card-category">${regionName.toUpperCase()} • RATING ★${item.rating} (${item.reviews})</div>
+                    <div class="card-category">${regionName.toUpperCase()} • RATING ★${item.rating} (${item.reviews}) ${availRoomsText}</div>
                     <h3 class="card-title">${title}</h3>
                     ${langBadgesHTML}
                     <p class="card-description" style="margin-top: 0.5rem;">${description}</p>
@@ -1322,7 +1557,7 @@ function renderCatalog() {
                             <span class="price-label">${dict.priceLabel}</span>
                             <span class="price-amount">$${item.price}</span>
                         </div>
-                        <button class="btn btn-primary btn-book" data-id="${item.id}" id="btn-book-${item.id}">
+                        <button class="btn btn-primary btn-book" data-id="${item.id}" id="btn-book-${item.id}" ${isFullyBooked ? 'disabled' : ''}>
                             ${dict.btnBook}
                         </button>
                     </div>
@@ -1390,25 +1625,37 @@ function openBookingModal(itemId) {
     const singleDateDiv = document.getElementById('form-single-date-group');
     const rangeDateDiv = document.getElementById('form-date-range-group');
     const craftDateSlotsDiv = document.getElementById('form-craft-date-slots-group');
+    const hotelDatesDiv = document.getElementById('form-hotel-dates-group');
+    const hotelCheckIn = document.getElementById('form-hotel-checkin');
+    const hotelCheckOut = document.getElementById('form-hotel-checkout');
+
+    const searchCheckIn = document.getElementById('search-hotel-checkin') ? document.getElementById('search-hotel-checkin').value : '';
+    const searchCheckOut = document.getElementById('search-hotel-checkout') ? document.getElementById('search-hotel-checkout').value : '';
 
     if (item.category === 'guides' && item.guideType === 'virtual') {
         singleDateDiv.style.display = 'none';
         rangeDateDiv.style.display = 'flex';
         craftDateSlotsDiv.style.display = 'none';
+        hotelDatesDiv.style.display = 'none';
         formStartDate.setAttribute('required', 'required');
         formEndDate.setAttribute('required', 'required');
         formDate.removeAttribute('required');
         formCraftDate.removeAttribute('required');
         formCraftSlot.removeAttribute('required');
+        hotelCheckIn.removeAttribute('required');
+        hotelCheckOut.removeAttribute('required');
     } else if (item.category === 'crafts') {
         singleDateDiv.style.display = 'none';
         rangeDateDiv.style.display = 'none';
         craftDateSlotsDiv.style.display = 'flex';
+        hotelDatesDiv.style.display = 'none';
         formCraftDate.setAttribute('required', 'required');
         formCraftSlot.setAttribute('required', 'required');
         formDate.removeAttribute('required');
         formStartDate.removeAttribute('required');
         formEndDate.removeAttribute('required');
+        hotelCheckIn.removeAttribute('required');
+        hotelCheckOut.removeAttribute('required');
 
         // Populate craft time slots
         formCraftSlot.innerHTML = '';
@@ -1420,30 +1667,58 @@ function openBookingModal(itemId) {
                 formCraftSlot.appendChild(opt);
             });
         }
+    } else if (item.category === 'hotels') {
+        singleDateDiv.style.display = 'none';
+        rangeDateDiv.style.display = 'none';
+        craftDateSlotsDiv.style.display = 'none';
+        hotelDatesDiv.style.display = 'flex';
+        
+        hotelCheckIn.setAttribute('required', 'required');
+        hotelCheckOut.setAttribute('required', 'required');
+        formDate.removeAttribute('required');
+        formStartDate.removeAttribute('required');
+        formEndDate.removeAttribute('required');
+        formCraftDate.removeAttribute('required');
+        formCraftSlot.removeAttribute('required');
+
+        hotelCheckIn.value = searchCheckIn || '';
+        hotelCheckOut.value = searchCheckOut || '';
     } else {
         singleDateDiv.style.display = 'block';
         rangeDateDiv.style.display = 'none';
         craftDateSlotsDiv.style.display = 'none';
+        hotelDatesDiv.style.display = 'none';
         formDate.setAttribute('required', 'required');
         formStartDate.removeAttribute('required');
         formEndDate.removeAttribute('required');
         formCraftDate.removeAttribute('required');
         formCraftSlot.removeAttribute('required');
+        hotelCheckIn.removeAttribute('required');
+        hotelCheckOut.removeAttribute('required');
     }
 
     // STEP 2 Form Layout Adjustments
     const quantityDiv = document.getElementById('form-quantity-group');
     const childSeatDiv = document.getElementById('form-child-seat-group');
     const guideLangDiv = document.getElementById('form-guide-lang-group');
+    const hotelDetailsDiv = document.getElementById('form-hotel-details-group');
+    const hotelRoomsInput = document.getElementById('form-hotel-rooms');
+    const hotelAdultsInput = document.getElementById('form-hotel-adults');
+    const hotelChildrenInput = document.getElementById('form-hotel-children');
+    const addonCamel = document.getElementById('form-hotel-addon-camel');
+    const addonDinner = document.getElementById('form-hotel-addon-dinner');
+    const addonMusic = document.getElementById('form-hotel-addon-music');
 
     if (item.category === 'transport') {
         quantityDiv.style.display = 'block';
         childSeatDiv.style.display = 'block';
         guideLangDiv.style.display = 'none';
+        if (hotelDetailsDiv) hotelDetailsDiv.style.display = 'none';
     } else if (item.category === 'guides') {
         quantityDiv.style.display = 'none';
         childSeatDiv.style.display = 'none';
         guideLangDiv.style.display = 'block';
+        if (hotelDetailsDiv) hotelDetailsDiv.style.display = 'none';
 
         // Populate spoken languages only
         formGuideLang.innerHTML = '';
@@ -1459,12 +1734,38 @@ function openBookingModal(itemId) {
         quantityDiv.style.display = 'block';
         childSeatDiv.style.display = 'none';
         guideLangDiv.style.display = 'none';
+        if (hotelDetailsDiv) hotelDetailsDiv.style.display = 'none';
         // Set maximum capacity limit
         formQuantity.max = item.maxCapacity;
+    } else if (item.category === 'hotels') {
+        quantityDiv.style.display = 'none';
+        childSeatDiv.style.display = 'none';
+        guideLangDiv.style.display = 'none';
+        hotelDetailsDiv.style.display = 'block';
+
+        hotelRoomsInput.value = '1';
+        hotelAdultsInput.value = '1';
+        hotelChildrenInput.value = '0';
+        
+        addonCamel.checked = false;
+        addonDinner.checked = false;
+        addonMusic.checked = false;
+
+        // Dynamic checkboxes display
+        const camelLabel = addonCamel.closest('.checkbox-group');
+        const musicLabel = addonMusic.closest('.checkbox-group');
+        if (item.subCategory === 'yurt') {
+            camelLabel.style.display = 'block';
+            musicLabel.style.display = 'block';
+        } else {
+            camelLabel.style.display = 'none';
+            musicLabel.style.display = 'none';
+        }
     } else {
         quantityDiv.style.display = 'block';
         childSeatDiv.style.display = 'none';
         guideLangDiv.style.display = 'none';
+        if (hotelDetailsDiv) hotelDetailsDiv.style.display = 'none';
     }
 
     // Reset Wizard steps
@@ -1547,6 +1848,36 @@ btnWizardNext.addEventListener('click', () => {
                 formCraftSlot.reportValidity();
                 return;
             }
+        } else if (item.category === 'hotels') {
+            const checkIn = document.getElementById('form-hotel-checkin');
+            const checkOut = document.getElementById('form-hotel-checkout');
+            if (!checkIn.value) {
+                checkIn.reportValidity();
+                return;
+            }
+            if (!checkOut.value) {
+                checkOut.reportValidity();
+                return;
+            }
+            const inDate = new Date(checkIn.value);
+            const outDate = new Date(checkOut.value);
+            if (outDate <= inDate) {
+                checkOut.setCustomValidity(translations[currentLanguage].errCheckOutBeforeCheckIn);
+                checkOut.reportValidity();
+                return;
+            } else {
+                checkOut.setCustomValidity("");
+            }
+
+            // Check availability
+            const avail = getAvailableRooms(item, checkIn.value, checkOut.value);
+            if (avail <= 0) {
+                checkOut.setCustomValidity(translations[currentLanguage].errNoRoomsAvailable);
+                checkOut.reportValidity();
+                return;
+            } else {
+                checkOut.setCustomValidity("");
+            }
         } else {
             if (!formDate.value) {
                 formDate.reportValidity();
@@ -1554,7 +1885,40 @@ btnWizardNext.addEventListener('click', () => {
             }
         }
     } else if (currentStep === 2) {
-        if (item.category !== 'guides') {
+        if (item.category === 'hotels') {
+            const hotelRoomsInput = document.getElementById('form-hotel-rooms');
+            const hotelAdultsInput = document.getElementById('form-hotel-adults');
+            const hotelChildrenInput = document.getElementById('form-hotel-children');
+            const checkInVal = document.getElementById('form-hotel-checkin').value;
+            const checkOutVal = document.getElementById('form-hotel-checkout').value;
+
+            const rooms = parseInt(hotelRoomsInput.value);
+            const adults = parseInt(hotelAdultsInput.value);
+            const children = parseInt(hotelChildrenInput.value);
+
+            if (isNaN(rooms) || rooms < 1) {
+                hotelRoomsInput.reportValidity();
+                return;
+            }
+            if (isNaN(adults) || adults < 1) {
+                hotelAdultsInput.reportValidity();
+                return;
+            }
+            if (isNaN(children) || children < 0) {
+                hotelChildrenInput.reportValidity();
+                return;
+            }
+
+            const avail = getAvailableRooms(item, checkInVal, checkOutVal);
+            if (rooms > avail) {
+                const msg = translations[currentLanguage].errRoomsExceedCapacity.replace('{avail}', avail);
+                hotelRoomsInput.setCustomValidity(msg);
+                hotelRoomsInput.reportValidity();
+                return;
+            } else {
+                hotelRoomsInput.setCustomValidity("");
+            }
+        } else if (item.category !== 'guides') {
             if (!formQuantity.value || parseInt(formQuantity.value) < 1) {
                 formQuantity.reportValidity();
                 return;
@@ -1626,6 +1990,17 @@ function populateReviewSummary() {
         const cDate = new Date(formCraftDate.value);
         const craftDateStr = isNaN(cDate.getTime()) ? formCraftDate.value : cDate.toLocaleDateString(currentLanguage === 'uz' ? 'uz-UZ' : 'en-US');
         dateStr = `${craftDateStr} (${formCraftSlot.value})`;
+    } else if (item.category === 'hotels') {
+        const checkInVal = document.getElementById('form-hotel-checkin').value;
+        const checkOutVal = document.getElementById('form-hotel-checkout').value;
+        const start = new Date(checkInVal);
+        const end = new Date(checkOutVal);
+        const diffTime = Math.abs(end - start);
+        diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // nights
+        
+        const startStr = start.toLocaleDateString(currentLanguage === 'uz' ? 'uz-UZ' : 'en-US');
+        const endStr = end.toLocaleDateString(currentLanguage === 'uz' ? 'uz-UZ' : 'en-US');
+        dateStr = `${startStr} ➔ ${endStr} (${diffDays} ${currentLanguage === 'uz' ? 'tun' : (currentLanguage === 'en' ? 'nights' : 'ночей')})`;
     } else {
         const dateObj = new Date(formDate.value);
         dateStr = isNaN(dateObj.getTime())
@@ -1638,6 +2013,16 @@ function populateReviewSummary() {
     if (item.category === 'guides') {
         // guides rate is per day/booking, not guests multiplied
         document.getElementById('review-guests-val').innerText = currentLanguage === 'uz' ? "1 ta guruh" : (currentLanguage === 'en' ? "1 group booking" : "1 групповая бронь");
+    } else if (item.category === 'hotels') {
+        const rooms = parseInt(document.getElementById('form-hotel-rooms').value) || 1;
+        const adults = parseInt(document.getElementById('form-hotel-adults').value) || 1;
+        const children = parseInt(document.getElementById('form-hotel-children').value) || 0;
+        const guestsText = currentLanguage === 'uz' 
+            ? `${rooms} xona, ${adults} kattalar, ${children} bolalar`
+            : (currentLanguage === 'en'
+                ? `${rooms} room(s), ${adults} adult(s), ${children} child(ren)`
+                : `${rooms} ном., ${adults} взр., ${children} дет.`);
+        document.getElementById('review-guests-val').innerText = guestsText;
     } else {
         document.getElementById('review-guests-val').innerText = `${formQuantity.value} ${dict.itineraryItemGuests}`;
     }
@@ -1677,6 +2062,51 @@ function populateReviewSummary() {
         craftCoordsRow.style.display = 'none';
     }
 
+    // Hotel Specific Review Rows
+    const hotelRoomsRow = document.getElementById('review-hotel-rooms-row');
+    const hotelNightsRow = document.getElementById('review-hotel-nights-row');
+    const hotelAddonsRow = document.getElementById('review-hotel-addons-row');
+
+    if (item.category === 'hotels') {
+        const rooms = parseInt(document.getElementById('form-hotel-rooms').value) || 1;
+        const adults = parseInt(document.getElementById('form-hotel-adults').value) || 1;
+        const children = parseInt(document.getElementById('form-hotel-children').value) || 0;
+        
+        hotelRoomsRow.style.display = 'table-row';
+        hotelNightsRow.style.display = 'table-row';
+        hotelAddonsRow.style.display = 'table-row';
+
+        document.getElementById('review-hotel-rooms-val').innerText = rooms;
+        document.getElementById('review-hotel-nights-val').innerText = diffDays; // diffDays represents nights here
+
+        // Process Add-ons
+        let addonsList = [];
+        let addonsCost = 0;
+        const totalGuests = adults + children;
+
+        if (document.getElementById('form-hotel-addon-camel').checked) {
+            addonsList.push(currentLanguage === 'uz' ? "Tuya minish" : (currentLanguage === 'en' ? "Camel riding" : "Катание на верблюдах"));
+            addonsCost += 15 * totalGuests;
+        }
+        if (document.getElementById('form-hotel-addon-dinner').checked) {
+            addonsList.push(currentLanguage === 'uz' ? "Milliy dasturxon" : (currentLanguage === 'en' ? "National dinner" : "Национальный ужин"));
+            addonsCost += 20 * totalGuests;
+        }
+        if (document.getElementById('form-hotel-addon-music').checked) {
+            addonsList.push(currentLanguage === 'uz' ? "Jonli musiqa" : (currentLanguage === 'en' ? "Live music" : "Живая музыка"));
+            addonsCost += 10 * totalGuests;
+        }
+
+        const addonsText = addonsList.length > 0 
+            ? `${addonsList.join(', ')} (+$${addonsCost})` 
+            : (currentLanguage === 'uz' ? "Yo'q" : (currentLanguage === 'en' ? "None" : "Нет"));
+        document.getElementById('review-hotel-addons-val').innerText = addonsText;
+    } else {
+        hotelRoomsRow.style.display = 'none';
+        hotelNightsRow.style.display = 'none';
+        hotelAddonsRow.style.display = 'none';
+    }
+
     // Messenger & Name
     const messengerRow = document.getElementById('review-messenger-row');
     messengerRow.style.display = 'table-row';
@@ -1689,6 +2119,16 @@ function populateReviewSummary() {
     let total = item.price;
     if (item.category === 'guides' && item.guideType === 'virtual') {
         total = item.price * diffDays;
+    } else if (item.category === 'hotels') {
+        const rooms = parseInt(document.getElementById('form-hotel-rooms').value) || 1;
+        const adults = parseInt(document.getElementById('form-hotel-adults').value) || 1;
+        const children = parseInt(document.getElementById('form-hotel-children').value) || 0;
+        const totalGuests = adults + children;
+        let addonsCost = 0;
+        if (document.getElementById('form-hotel-addon-camel').checked) addonsCost += 15 * totalGuests;
+        if (document.getElementById('form-hotel-addon-dinner').checked) addonsCost += 20 * totalGuests;
+        if (document.getElementById('form-hotel-addon-music').checked) addonsCost += 10 * totalGuests;
+        total = (item.price * rooms * diffDays) + addonsCost;
     } else if (item.category !== 'transport' && item.category !== 'guides') {
         total = item.price * parseInt(formQuantity.value);
     }
@@ -1718,6 +2158,27 @@ btnGeneratePdfReceipt.addEventListener('click', () => {
     } else if (item.category === 'crafts') {
         total = item.price * parseInt(formQuantity.value);
         dateStr = `${formCraftDate.value} (${formCraftSlot.value})`;
+    } else if (item.category === 'hotels') {
+        const checkInVal = document.getElementById('form-hotel-checkin').value;
+        const checkOutVal = document.getElementById('form-hotel-checkout').value;
+        const start = new Date(checkInVal);
+        const end = new Date(checkOutVal);
+        const diffTime = Math.abs(end - start);
+        const nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+        dateStr = `${checkInVal} ➔ ${checkOutVal} (${nights} nights)`;
+
+        const rooms = parseInt(document.getElementById('form-hotel-rooms').value) || 1;
+        const adults = parseInt(document.getElementById('form-hotel-adults').value) || 1;
+        const children = parseInt(document.getElementById('form-hotel-children').value) || 0;
+        const totalGuests = adults + children;
+
+        let addonsCost = 0;
+        if (document.getElementById('form-hotel-addon-camel').checked) addonsCost += 15 * totalGuests;
+        if (document.getElementById('form-hotel-addon-dinner').checked) addonsCost += 20 * totalGuests;
+        if (document.getElementById('form-hotel-addon-music').checked) addonsCost += 10 * totalGuests;
+
+        total = (item.price * rooms * nights) + addonsCost;
     } else {
         dateStr = formDate.value;
         if (item.category !== 'transport' && item.category !== 'guides') {
@@ -1725,13 +2186,15 @@ btnGeneratePdfReceipt.addEventListener('click', () => {
         }
     }
 
+    const isHotel = item.category === 'hotels';
     const isGuide = item.category === 'guides';
     const isCraft = item.category === 'crafts';
-    const filename = (isGuide || isCraft) ? `voucher_SR-${Date.now().toString().slice(-4)}.txt` : `receipt_SR-${Date.now().toString().slice(-4)}.txt`;
+    const filename = (isGuide || isCraft || isHotel) ? `voucher_SR-${Date.now().toString().slice(-4)}.txt` : `receipt_SR-${Date.now().toString().slice(-4)}.txt`;
     
     let docHeader = "SILKROAD SERVICE RECEIPT";
     if (isGuide) docHeader = "SILKROAD TOURIST VOUCHER";
     else if (isCraft) docHeader = "SILKROAD CRAFT WORKSHOP VOUCHER";
+    else if (isHotel) docHeader = "SILKROAD ACCOMMODATION VOUCHER";
 
     let detailsStr = '';
     if (isGuide) {
@@ -1751,6 +2214,31 @@ Location URL:  https://maps.google.com/?q=${item.coordinates}
 Messenger:     ${messenger} (${name})
 Date:          ${formCraftDate.value}
         `;
+    } else if (isHotel) {
+        const checkInVal = document.getElementById('form-hotel-checkin').value;
+        const checkOutVal = document.getElementById('form-hotel-checkout').value;
+        const rooms = parseInt(document.getElementById('form-hotel-rooms').value) || 1;
+        const adults = parseInt(document.getElementById('form-hotel-adults').value) || 1;
+        const children = parseInt(document.getElementById('form-hotel-children').value) || 0;
+        const totalGuests = adults + children;
+
+        let addonsList = [];
+        if (document.getElementById('form-hotel-addon-camel').checked) addonsList.push("Camel Riding (+$15/person)");
+        if (document.getElementById('form-hotel-addon-dinner').checked) addonsList.push("National Dinner (+$20/person)");
+        if (document.getElementById('form-hotel-addon-music').checked) addonsList.push("Campfire Music (+$10/person)");
+        const addonsStr = addonsList.length > 0 ? addonsList.join(', ') : "None";
+
+        detailsStr = `
+Check-In:      ${checkInVal}
+Check-Out:     ${checkOutVal}
+Nights:        ${dateStr.split('(')[1].split(')')[0]}
+Rooms booked:  ${rooms} room(s)
+Guests:        ${adults} Adult(s), ${children} Child(ren) (Total: ${totalGuests})
+Add-ons:       ${addonsStr}
+Coordinates:   ${item.coordinates || 'N/A'}
+Google Maps:   https://maps.google.com/?q=${item.coordinates || ''}
+Messenger:     ${messenger} (${name})
+        `;
     } else {
         detailsStr = `
 Quantity:      ${formQuantity.value}
@@ -1758,6 +2246,21 @@ Child Seat:    ${formChildSeat.checked ? dict.msgYes : dict.msgNo}
 Messenger:     ${messenger} (${name})
 Date & Time:   ${dateStr}
         `;
+    }
+
+    let qrSimulation = '';
+    if (isGuide || isCraft || isHotel) {
+        qrSimulation = `
+----------------------------------------
+[ QR CODE SIMULATION - SCAN FOR ENTRY ]
+   +-------------------------------+
+   |  ##      ##  ##  ######  ##   |
+   |  ##  ##  ##      ##  ##  ##   |
+   |  ######  ######  ######  #### |
+   |  ##  ##  ##  ##  ##  ##  ##   |
+   +-------------------------------+
+       Booking ID: #SR-${Date.now().toString().slice(-6)}
+`;
     }
 
     const docContent = `
@@ -1772,6 +2275,7 @@ ${detailsStr.trim()}
 Contact phone: ${contact}
 ----------------------------------------
 TOTAL PRICE:   $${total.toFixed(2)}
+${qrSimulation}
 ========================================
 Thank you for booking with SilkRoad Operations!
 Automatic notification sent to guide/operator/artisan.
@@ -1787,7 +2291,7 @@ Welcome to Uzbekistan!
     link.click();
     document.body.removeChild(link);
 
-    alert((isGuide || isCraft) ? "PDF Vaucher yuklab olindi (MOCK voucher.txt)" : dict.alertReceiptGenerated);
+    alert((isGuide || isCraft || isHotel) ? "PDF Vaucher yuklab olindi (MOCK voucher.txt)" : dict.alertReceiptGenerated);
 });
 
 // Close Modal
@@ -1807,6 +2311,8 @@ bookingForm.addEventListener('submit', (e) => {
     
     let dateVal = '';
     let total = item.price;
+    let customNotes = formNotes.value;
+
     if (item.category === 'guides' && item.guideType === 'virtual') {
         const start = new Date(formStartDate.value);
         const end = new Date(formEndDate.value);
@@ -1817,6 +2323,48 @@ bookingForm.addEventListener('submit', (e) => {
     } else if (item.category === 'crafts') {
         total = item.price * qty;
         dateVal = `${formCraftDate.value} (${formCraftSlot.value})`;
+    } else if (item.category === 'hotels') {
+        const checkInVal = document.getElementById('form-hotel-checkin').value;
+        const checkOutVal = document.getElementById('form-hotel-checkout').value;
+        const rooms = parseInt(document.getElementById('form-hotel-rooms').value) || 1;
+        const adults = parseInt(document.getElementById('form-hotel-adults').value) || 1;
+        const children = parseInt(document.getElementById('form-hotel-children').value) || 0;
+
+        const start = new Date(checkInVal);
+        const end = new Date(checkOutVal);
+        const diffTime = Math.abs(end - start);
+        const nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        dateVal = `${checkInVal} ➔ ${checkOutVal}`;
+
+        let addonsList = [];
+        let addonsCost = 0;
+        const totalGuests = adults + children;
+
+        if (document.getElementById('form-hotel-addon-camel').checked) {
+            addonsList.push("Camel Riding");
+            addonsCost += 15 * totalGuests;
+        }
+        if (document.getElementById('form-hotel-addon-dinner').checked) {
+            addonsList.push("National Dinner");
+            addonsCost += 20 * totalGuests;
+        }
+        if (document.getElementById('form-hotel-addon-music').checked) {
+            addonsList.push("Campfire Music");
+            addonsCost += 10 * totalGuests;
+        }
+
+        total = (item.price * rooms * nights) + addonsCost;
+        
+        customNotes += ` [Rooms: ${rooms}] [Guests: ${adults}A+${children}C]`;
+        if (addonsList.length > 0) {
+            customNotes += ` [Add-ons: ${addonsList.join(', ')}]`;
+        }
+
+        // n8n & Telegram Webhook simulation
+        const webhookMsg = `🔔 [n8n Telegram Webhook] Yangi bron: ${title}, ${nights} kecha, ${totalGuests} kishi. Mijoz: ${formContact.value}`;
+        console.log(webhookMsg);
+        alert(webhookMsg);
     } else {
         dateVal = formDate.value;
         if (item.category !== 'transport' && item.category !== 'guides') {
@@ -1824,21 +2372,12 @@ bookingForm.addEventListener('submit', (e) => {
         }
     }
 
-    // Custom notes and contact details for Itinerary representation
-    let customNotes = formNotes.value;
-    if (formChildSeat.checked) customNotes += " [Child Seat]";
-    if (item.category === 'guides') {
-        customNotes += ` [Lang: ${formGuideLang.value.toUpperCase()}]`;
-    } else if (item.category === 'crafts') {
-        customNotes += ` [Slot: ${formCraftSlot.value}] [Duration: ${item.durationMinutes}m]`;
-    }
-
     const bookingItem = {
         bookingId: Date.now().toString(), // unique key in itinerary
         serviceId: item.id,
         title: title,
         basePrice: item.price,
-        quantity: item.category === 'guides' ? 1 : qty,
+        quantity: item.category === 'guides' ? 1 : (item.category === 'hotels' ? parseInt(document.getElementById('form-hotel-rooms').value) : qty),
         totalItemPrice: total,
         date: dateVal,
         notes: customNotes.trim(),

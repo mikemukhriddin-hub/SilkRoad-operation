@@ -69,6 +69,14 @@
                         <option value="premium">Premium ($150+)</option>
                     </select>
                 </div>
+                <div class="search-field" id="search-hotel-dates-group" style="display: none;">
+                    <label id="lbl-search-hotel-dates">Sana oralig'i (Kirish-Chiqish)</label>
+                    <div style="display: flex; gap: 0.5rem; align-items: center;">
+                        <input type="date" id="search-hotel-checkin" style="width: 130px; padding: 0.6rem 0.5rem;">
+                        <span style="color: var(--text-muted);">➔</span>
+                        <input type="date" id="search-hotel-checkout" style="width: 130px; padding: 0.6rem 0.5rem;">
+                    </div>
+                </div>
                 <button class="btn btn-primary search-btn" id="btn-search-trigger">
                     Qidirish
                 </button>
@@ -224,6 +232,16 @@
                                 <select id="form-craft-slot"></select>
                             </div>
                         </div>
+                        <div class="form-group-range" id="form-hotel-dates-group" style="display: none;">
+                            <div class="form-group">
+                                <label for="form-hotel-checkin" id="lbl-form-hotel-checkin">Check-in (Kirish sanasi)</label>
+                                <input type="date" id="form-hotel-checkin">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-hotel-checkout" id="lbl-form-hotel-checkout">Check-out (Chiqish sanasi)</label>
+                                <input type="date" id="form-hotel-checkout">
+                            </div>
+                        </div>
                     </div>
 
                     <!-- STEP 2: Passengers & Add-ons -->
@@ -242,6 +260,48 @@
                         <div class="form-group" id="form-guide-lang-group" style="display: none;">
                             <label for="form-guide-lang" id="lbl-form-guide-lang">Muloqot tili</label>
                             <select id="form-guide-lang"></select>
+                        </div>
+                        
+                        <!-- Hotel specific fields in Step 2 -->
+                        <div id="form-hotel-details-group" style="display: none;">
+                            <div class="form-group">
+                                <label for="form-hotel-rooms" id="lbl-form-hotel-rooms">Xonalar soni</label>
+                                <input type="number" id="form-hotel-rooms" min="1" max="50" value="1">
+                            </div>
+                            <div class="form-group-range">
+                                <div class="form-group">
+                                    <label for="form-hotel-adults" id="lbl-form-hotel-adults">Kattalar soni</label>
+                                    <input type="number" id="form-hotel-adults" min="1" max="20" value="1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-hotel-children" id="lbl-form-hotel-children">Bolalar soni</label>
+                                    <input type="number" id="form-hotel-children" min="0" max="20" value="0">
+                                </div>
+                            </div>
+                            <div class="form-group" id="form-hotel-addons-container" style="margin-top: 1rem;">
+                                <label style="font-weight: 600; margin-bottom: 0.5rem; display: block;" id="lbl-hotel-addons-title">Qo'shimcha xizmatlar (Alohida to'lanadi):</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" id="form-hotel-addon-camel">
+                                        <span class="checkmark"></span>
+                                        <span id="lbl-hotel-addon-camel">Tuya minish (Camel riding) - $15 / kishi</span>
+                                    </label>
+                                </div>
+                                <div class="checkbox-group" style="margin-top: 0.5rem;">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" id="form-hotel-addon-dinner">
+                                        <span class="checkmark"></span>
+                                        <span id="lbl-hotel-addon-dinner">Milliy dasturxon (National dinner) - $20 / kishi</span>
+                                    </label>
+                                </div>
+                                <div class="checkbox-group" style="margin-top: 0.5rem;">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" id="form-hotel-addon-music">
+                                        <span class="checkmark"></span>
+                                        <span id="lbl-hotel-addon-music">Jonli musiqa (Live music around campfire) - $10 / kishi</span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -308,6 +368,18 @@
                                 <tr id="review-craft-coords-row" style="display:none;">
                                     <td id="lbl-review-craft-coords">Koordinatalar:</td>
                                     <td id="review-craft-coords-val" class="val">-</td>
+                                </tr>
+                                <tr id="review-hotel-rooms-row" style="display:none;">
+                                    <td id="lbl-review-hotel-rooms">Xonalar soni:</td>
+                                    <td id="review-hotel-rooms-val" class="val">-</td>
+                                </tr>
+                                <tr id="review-hotel-nights-row" style="display:none;">
+                                    <td id="lbl-review-hotel-nights">Tunlar soni:</td>
+                                    <td id="review-hotel-nights-val" class="val">-</td>
+                                </tr>
+                                <tr id="review-hotel-addons-row" style="display:none;">
+                                    <td id="lbl-review-hotel-addons">Qo'shimcha xizmatlar:</td>
+                                    <td id="review-hotel-addons-val" class="val">-</td>
                                 </tr>
                                 <tr>
                                     <td id="lbl-review-contact">Aloqa raqami:</td>
