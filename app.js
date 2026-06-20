@@ -336,6 +336,58 @@ const servicesData = [
         region: "bukhara",
         priceCategory: "budget",
         image: "assets/national_plov.png"
+    },
+    // --- TICKETS / BUS & AIRPORT ---
+    {
+        id: "ticket-airport-shuttle",
+        category: "tickets",
+        subCategory: "shuttle",
+        titleUz: "Airport Shuttle Bus (Aeroport Transfer)",
+        titleEn: "Airport Shuttle Bus (Airport Transfer)",
+        titleRu: "Шаттл-автобус до аэропорта (Трансфер)",
+        descriptionUz: "Toshkent xalqaro aeroportidan shahardagi asosiy mehmonxonalargacha guruhli qulay mikroavtobus xizmati. 24/7 ishlaydi.",
+        descriptionEn: "Comfortable group shuttle bus service from Tashkent International Airport to major city hotels. Running 24/7.",
+        descriptionRu: "Удобный групповой шаттл-автобус от Ташкентского международного аэропорта до основных отелей города. Работает 24/7.",
+        price: 10,
+        rating: 4.8,
+        reviews: 245,
+        region: "tashkent",
+        priceCategory: "budget",
+        image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1000"
+    },
+    {
+        id: "ticket-intercity-bus",
+        category: "tickets",
+        subCategory: "bus",
+        titleUz: "Intercity Turistik Avtobus (Comfort-class)",
+        titleEn: "Intercity Touristic Bus (Comfort-class)",
+        titleRu: "Междугородний туристический автобус (Комфорт)",
+        descriptionUz: "Toshkent – Samarqand – Buxoro yo‘nalishida qatnaydigan zamonaviy Comfort-class avtobuslari. Konditsioner va USB zaryadlash moslamalari bilan jihozlangan.",
+        descriptionEn: "Modern Comfort-class buses operating on Tashkent – Samarkand – Bukhara routes. Equipped with AC and USB charging ports.",
+        descriptionRu: "Современные автобусы класса комфорт, курсирующие по маршруту Ташкент – Самарканд – Бухара. Оснащены кондиционером и USB-портами.",
+        price: 15,
+        rating: 4.7,
+        reviews: 188,
+        region: "samarkand",
+        priceCategory: "budget",
+        image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1000"
+    },
+    {
+        id: "ticket-group-charter",
+        category: "tickets",
+        subCategory: "charter",
+        titleUz: "Guruhlar uchun Yutong/Isuzu Charter (Shaxsiy Buyurtma)",
+        titleEn: "Yutong/Isuzu Charter for Groups (Private Booking)",
+        titleRu: "Чартный автобус Yutong/Isuzu для групп (Частный заказ)",
+        descriptionUz: "20-45 kishilik sayyohlar guruhini shinam va xavfsiz transportda tog‘li hududlarga (Zomin, Chorvoq, Amirsoy) olib borish va qaytarish xizmati.",
+        descriptionEn: "Private charter service for groups of 20-45 travelers to mountain resorts (Zaamin, Charvak, Amirsoy). Comfortable and safe travel.",
+        descriptionRu: "Частный чартерный сервис для групп из 20-45 туристов в горные курорты (Заамин, Чарвак, Амирсой). Комфортное и безопасное путешествие.",
+        price: 120,
+        rating: 4.9,
+        reviews: 62,
+        region: "tashkent",
+        priceCategory: "mid",
+        image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1000"
     }
 ];
 
@@ -459,7 +511,14 @@ const translations = {
         lblReviewCraftDuration: "Davomiyligi:",
         lblReviewCraftSlot: "Seans vaqti:",
         lblReviewCraftCoords: "Koordinatalar:",
-        errMaxCapacity: "Maksimal sig'imdan oshib ketdi! Ushbu master-klassda ko'pi bilan {max} kishi qatnasha oladi."
+        errMaxCapacity: "Maksimal sig'imdan oshib ketdi! Ushbu master-klassda ko'pi bilan {max} kishi qatnasha oladi.",
+
+        // Empty state translations
+        emptyStateTitle: "Hech qanday mos xizmat topilmadi",
+        emptyStateDesc: "Qidiruv parametrlarini o'zgartirib ko'ring yoki filtrlarni tozalang.",
+        btnEmptyReset: "Filtrlarni tozalash",
+        btnEmptyViewAll: "Barcha xizmatlarni ko'rish",
+        recommendedTitle: "Sizga yoqishi mumkin (Tavsiyalar)"
     },
     en: {
         langBtn: "🌐 EN",
@@ -579,7 +638,14 @@ const translations = {
         lblReviewCraftDuration: "Duration:",
         lblReviewCraftSlot: "Session Time:",
         lblReviewCraftCoords: "Coordinates:",
-        errMaxCapacity: "Max capacity exceeded! Maximum of {max} people can participate in this masterclass."
+        errMaxCapacity: "Max capacity exceeded! Maximum of {max} people can participate in this masterclass.",
+
+        // Empty state translations
+        emptyStateTitle: "No matching services found",
+        emptyStateDesc: "Try changing your search parameters or reset filters.",
+        btnEmptyReset: "Reset Filters",
+        btnEmptyViewAll: "View All Services",
+        recommendedTitle: "Recommended for You"
     },
     ru: {
         langBtn: "🌐 RU",
@@ -699,7 +765,14 @@ const translations = {
         lblReviewCraftDuration: "Длительность:",
         lblReviewCraftSlot: "Время сеанса:",
         lblReviewCraftCoords: "Координаты:",
-        errMaxCapacity: "Превышена максимальная вместимость! В этом мастер-классе могут участвовать не более {max} человек."
+        errMaxCapacity: "Превышена максимальная вместимость! В этом мастер-классе могут участвовать не более {max} человек.",
+
+        // Empty state translations
+        emptyStateTitle: "Совпадений не найдено",
+        emptyStateDesc: "Попробуйте изменить параметры поиска или сбросить фильтры.",
+        btnEmptyReset: "Сбросить фильтры",
+        btnEmptyViewAll: "Показать все услуги",
+        recommendedTitle: "Рекомендуем вам"
     }
 };
 
@@ -969,6 +1042,21 @@ function renderSubCategories() {
     subCategoriesFilterArea.style.display = 'flex';
 }
 
+// Log failed searches to localStorage for analytics
+function logFailedSearch(query, region, price, category) {
+    if (!query && region === 'all' && price === 'all') return; // don't log empty default searches
+    let failedList = JSON.parse(localStorage.getItem('silkroad_failed_searches')) || [];
+    failedList.push({
+        query: query || "",
+        region: region || "all",
+        price: price || "all",
+        category: category || "all",
+        timestamp: new Date().toISOString()
+    });
+    localStorage.setItem('silkroad_failed_searches', JSON.stringify(failedList));
+    console.log("Logged failed search query:", query, region, price, category);
+}
+
 // Render Catalog Cards (with Priority Language-based sorting for Guides)
 function renderCatalog() {
     const dict = translations[currentLanguage];
@@ -1064,11 +1152,128 @@ function renderCatalog() {
         catalogGrid.innerHTML = '';
 
         if (filtered.length === 0) {
+            // Log failed search
+            logFailedSearch(searchQuery, selectedRegion, selectedPrice, activeCategory);
+
             catalogGrid.innerHTML = `
-                <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-muted); font-style: italic;">
-                    ${dict.noResults}
+                <div class="empty-state-card" style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-md); backdrop-filter: blur(10px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.25rem; box-shadow: var(--shadow-sm);">
+                    <div class="empty-state-icon-wrapper" style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary-cobalt-light); display: flex; align-items: center; justify-content: center; color: var(--accent-gold); margin-bottom: 0.5rem; animation: float 3s ease-in-out infinite;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            <line x1="11" y1="8" x2="11" y2="14"></line>
+                            <line x1="8" y1="11" x2="14" y2="11"></line>
+                        </svg>
+                    </div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin: 0;">${dict.emptyStateTitle}</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 480px; margin: 0 auto 0.5rem auto; line-height: 1.5;">${dict.emptyStateDesc}</p>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                        <button class="btn btn-primary" id="btn-empty-reset" style="padding: 0.6rem 1.5rem;">${dict.btnEmptyReset}</button>
+                        <button class="btn btn-outline" id="btn-empty-view-all" style="padding: 0.6rem 1.5rem; background: transparent; border: 1px solid var(--border-light); color: var(--text-main); border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; transition: all 0.3s ease;">${dict.btnEmptyViewAll}</button>
+                    </div>
+
+                    <!-- Recommended Section -->
+                    <div class="recommended-section" style="margin-top: 3.5rem; width: 100%; border-top: 1px solid var(--border-light); padding-top: 2.5rem;">
+                        <h4 style="font-size: 1.2rem; font-weight: 700; color: var(--text-main); text-align: left; margin-bottom: 1.5rem; border-left: 4px solid var(--accent-gold); padding-left: 0.75rem;">${dict.recommendedTitle}</h4>
+                        <div class="recommended-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; width: 100%;"></div>
+                    </div>
                 </div>
             `;
+
+            // Bind Reset Filters
+            document.getElementById('btn-empty-reset').addEventListener('click', () => {
+                searchQuery = '';
+                selectedRegion = 'all';
+                selectedPrice = 'all';
+                searchInput.value = '';
+                filterRegion.value = 'all';
+                filterPrice.value = 'all';
+                activeSubCategory = 'all';
+                renderCatalog();
+            });
+
+            // Bind View All
+            document.getElementById('btn-empty-view-all').addEventListener('click', () => {
+                activeCategory = 'all';
+                document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                const allTab = document.getElementById('tab-cat-all');
+                if (allTab) allTab.classList.add('active');
+                
+                searchQuery = '';
+                selectedRegion = 'all';
+                selectedPrice = 'all';
+                searchInput.value = '';
+                filterRegion.value = 'all';
+                filterPrice.value = 'all';
+                activeSubCategory = 'all';
+                renderCatalog();
+            });
+
+            // Render Recommended Cards
+            const recGrid = catalogGrid.querySelector('.recommended-grid');
+            if (recGrid) {
+                const topServices = servicesData
+                    .filter(item => item.rating >= 4.8)
+                    .sort((a, b) => b.rating - a.rating || b.reviews - a.reviews)
+                    .slice(0, 3);
+
+                topServices.forEach(recItem => {
+                    let recTitle = recItem.titleUz;
+                    let recDesc = recItem.descriptionUz;
+                    if (currentLanguage === 'en') {
+                        recTitle = recItem.titleEn;
+                        recDesc = recItem.descriptionEn;
+                    } else if (currentLanguage === 'ru') {
+                        recTitle = recItem.titleRu;
+                        recDesc = recItem.descriptionRu;
+                    }
+                    const recRegionName = dict[`opt${recItem.region.charAt(0).toUpperCase() + recItem.region.slice(1)}`] || recItem.region;
+                    
+                    let recLangBadges = '';
+                    if (recItem.category === 'guides' && recItem.spokenLanguages) {
+                        recLangBadges = `<div class="card-languages">`;
+                        recItem.spokenLanguages.forEach(l => {
+                            const isActive = l.toLowerCase() === currentLanguage ? 'active' : '';
+                            recLangBadges += `<span class="lang-badge ${isActive}">${l}</span>`;
+                        });
+                        recLangBadges += `</div>`;
+                    }
+
+                    const recCard = document.createElement('article');
+                    recCard.className = `card category-${recItem.category}`;
+                    recCard.style.textAlign = 'left'; // align text to left inside recommended cards
+                    recCard.innerHTML = `
+                        <div class="card-image-wrapper">
+                            <img src="${recItem.image}" alt="${recTitle}" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=600'">
+                            <span class="card-badge">${recItem.category === 'crafts' ? dict.badgeMasterclass : dict[`tab${recItem.category.charAt(0).toUpperCase() + recItem.category.slice(1)}`] || recItem.category}</span>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-category">${recRegionName.toUpperCase()} • RATING ★${recItem.rating} (${recItem.reviews})</div>
+                            <h3 class="card-title">${recTitle}</h3>
+                            ${recLangBadges}
+                            <p class="card-description" style="margin-top: 0.5rem;">${recDesc}</p>
+                            <div class="card-footer">
+                                <div class="card-price">
+                                    <span class="price-label">${dict.priceLabel}</span>
+                                    <span class="price-amount">$${recItem.price}</span>
+                                </div>
+                                <button class="btn btn-primary btn-book" data-id="${recItem.id}" id="btn-book-rec-${recItem.id}">
+                                    ${dict.btnBook}
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    recGrid.appendChild(recCard);
+                });
+
+                // Bind click events for booking buttons inside recommended cards
+                recGrid.querySelectorAll('.btn-book').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const id = e.target.getAttribute('data-id');
+                        openBookingModal(id);
+                    });
+                });
+            }
             return;
         }
 
