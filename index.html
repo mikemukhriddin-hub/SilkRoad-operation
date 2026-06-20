@@ -242,6 +242,25 @@
                                 <input type="date" id="form-hotel-checkout">
                             </div>
                         </div>
+                        <div class="form-group-range" id="form-restaurant-dates-group" style="display: none;">
+                            <div class="form-group">
+                                <label for="form-restaurant-date" id="lbl-form-restaurant-date">Sana</label>
+                                <input type="date" id="form-restaurant-date">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-restaurant-meal-slot" id="lbl-form-restaurant-meal-slot">Vaqt turi</label>
+                                <select id="form-restaurant-meal-slot">
+                                    <option value="lunch" id="opt-meal-slot-lunch">Tushlik (Lunch / Plov time: 11:00 - 14:30)</option>
+                                    <option value="dinner" id="opt-meal-slot-dinner">Kechki ovqat (Dinner time: 18:00 - 23:00)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-restaurant-time" id="lbl-form-restaurant-time">Kelish vaqti</label>
+                                <select id="form-restaurant-time">
+                                    <!-- Populated dynamically -->
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- STEP 2: Passengers & Add-ons -->
@@ -301,6 +320,22 @@
                                         <span id="lbl-hotel-addon-music">Jonli musiqa (Live music around campfire) - $10 / kishi</span>
                                     </label>
                                 </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Restaurant specific fields in Step 2 -->
+                        <div id="form-restaurant-details-group" style="display: none;">
+                            <div class="form-group">
+                                <label for="form-restaurant-guests" id="lbl-form-restaurant-guests">Mehmonlar soni (1-20 kishi)</label>
+                                <input type="number" id="form-restaurant-guests" min="1" max="20" value="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-restaurant-table-type" id="lbl-form-restaurant-table-type">Stol joylashuvi</label>
+                                <select id="form-restaurant-table-type">
+                                    <option value="indoor" id="opt-table-indoor">Zal ichida (Indoor)</option>
+                                    <option value="outdoor" id="opt-table-outdoor">Ochiq havoda / Hovuz bo'yida (Open-air / Poolside)</option>
+                                    <option value="vip" id="opt-table-vip">VIP xona (VIP Room) (+$10 premium)</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -380,6 +415,22 @@
                                 <tr id="review-hotel-addons-row" style="display:none;">
                                     <td id="lbl-review-hotel-addons">Qo'shimcha xizmatlar:</td>
                                     <td id="review-hotel-addons-val" class="val">-</td>
+                                </tr>
+                                <tr id="review-restaurant-meal-slot-row" style="display:none;">
+                                    <td id="lbl-review-restaurant-meal-slot">Vaqt turi va kelish vaqti:</td>
+                                    <td id="review-restaurant-meal-slot-val" class="val">-</td>
+                                </tr>
+                                <tr id="review-restaurant-table-row" style="display:none;">
+                                    <td id="lbl-review-restaurant-table">Stol joylashuvi:</td>
+                                    <td id="review-restaurant-table-val" class="val">-</td>
+                                </tr>
+                                <tr id="review-restaurant-pricing-row" style="display:none;">
+                                    <td id="lbl-review-restaurant-pricing">Mantiq va depozit:</td>
+                                    <td id="review-restaurant-pricing-val" class="val">-</td>
+                                </tr>
+                                <tr id="review-restaurant-vip-premium-row" style="display:none;">
+                                    <td id="lbl-review-restaurant-vip-premium">VIP premium:</td>
+                                    <td id="review-restaurant-vip-premium-val" class="val">-</td>
                                 </tr>
                                 <tr>
                                     <td id="lbl-review-contact">Aloqa raqami:</td>

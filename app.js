@@ -432,6 +432,63 @@ const servicesData = [
         region: "tashkent",
         priceCategory: "mid",
         image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1000"
+    },
+    {
+        id: "restaurant-plov-center",
+        category: "restaurants",
+        subCategory: "osh",
+        pricingType: "fee",
+        titleUz: "O'rta Osiyo Plov Markazi - Stol Band qilish",
+        titleEn: "Central Asian Plov Center - Table Booking",
+        titleRu: "Центр плова Средней Азии - Бронь стола",
+        descriptionUz: "Besh qozon mashhur milliy osh markazida navbatsiz kirish va kafolatlangan stol. Haqiqiy toshkentcha osh va choy marosimi.",
+        descriptionEn: "Skip the line at the famous Besh Qozon plov center with a guaranteed table. Authentic Tashkent plov and tea ceremony experience.",
+        descriptionRu: "Вход без очереди в знаменитый центр плова Беш Козон с гарантированным столом. Настоящий ташкентский плов и чайная церемония.",
+        price: 15,
+        rating: 4.9,
+        reviews: 580,
+        region: "tashkent",
+        priceCategory: "budget",
+        image: "assets/national_plov.png",
+        coordinates: "41.3409, 69.2867"
+    },
+    {
+        id: "restaurant-registan-royal",
+        category: "restaurants",
+        subCategory: "premium",
+        pricingType: "deposit",
+        titleUz: "Registan Royal Palace - Fine Dining",
+        titleEn: "Registan Royal Palace - Fine Dining",
+        titleRu: "Регистан Роял Палас - Fine Dining",
+        descriptionUz: "Samarqand Registon yaqinidagi premium milliy va Yevropa restorani. Jonli klassik va milliy musiqa, sharqona interyer va yuqori sifatli xizmat.",
+        descriptionEn: "Premium national and European dining near Samarkand Registan. Live classical and national music, oriental interiors and top-tier service.",
+        descriptionRu: "Премиальный национальный и европейский ресторан возле Регистана в Самарканде. Живая классическая и национальная музыка, восточный интерьер и сервис высшего класса.",
+        price: 30,
+        rating: 4.9,
+        reviews: 320,
+        region: "samarkand",
+        priceCategory: "budget",
+        image: "assets/registan_royal.png",
+        coordinates: "39.6508, 66.9654"
+    },
+    {
+        id: "restaurant-labi-hovuz",
+        category: "restaurants",
+        subCategory: "chayxana",
+        pricingType: "deposit",
+        titleUz: "Labi Hovuz Milliy Restorani - Kechki ovqat",
+        titleEn: "Lyabi-Khauz National Chayxana - Dinner",
+        titleRu: "Национальная Чайхана Ляби-Хауз - Ужин",
+        descriptionUz: "Buxoroning tarixiy hovuz bo'yidagi qadimiy chinorlar ostida joylashgan choyxona. Milliy so'rilar (topchan) va ochiq osmon ostidagi shinam muhit.",
+        descriptionEn: "Chayxana located under ancient chinors by Bukhara's historic pond. National topchans (sofa-beds) and cozy open-air atmosphere.",
+        descriptionRu: "Чайхана под вековыми чинарами у исторического пруда Бухары. Национальные топчаны и уютная атмосфера под открытым небом.",
+        price: 25,
+        rating: 4.8,
+        reviews: 420,
+        region: "bukhara",
+        priceCategory: "budget",
+        image: "assets/labi_hovuz.png",
+        coordinates: "39.7735, 64.4182"
     }
 ];
 
@@ -492,6 +549,28 @@ const translations = {
         tabTickets: "Avtobus & Aeroport",
         tabHotels: "Mehmonxonalar",
         tabRestaurants: "Restoranlar",
+        badgeRestaurants: "RESTORANLAR",
+        subCatOsh: "Osh markazlari",
+        subCatPremium: "Premium (Fine Dining)",
+        subCatChayxana: "Choyxona / Ochiq havoda",
+        lblRestaurantDate: "Sana",
+        lblMealSlot: "Vaqt turi",
+        optMealSlotLunch: "Tushlik (Lunch / Plov time: 11:00 - 14:30)",
+        optMealSlotDinner: "Kechki ovqat (Dinner time: 18:00 - 23:00)",
+        lblRestaurantTime: "Kelish vaqti",
+        lblRestaurantGuests: "Mehmonlar soni (1-20 kishi)",
+        lblRestaurantTableType: "Stol joylashuvi",
+        optTableIndoor: "Zal ichida (Indoor)",
+        optTableOutdoor: "Ochiq havoda / Hovuz bo'yida",
+        optTableVip: "VIP xona (VIP Room) (+$10)",
+        lblReviewRestaurantMealSlot: "Vaqt turi va kelish vaqti:",
+        lblReviewRestaurantTable: "Stol joylashuvi:",
+        lblReviewRestaurantPricing: "Mantiq va depozit:",
+        lblReviewRestaurantVipPremium: "VIP premium:",
+        pricingTypeFee: "Fiksirlangan xizmat haqi (Booking Fee)",
+        pricingTypeDeposit: "Depozit tizimi",
+        pricingTypeFeeDesc: "Booking Fee — faqat navbatsiz kirish va stol band qilish (taomlar hisobiga kirmaydi)",
+        pricingTypeDepositDesc: "Depozit — restoranda ovqatlanganda jami hisobdan chegiriladigan pul",
         
         // About Section & Login Modal Translations
         aboutTitle: "Platforma Haqida",
@@ -642,6 +721,28 @@ const translations = {
         tabTickets: "Bus & Airport",
         tabHotels: "Hotels",
         tabRestaurants: "Restaurants",
+        badgeRestaurants: "RESTAURANTS",
+        subCatOsh: "Plov Centers",
+        subCatPremium: "Premium (Fine Dining)",
+        subCatChayxana: "Chayxana / Open-air",
+        lblRestaurantDate: "Date",
+        lblMealSlot: "Meal Slot",
+        optMealSlotLunch: "Lunch (Lunch / Plov time: 11:00 - 14:30)",
+        optMealSlotDinner: "Dinner (Dinner time: 18:00 - 23:00)",
+        lblRestaurantTime: "Arrival Time",
+        lblRestaurantGuests: "Guests count (1-20 pax)",
+        lblRestaurantTableType: "Table Location",
+        optTableIndoor: "Indoor Hall",
+        optTableOutdoor: "Open-air / Poolside",
+        optTableVip: "VIP Room (+$10 premium)",
+        lblReviewRestaurantMealSlot: "Slot & Arrival Time:",
+        lblReviewRestaurantTable: "Table Location:",
+        lblReviewRestaurantPricing: "Pricing logic:",
+        lblReviewRestaurantVipPremium: "VIP premium:",
+        pricingTypeFee: "Fixed Booking Fee",
+        pricingTypeDeposit: "Deposit System",
+        pricingTypeFeeDesc: "Booking Fee — only guarantees entry and table reservation (not deducted from bill)",
+        pricingTypeDepositDesc: "Deposit — deposit paid online, deducted from the final restaurant bill",
 
         // About Section & Login Modal Translations
         aboutTitle: "About Platform",
@@ -792,6 +893,28 @@ const translations = {
         tabTickets: "Автобусы и Аэропорт",
         tabHotels: "Отели",
         tabRestaurants: "Рестораны",
+        badgeRestaurants: "РЕСТОРАНЫ",
+        subCatOsh: "Центры плова",
+        subCatPremium: "Премиум (Fine Dining)",
+        subCatChayxana: "Чайхана / На воздухе",
+        lblRestaurantDate: "Дата",
+        lblMealSlot: "Тип времени",
+        optMealSlotLunch: "Обед (Время плова: 11:00 - 14:30)",
+        optMealSlotDinner: "Ужин (Время ужина: 18:00 - 23:00)",
+        lblRestaurantTime: "Время прибытия",
+        lblRestaurantGuests: "Количество гостей (1-20 чел)",
+        lblRestaurantTableType: "Расположение стола",
+        optTableIndoor: "Внутри зала",
+        optTableOutdoor: "На улице / У бассейна",
+        optTableVip: "VIP комната (+$10 премиум)",
+        lblReviewRestaurantMealSlot: "Время и тип:",
+        lblReviewRestaurantTable: "Расположение стола:",
+        lblReviewRestaurantPricing: "Тип оплаты:",
+        lblReviewRestaurantVipPremium: "VIP премиум:",
+        pricingTypeFee: "Фиксированная бронь",
+        pricingTypeDeposit: "Депозитная система",
+        pricingTypeFeeDesc: "Booking Fee — сбор только за бронь и вход без очереди (не входит в счет)",
+        pricingTypeDepositDesc: "Депозит — предоплата, которая вычитается из итогового счета в ресторане",
 
         // About Section & Login Modal Translations
         aboutTitle: "О платформе",
@@ -1017,6 +1140,13 @@ const formMessengerType = document.getElementById('form-messenger-type');
 const formCraftDate = document.getElementById('form-craft-date');
 const formCraftSlot = document.getElementById('form-craft-slot');
 
+// Restaurants Wizard specific inputs
+const formRestaurantDate = document.getElementById('form-restaurant-date');
+const formRestaurantMealSlot = document.getElementById('form-restaurant-meal-slot');
+const formRestaurantTime = document.getElementById('form-restaurant-time');
+const formRestaurantGuests = document.getElementById('form-restaurant-guests');
+const formRestaurantTableType = document.getElementById('form-restaurant-table-type');
+
 // PDF Mock Receipt button
 const btnGeneratePdfReceipt = document.getElementById('btn-generate-pdf-receipt');
 
@@ -1136,6 +1266,30 @@ function translateUI() {
     document.getElementById('lbl-form-craft-date').innerText = dict.lblFormCraftDate;
     document.getElementById('lbl-form-craft-slot').innerText = dict.lblFormCraftSlot;
 
+    // Restaurant Specific wizard labels
+    const lblFormRestaurantDate = document.getElementById('lbl-form-restaurant-date');
+    if (lblFormRestaurantDate) lblFormRestaurantDate.innerText = dict.lblRestaurantDate;
+    const lblFormRestaurantMealSlot = document.getElementById('lbl-form-restaurant-meal-slot');
+    if (lblFormRestaurantMealSlot) lblFormRestaurantMealSlot.innerText = dict.lblMealSlot;
+    const lblFormRestaurantTime = document.getElementById('lbl-form-restaurant-time');
+    if (lblFormRestaurantTime) lblFormRestaurantTime.innerText = dict.lblRestaurantTime;
+    const lblFormRestaurantGuests = document.getElementById('lbl-form-restaurant-guests');
+    if (lblFormRestaurantGuests) lblFormRestaurantGuests.innerText = dict.lblRestaurantGuests;
+    const lblFormRestaurantTableType = document.getElementById('lbl-form-restaurant-table-type');
+    if (lblFormRestaurantTableType) lblFormRestaurantTableType.innerText = dict.lblRestaurantTableType;
+
+    // Restaurant dropdown options translations
+    const optMealSlotLunch = document.getElementById('opt-meal-slot-lunch');
+    if (optMealSlotLunch) optMealSlotLunch.text = dict.optMealSlotLunch;
+    const optMealSlotDinner = document.getElementById('opt-meal-slot-dinner');
+    if (optMealSlotDinner) optMealSlotDinner.text = dict.optMealSlotDinner;
+    const optTableIndoor = document.getElementById('opt-table-indoor');
+    if (optTableIndoor) optTableIndoor.text = dict.optTableIndoor;
+    const optTableOutdoor = document.getElementById('opt-table-outdoor');
+    if (optTableOutdoor) optTableOutdoor.text = dict.optTableOutdoor;
+    const optTableVip = document.getElementById('opt-table-vip');
+    if (optTableVip) optTableVip.text = dict.optTableVip;
+
     // Wizard Review Table Labels
     document.getElementById('lbl-review-title').innerText = dict.lblReviewTitle;
     document.getElementById('lbl-review-service').innerText = dict.lblReviewService;
@@ -1150,6 +1304,16 @@ function translateUI() {
     document.getElementById('lbl-review-contact').innerText = dict.lblReviewContact;
     document.getElementById('lbl-review-name').innerText = dict.lblReviewName;
     document.getElementById('lbl-review-price').innerText = dict.lblReviewPrice;
+
+    // Restaurant Review labels
+    const lblReviewRestaurantMealSlot = document.getElementById('lbl-review-restaurant-meal-slot');
+    if (lblReviewRestaurantMealSlot) lblReviewRestaurantMealSlot.innerText = dict.lblReviewRestaurantMealSlot;
+    const lblReviewRestaurantTable = document.getElementById('lbl-review-restaurant-table');
+    if (lblReviewRestaurantTable) lblReviewRestaurantTable.innerText = dict.lblReviewRestaurantTable;
+    const lblReviewRestaurantPricing = document.getElementById('lbl-review-restaurant-pricing');
+    if (lblReviewRestaurantPricing) lblReviewRestaurantPricing.innerText = dict.lblReviewRestaurantPricing;
+    const lblReviewRestaurantVipPremium = document.getElementById('lbl-review-restaurant-vip-premium');
+    if (lblReviewRestaurantVipPremium) lblReviewRestaurantVipPremium.innerText = dict.lblReviewRestaurantVipPremium;
 
     // Login Modal
     document.getElementById('login-modal-title').innerText = dict.loginModalTitle;
@@ -1201,7 +1365,7 @@ function translateUI() {
     if (lblReviewHotelAddons) lblReviewHotelAddons.innerText = dict.lblReviewHotelAddons;
 
     // Refresh secondary sub-category buttons
-    if (activeCategory === 'transport' || activeCategory === 'guides' || activeCategory === 'hotels') {
+    if (activeCategory === 'transport' || activeCategory === 'guides' || activeCategory === 'hotels' || activeCategory === 'restaurants') {
         renderSubCategories();
     }
 }
@@ -1274,11 +1438,12 @@ function renderCatalog() {
     const dict = translations[currentLanguage];
 
     // Hide or Show secondary sub-category tabs
-    if (activeCategory === 'transport' || activeCategory === 'guides' || activeCategory === 'hotels') {
+    if (activeCategory === 'transport' || activeCategory === 'guides' || activeCategory === 'hotels' || activeCategory === 'restaurants') {
         if (subCategoriesFilterArea.innerHTML === '' || 
            (activeCategory === 'transport' && subCategoriesFilterArea.firstChild.getAttribute('data-subcategory') === 'in-person') ||
            (activeCategory === 'guides' && subCategoriesFilterArea.firstChild.getAttribute('data-subcategory') === 'sedan') ||
-           (activeCategory === 'hotels' && !['all','boutique','yurt','modern','hostel'].includes(subCategoriesFilterArea.firstChild.getAttribute('data-subcategory')))) {
+           (activeCategory === 'hotels' && !['all','boutique','yurt','modern','hostel'].includes(subCategoriesFilterArea.firstChild.getAttribute('data-subcategory'))) ||
+           (activeCategory === 'restaurants' && !['all','osh','premium','chayxana'].includes(subCategoriesFilterArea.firstChild.getAttribute('data-subcategory')))) {
             renderSubCategories();
         } else {
             subCategoriesFilterArea.style.display = 'flex';
@@ -2365,6 +2530,28 @@ bookingForm.addEventListener('submit', (e) => {
         const webhookMsg = `🔔 [n8n Telegram Webhook] Yangi bron: ${title}, ${nights} kecha, ${totalGuests} kishi. Mijoz: ${formContact.value}`;
         console.log(webhookMsg);
         alert(webhookMsg);
+    } else if (item.category === 'restaurants') {
+        const guests = parseInt(formRestaurantGuests.value) || 1;
+        const isVip = formRestaurantTableType.value === 'vip';
+        const vipPremium = isVip ? 10 : 0;
+        if (item.pricingType === 'fee') {
+            total = item.price + vipPremium;
+        } else {
+            total = (item.price * guests) + vipPremium;
+        }
+        dateVal = `${formRestaurantDate.value} (${formRestaurantTime.value})`;
+
+        const tableLocVal = formRestaurantTableType.value;
+        let tableLocText = tableLocVal === 'indoor' ? 'Zal ichida' : (tableLocVal === 'outdoor' ? "Ochiq havoda / Hovuz bo'yida" : 'VIP xona');
+        const pricingDesc = item.pricingType === 'fee' ? 'Booking Fee' : 'Deposit';
+
+        customNotes += ` [Time: ${formRestaurantTime.value}] [Guests: ${guests}] [Table: ${tableLocText}] [Type: ${pricingDesc}]`;
+
+        // n8n & Telegram Webhook simulation
+        const restShortName = title.split(' - ')[0];
+        const webhookMsg = `🔔 [n8n Telegram Webhook] Yangi bron: ${restShortName}, ${formRestaurantDate.value} ${formRestaurantTime.value} ga, ${guests} kishi, ${tableLocText}. Mijoz: ${formUsername.value.trim()} (${formContact.value})`;
+        console.log(webhookMsg);
+        alert(webhookMsg);
     } else {
         dateVal = formDate.value;
         if (item.category !== 'transport' && item.category !== 'guides') {
@@ -2377,7 +2564,7 @@ bookingForm.addEventListener('submit', (e) => {
         serviceId: item.id,
         title: title,
         basePrice: item.price,
-        quantity: item.category === 'guides' ? 1 : (item.category === 'hotels' ? parseInt(document.getElementById('form-hotel-rooms').value) : qty),
+        quantity: item.category === 'guides' ? 1 : (item.category === 'hotels' ? parseInt(document.getElementById('form-hotel-rooms').value) : (item.category === 'restaurants' ? guests : qty)),
         totalItemPrice: total,
         date: dateVal,
         notes: customNotes.trim(),
