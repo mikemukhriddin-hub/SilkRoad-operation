@@ -1150,3 +1150,224 @@ html {
     color: var(--text-muted);
     font-size: 0.95rem;
 }
+
+/* Sub-categories container */
+.sub-categories-container {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0.5rem 0.25rem 1.25rem 0.25rem;
+    scrollbar-width: none;
+}
+
+.sub-categories-container::-webkit-scrollbar {
+    display: none;
+}
+
+.sub-category-tab {
+    background: white;
+    border: 1px solid var(--border-light);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.sub-category-tab:hover {
+    border-color: var(--accent-emerald);
+    color: var(--accent-emerald);
+    transform: translateY(-1px);
+}
+
+.sub-category-tab.active {
+    background: var(--accent-emerald);
+    color: white;
+    border-color: var(--accent-emerald);
+    box-shadow: 0 2px 6px rgba(17, 106, 123, 0.2);
+}
+
+/* Wizard Steps Progress Tracker */
+.wizard-progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    max-width: 320px;
+    margin: 1.5rem auto 0 auto;
+    padding: 0 1rem;
+}
+
+.wizard-progress::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: var(--border-light);
+    z-index: 1;
+    transform: translateY(-50%);
+}
+
+.wizard-step-node {
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    border: 3px solid var(--border-light);
+    color: var(--text-muted);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    position: relative;
+    z-index: 5;
+    transition: all 0.3s ease;
+}
+
+.wizard-step-node.active {
+    border-color: var(--primary-cobalt);
+    color: var(--primary-cobalt);
+    background-color: white;
+    transform: scale(1.1);
+}
+
+.wizard-step-node.completed {
+    border-color: var(--accent-gold);
+    background-color: var(--accent-gold);
+    color: var(--primary-cobalt);
+}
+
+/* Step Panels toggling */
+.step-panel {
+    display: none;
+    animation: fadePanel 0.3s ease-in-out;
+}
+
+.step-panel.active {
+    display: block;
+}
+
+@keyframes fadePanel {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom Checkbox Group */
+.checkbox-group {
+    margin-top: 1rem;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 2rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    user-select: none;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 20px;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+    border-color: var(--primary-cobalt);
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: var(--primary-cobalt);
+    border-color: var(--primary-cobalt);
+}
+
+.checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark::after {
+    display: block;
+}
+
+.checkbox-container .checkmark::after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Review Box & Table */
+.review-box {
+    background-color: var(--bg-main);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    border: 1px solid var(--border-light);
+}
+
+.review-box h4 {
+    font-size: 1rem;
+    color: var(--primary-cobalt);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 0.5rem;
+}
+
+.review-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.review-table td {
+    padding: 0.5rem 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.review-table td.val {
+    text-align: right;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.review-table td.font-highlight {
+    font-size: 1.1rem;
+    color: var(--accent-emerald);
+    font-weight: 700;
+}
+
+.review-table tr {
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.05);
+}
+
+.review-table tr:last-child {
+    border-bottom: none;
+}

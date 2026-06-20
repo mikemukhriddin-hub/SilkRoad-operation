@@ -2,12 +2,15 @@
 
 // Mock Services Data
 const servicesData = [
+    // --- TRANSPORT CLASS: A (Intercity Classical) ---
     {
         id: "trans-vip-sedan",
         category: "transport",
-        titleUz: "VIP Sedan Transfer (Toshkent - Samarqand)",
-        titleEn: "VIP Sedan Transfer (Tashkent - Samarkand)",
-        titleRu: "VIP Трансфер на седане (Ташкент - Самарканд)",
+        subCategory: "sedan",
+        routeCategory: "intercity",
+        titleUz: "VIP Sedan Transfer (Toshkent ↔ Samarqand)",
+        titleEn: "VIP Sedan Transfer (Tashkent ↔ Samarkand)",
+        titleRu: "VIP Трансфер на седане (Ташкент ↔ Самарканд)",
         descriptionUz: "Professional haydovchi bilan premium toifadagi sedan (Chevrolet Malibu 2 yoki Tracker) orqali shinam va xavfsiz transport xizmati. Konditsioner va bepul salqin ichimliklar mavjud.",
         descriptionEn: "Comfortable and safe transport service in a premium sedan (Chevrolet Malibu 2 or Tracker) with a professional driver. Air conditioning and free cold drinks included.",
         descriptionRu: "Комфортабельный и безопасный трансфер на седане премиум-класса (Chevrolet Malibu 2 или Tracker) с профессиональным водителем. Кондиционер и прохладительные напитки включены.",
@@ -21,9 +24,11 @@ const servicesData = [
     {
         id: "trans-group-minivan",
         category: "transport",
-        titleUz: "Mercedes Sprinter VIP Minivan (Buxoro - Xiva)",
-        titleEn: "Mercedes Sprinter VIP Minivan (Bukhara - Khiva)",
-        titleRu: "VIP Минивэн Mercedes Sprinter (Бухара - Хива)",
+        subCategory: "minivan",
+        routeCategory: "intercity",
+        titleUz: "Mercedes Sprinter VIP Minivan (Buxoro ↔ Xiva)",
+        titleEn: "Mercedes Sprinter VIP Minivan (Bukhara ↔ Khiva)",
+        titleRu: "VIP Минивэн Mercedes Sprinter (Бухара ↔ Хива)",
         descriptionUz: "Guruhlar uchun moslashtirilgan, keng yukxona va yumshoq o'rindiqlarga ega bo'lgan zamonaviy minivan sayohati. Yo'lda tarixiy obidalarda to'xtab o'tish imkoniyati.",
         descriptionEn: "Modern minivan trip customized for groups with spacious luggage compartment and soft seats. Possibility to stop at historical monuments along the way.",
         descriptionRu: "Поездка на современном минивэне для групп, с просторным багажным отделением и мягкими сиденьями. Возможность остановки у исторических объектов в пути.",
@@ -34,6 +39,86 @@ const servicesData = [
         priceCategory: "premium",
         image: "assets/minivan.png"
     },
+    {
+        id: "trans-suv-bukhara-samarkand",
+        category: "transport",
+        subCategory: "suv",
+        routeCategory: "intercity",
+        titleUz: "SUV Captiva Qulay Transfer (Samarqand ↔ Buxoro)",
+        titleEn: "SUV Captiva Comfortable Transfer (Samarkand ↔ Bukhara)",
+        titleRu: "SUV Captiva Комфортный трансфер (Самарканд ↔ Бухара)",
+        descriptionUz: "Chevrolet Captiva yo'ltanlamasi orqali ikki qadimiy shahar o'rtasida shinam sayohat. Konditsioner, yumshoq salon va professional haydovchi hamrohligi.",
+        descriptionEn: "Comfortable trip between two ancient cities in a Chevrolet Captiva SUV. Climate control, soft leather seats, and professional chauffeur.",
+        descriptionRu: "Комфортная поездка между двумя древними городами на внедорожнике Chevrolet Captiva. Климат-контроль, кожаный салон и профессиональный водитель.",
+        price: 120,
+        rating: 4.8,
+        reviews: 42,
+        region: "samarkand",
+        priceCategory: "mid",
+        image: "assets/minivan.png"
+    },
+
+    // --- TRANSPORT CLASS: B (Nature & Mountains) ---
+    {
+        id: "trans-suv-chimgan",
+        category: "transport",
+        subCategory: "suv",
+        routeCategory: "nature",
+        titleUz: "Chimyon & Amirsoy Tog'li Turi (Toshkent ↔ Amirsoy)",
+        titleEn: "Chimgan & Amirsoy Mountain Day Trip (Tashkent ↔ Amirsoy)",
+        titleRu: "Горная экскурсия в Чимган и Амирсой (Ташкент ↔ Амирсой)",
+        descriptionUz: "Tog'li hududlarda sayohat qilish uchun mo'ljallangan 4x4 yo'ltanlamas mashinasida kunlik sayohat. Amirsoy dor yo'li va Chorvoq suv omboriga tashrif buyurish imkoniyati.",
+        descriptionEn: "Full day trip in a 4x4 SUV designed for mountain road terrains. Includes optional visits to Amirsoy cable car and Charvak reservoir.",
+        descriptionRu: "Дневная поездка на внедорожнике 4x4, предназначенном для горных дорог. Включает посещение канатной дороги Амирсой и Чарвакского водохранилища.",
+        price: 95,
+        rating: 4.9,
+        reviews: 134,
+        region: "tashkent",
+        priceCategory: "mid",
+        image: "assets/minivan.png"
+    },
+
+    // --- TRANSPORT CLASS: C (Extreme & Eco-tourism) ---
+    {
+        id: "trans-extreme-aral",
+        category: "transport",
+        subCategory: "suv",
+        routeCategory: "eco",
+        titleUz: "Orol Dengizi Off-Road Sayohati (Nukus ↔ Mo'ynoq)",
+        titleEn: "Aral Sea Off-Road SUV Adventure (Nukus ↔ Moynak)",
+        titleRu: "Внедорожное приключение на Аральское море (Нукус ↔ Муйнак)",
+        descriptionUz: "Toyota Land Cruiser yo'ltanlamasida Orol dengizi bo'ylab, kemalar qabristoni va Ustyurt platosiga ekstrimal sayohat. Tajribali cho'l haydovchisi xizmati.",
+        descriptionEn: "Extreme SUV trip to the Aral Sea, ship graveyard, and Ustyurt plateau in a robust Toyota Land Cruiser with an experienced desert pilot.",
+        descriptionRu: "Экстремальная поездка на Аральское море, кладбище кораблей и плато Устюрт на внедорожнике Toyota Land Cruiser с опытным водителем.",
+        price: 220,
+        rating: 5.0,
+        reviews: 58,
+        region: "khiva", // serves western region
+        priceCategory: "premium",
+        image: "assets/minivan.png"
+    },
+
+    // --- TRANSPORT CLASS: D (City Services) ---
+    {
+        id: "trans-city-chauffeur",
+        category: "transport",
+        subCategory: "sedan",
+        routeCategory: "city",
+        titleUz: "Toshkent shahrida shaxsiy haydovchi (8 soat)",
+        titleEn: "Tashkent City Private Chauffeur (8 hours)",
+        titleRu: "Личный водитель в Ташкенте (8 часов)",
+        descriptionUz: "Toshkent shahri bo'ylab kun davomida Chevrolet Gentra yoki Cobalt avtomobilida shaxsiy biznes xizmatlari yoki sayohat uchun haydovchi xizmati. Yoqilg'i narxi ichida.",
+        descriptionEn: "Personal chauffeur service for business or sightseeing in Tashkent in a clean Gentra or Cobalt. Fuel and unlimited city stops included.",
+        descriptionRu: "Услуги личного водителя для бизнеса или прогулок по Ташкенту на чистом автомобиле Gentra или Cobalt. Топливо и стоянки включены в стоимость.",
+        price: 60,
+        rating: 4.7,
+        reviews: 95,
+        region: "tashkent",
+        priceCategory: "mid",
+        image: "assets/minivan.png"
+    },
+
+    // --- GUIDES ---
     {
         id: "guide-samarkand-person",
         category: "guides",
@@ -66,6 +151,8 @@ const servicesData = [
         priceCategory: "budget",
         image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000"
     },
+
+    // --- CRAFT / MASTERCLASSES ---
     {
         id: "craft-pottery-gijduvan",
         category: "crafts",
@@ -98,38 +185,8 @@ const servicesData = [
         priceCategory: "budget",
         image: "assets/pottery.png"
     },
-    {
-        id: "ticket-express-bus",
-        category: "tickets",
-        titleUz: "Comfort Express Avtobus Chiptasi (Toshkent - Samarqand)",
-        titleEn: "Comfort Express Bus Ticket (Tashkent - Samarkand)",
-        titleRu: "Билет на комфортабельный экспресс-автобус (Ташкент - Самарканд)",
-        descriptionUz: "Afrosiyob poezdiga chipta topilmaganda eng yaxshi muqobil. Zamonaviy iqlim nazoratiga ega, multimedia tizimi bilan jihozlangan tezyurar avtobus yo'nalishi. Kundalik qatnovlar.",
-        descriptionEn: "Best alternative when train tickets are sold out. Fast highway bus route equipped with modern climate control and multimedia screens. Daily schedule.",
-        descriptionRu: "Отличная альтернатива при отсутствии билетов на поезд Афросиаб. Быстрый автобусный рейс с современным климат-контролем и мультимедиа. Ежедневное расписание.",
-        price: 12,
-        rating: 4.5,
-        reviews: 412,
-        region: "tashkent",
-        priceCategory: "budget",
-        image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1000"
-    },
-    {
-        id: "ticket-airport-transfer",
-        category: "tickets",
-        titleUz: "Toshkent Aeroport VIP Transferi & Lounge",
-        titleEn: "Tashkent Airport VIP Transfer & Fast Track",
-        titleRu: "VIP Трансфер и Fast Track в аэропорту Ташкента",
-        descriptionUz: "Aeroportda kutib olish, maxsus VIP yo'lak orqali tezkor pasport tekshiruvi (Fast Track) va yuklarni tashish xizmati bilan mehmonxonagacha kuzatib qo'yish.",
-        descriptionEn: "Airport meet-and-greet, expedited VIP passport lane (Fast Track), baggage assistance, and private transfer directly to your hotel.",
-        descriptionRu: "Встреча в аэропорту, прохождение паспортного контроля через VIP-коридор (Fast Track), помощь с багажом и индивидуальный трансфер до отеля.",
-        price: 45,
-        rating: 4.9,
-        reviews: 167,
-        region: "tashkent",
-        priceCategory: "budget",
-        image: "assets/minivan.png"
-    },
+
+    // --- HOTELS ---
     {
         id: "hotel-heritage-bukhara",
         category: "hotels",
@@ -162,6 +219,8 @@ const servicesData = [
         priceCategory: "mid",
         image: "assets/hotel.png"
     },
+
+    // --- RESTAURANTS ---
     {
         id: "restaurant-plov-center",
         category: "restaurants",
@@ -222,10 +281,10 @@ const translations = {
         shareTitle: "Guruh bilan ulashish",
         modalTitle: "Xizmat Tafsilotlari",
         lblFormDate: "Sana va vaqt",
-        lblFormQuantity: "Odamlar soni / Miqdor",
+        lblFormQuantity: "Yo'lovchilar soni / Miqdor",
         lblFormNotes: "Qo'shimcha istaklar va ma'lumotlar",
         placeholderFormNotes: "Masalan: Maxsus xizmatlar, parhez, reys raqami...",
-        lblFormContact: "Siz bilan bog'lanish uchun raqam (Telegram / Telefon)",
+        lblFormContact: "Siz bilan bog'lanish uchun raqam (Telegram / WhatsApp / Telefon)",
         btnModalCancel: "Bekor qilish",
         btnModalConfirm: "Safar rejasiga qo'shish",
         badgeMasterclass: "Master-klass",
@@ -266,7 +325,36 @@ const translations = {
         lblLoginUsername: "Foydalanuvchi nomi / Email",
         lblLoginPassword: "Mahfiy Parol",
         btnLoginSubmit: "Kirish",
-        btnLoginCancel: "Bekor qilish"
+        btnLoginCancel: "Bekor qilish",
+
+        // Transport Subcategories
+        subCatAll: "Barchasi",
+        subCatSedan: "Sedan / Biznes (1-3 kishi)",
+        subCatMinivan: "Miniven / Mikroavtobus (4-15 kishi)",
+        subCatSuv: "Yo'ltanlamas / Jip (4x4)",
+
+        // Wizard steps translations
+        wizardStepNode1: "Vaqt",
+        wizardStepNode2: "Yo'lovchi",
+        wizardStepNode3: "Kontaktlar",
+        wizardStepNode4: "Tasdiqlash",
+        lblFormChildSeat: "Bolalar o'rindig'i kerakmi? (Bepul)",
+        lblFormUsername: "Ismingiz va Telegram username (ixtiyoriy)",
+        lblReviewTitle: "Buyurtma tafsilotlarini tekshiring",
+        lblReviewService: "Xizmat:",
+        lblReviewDatetime: "Sana va vaqt:",
+        lblReviewGuests: "Yo'lovchilar/Miqdor:",
+        lblReviewChildSeat: "Bolalar o'rindig'i:",
+        lblReviewContact: "Aloqa raqami:",
+        lblReviewName: "Buyurtmachi ismi:",
+        lblReviewPrice: "Jami qiymat:",
+        btnWizardBack: "Orqaga",
+        btnWizardNext: "Keyingisi",
+        btnGeneratePdfReceipt: "📄 PDF Chek yuklab olish",
+        alertReceiptGenerated: "PDF Chek yuklab olindi (MOCK receipt.txt yuklandi)",
+        msgYes: "Ha",
+        msgNo: "Yo'q",
+        msgNotSpecified: "Kiritilmagan"
     },
     en: {
         langBtn: "🌐 EN",
@@ -336,7 +424,36 @@ const translations = {
         lblLoginUsername: "Username / Email",
         lblLoginPassword: "Secret Password",
         btnLoginSubmit: "Login",
-        btnLoginCancel: "Cancel"
+        btnLoginCancel: "Cancel",
+
+        // Transport Subcategories
+        subCatAll: "All",
+        subCatSedan: "Sedan / Business (1-3 pax)",
+        subCatMinivan: "Minivan / Minibus (4-15 pax)",
+        subCatSuv: "Off-Road / SUV (4x4)",
+
+        // Wizard steps translations
+        wizardStepNode1: "Time",
+        wizardStepNode2: "Passengers",
+        wizardStepNode3: "Contacts",
+        wizardStepNode4: "Review",
+        lblFormChildSeat: "Child safety seat required? (Free)",
+        lblFormUsername: "Your name and Telegram username (optional)",
+        lblReviewTitle: "Verify Booking Details",
+        lblReviewService: "Service:",
+        lblReviewDatetime: "Date & Time:",
+        lblReviewGuests: "Passengers/Quantity:",
+        lblReviewChildSeat: "Child safety seat:",
+        lblReviewContact: "Contact number:",
+        lblReviewName: "Customer name:",
+        lblReviewPrice: "Total cost:",
+        btnWizardBack: "Back",
+        btnWizardNext: "Next",
+        btnGeneratePdfReceipt: "📄 Download PDF Receipt",
+        alertReceiptGenerated: "PDF Receipt downloaded (MOCK receipt.txt saved)",
+        msgYes: "Yes",
+        msgNo: "No",
+        msgNotSpecified: "Not specified"
     },
     ru: {
         langBtn: "🌐 RU",
@@ -406,7 +523,36 @@ const translations = {
         lblLoginUsername: "Имя пользователя / Email",
         lblLoginPassword: "Секретный пароль",
         btnLoginSubmit: "Войти",
-        btnLoginCancel: "Отмена"
+        btnLoginCancel: "Отмена",
+
+        // Transport Subcategories
+        subCatAll: "Все",
+        subCatSedan: "Седан / Бизнес (1-3 чел.)",
+        subCatMinivan: "Минивэн / Микроавтобус (4-15 чел.)",
+        subCatSuv: "Внедорожник / Джип (4x4)",
+
+        // Wizard steps translations
+        wizardStepNode1: "Время",
+        wizardStepNode2: "Пассажиры",
+        wizardStepNode3: "Контакты",
+        wizardStepNode4: "Подтверждение",
+        lblFormChildSeat: "Нужно детское кресло? (Бесплатно)",
+        lblFormUsername: "Ваше имя и Telegram username (необязательно)",
+        lblReviewTitle: "Проверьте детали заказа",
+        lblReviewService: "Услуга:",
+        lblReviewDatetime: "Дата и время:",
+        lblReviewGuests: "Пассажиры/Количество:",
+        lblReviewChildSeat: "Детское кресло:",
+        lblReviewContact: "Контактный номер:",
+        lblReviewName: "Имя заказчика:",
+        lblReviewPrice: "Общая стоимость:",
+        btnWizardBack: "Назад",
+        btnWizardNext: "Далее",
+        btnGeneratePdfReceipt: "📄 Скачать PDF чек",
+        alertReceiptGenerated: "PDF Чек скачан (MOCK receipt.txt сохранен)",
+        msgYes: "Да",
+        msgNo: "Нет",
+        msgNotSpecified: "Не указано"
     }
 };
 
@@ -414,10 +560,12 @@ const translations = {
 let currentLanguage = localStorage.getItem('silkroad_lang') || 'uz';
 let itinerary = JSON.parse(localStorage.getItem('silkroad_itinerary')) || [];
 let activeCategory = 'all';
+let activeSubCategory = 'all'; // specifically for transport sub-categories
 let searchQuery = '';
 let selectedRegion = 'all';
 let selectedPrice = 'all';
-let isCatalogLoading = false;
+let currentStep = 1;
+let selectedServiceForBooking = null;
 
 // DOM Elements
 const catalogGrid = document.getElementById('catalog-grid');
@@ -430,6 +578,7 @@ const filterRegion = document.getElementById('filter-region');
 const filterPrice = document.getElementById('filter-price');
 const btnSearchTrigger = document.getElementById('btn-search-trigger');
 const searchSuggestionsBox = document.getElementById('search-suggestions-box');
+const subCategoriesFilterArea = document.getElementById('sub-categories-filter-area');
 
 const itineraryItemsContainer = document.getElementById('itinerary-items-container');
 const emptyItineraryPlaceholder = document.getElementById('empty-itinerary-placeholder');
@@ -453,10 +602,21 @@ const btnModalCancel = document.getElementById('btn-modal-cancel');
 const bookingForm = document.getElementById('booking-form');
 const formItemId = document.getElementById('form-item-id');
 const formDynamicDetails = document.getElementById('form-dynamic-details');
+
+// Wizard controls
+const btnWizardBack = document.getElementById('btn-wizard-back');
+const btnWizardNext = document.getElementById('btn-wizard-next');
+const btnModalConfirm = document.getElementById('btn-modal-confirm');
+
 const formDate = document.getElementById('form-date');
 const formQuantity = document.getElementById('form-quantity');
 const formNotes = document.getElementById('form-notes');
 const formContact = document.getElementById('form-contact');
+const formUsername = document.getElementById('form-username');
+const formChildSeat = document.getElementById('form-child-seat');
+
+// PDF Mock Receipt button
+const btnGeneratePdfReceipt = document.getElementById('btn-generate-pdf-receipt');
 
 // Login Modal Elements
 const loginModal = document.getElementById('login-modal');
@@ -543,7 +703,13 @@ function translateUI() {
     document.querySelector('.summary-row.total span:first-child').innerText = dict.summaryTotal;
     document.querySelector('.share-title').innerText = dict.shareTitle;
 
-    // Booking Modal
+    // Booking Wizard step indicators
+    document.getElementById('wizard-step-node-1').innerText = "1";
+    document.getElementById('wizard-step-node-2').innerText = "2";
+    document.getElementById('wizard-step-node-3').innerText = "3";
+    document.getElementById('wizard-step-node-4').innerText = "4";
+
+    // Booking Modal Labels
     document.getElementById('lbl-form-date').innerText = dict.lblFormDate;
     document.getElementById('lbl-form-quantity').innerText = dict.lblFormQuantity;
     document.getElementById('lbl-form-notes').innerText = dict.lblFormNotes;
@@ -551,6 +717,22 @@ function translateUI() {
     document.getElementById('lbl-form-contact').innerText = dict.lblFormContact;
     document.getElementById('btn-modal-cancel').innerText = dict.btnModalCancel;
     document.getElementById('btn-modal-confirm').innerText = dict.btnModalConfirm;
+    document.getElementById('btn-wizard-back').innerText = dict.btnWizardBack;
+    document.getElementById('btn-wizard-next').innerText = dict.btnWizardNext;
+
+    document.getElementById('lbl-form-child-seat').innerText = dict.lblFormChildSeat;
+    document.getElementById('lbl-form-username').innerText = dict.lblFormUsername;
+    document.getElementById('btn-generate-pdf-receipt').innerText = dict.btnGeneratePdfReceipt;
+
+    // Wizard Review Table Labels
+    document.getElementById('lbl-review-title').innerText = dict.lblReviewTitle;
+    document.getElementById('lbl-review-service').innerText = dict.lblReviewService;
+    document.getElementById('lbl-review-datetime').innerText = dict.lblReviewDatetime;
+    document.getElementById('lbl-review-guests').innerText = dict.lblReviewGuests;
+    document.getElementById('lbl-review-child-seat').innerText = dict.lblReviewChildSeat;
+    document.getElementById('lbl-review-contact').innerText = dict.lblReviewContact;
+    document.getElementById('lbl-review-name').innerText = dict.lblReviewName;
+    document.getElementById('lbl-review-price').innerText = dict.lblReviewPrice;
 
     // Login Modal
     document.getElementById('login-modal-title').innerText = dict.loginModalTitle;
@@ -568,11 +750,59 @@ function translateUI() {
             resultsTitle.innerText = activeTab.textContent.trim();
         }
     }
+
+    // Refresh secondary sub-category buttons
+    if (activeCategory === 'transport') {
+        renderSubCategories();
+    }
+}
+
+// Render Sub-category Tabs (For Transport specifically)
+function renderSubCategories() {
+    const dict = translations[currentLanguage];
+    subCategoriesFilterArea.innerHTML = '';
+
+    const subCats = [
+        { id: "all", label: dict.subCatAll },
+        { id: "sedan", label: dict.subCatSedan },
+        { id: "minivan", label: dict.subCatMinivan },
+        { id: "suv", label: dict.subCatSuv }
+    ];
+
+    subCats.forEach(sc => {
+        const btn = document.createElement('button');
+        btn.className = `sub-category-tab ${activeSubCategory === sc.id ? 'active' : ''}`;
+        btn.innerText = sc.label;
+        btn.setAttribute('data-subcategory', sc.id);
+        
+        btn.addEventListener('click', (e) => {
+            document.querySelectorAll('.sub-category-tab').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            activeSubCategory = e.target.getAttribute('data-subcategory');
+            renderCatalog();
+        });
+
+        subCategoriesFilterArea.appendChild(btn);
+    });
+
+    subCategoriesFilterArea.style.display = 'flex';
 }
 
 // Render Catalog Cards (with Skeleton Loader Simulation)
 function renderCatalog() {
     const dict = translations[currentLanguage];
+
+    // Hide or Show secondary sub-category tabs
+    if (activeCategory === 'transport') {
+        if (subCategoriesFilterArea.innerHTML === '') {
+            renderSubCategories();
+        } else {
+            subCategoriesFilterArea.style.display = 'flex';
+        }
+    } else {
+        subCategoriesFilterArea.style.display = 'none';
+        activeSubCategory = 'all';
+    }
 
     // Show Skeletons first
     catalogGrid.innerHTML = '';
@@ -598,6 +828,9 @@ function renderCatalog() {
         const filtered = servicesData.filter(item => {
             const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
             
+            // Secondary subcategory filtering for transport
+            const matchesSubCategory = activeSubCategory === 'all' || (item.category === 'transport' && item.subCategory === activeSubCategory);
+
             // Dynamic fields based on current language
             let title = item.titleUz;
             let description = item.descriptionUz;
@@ -609,18 +842,21 @@ function renderCatalog() {
                 description = item.descriptionRu;
             }
 
+            // Route search matching (e.g. Samarqand matches "Samarqand ↔ Buxoro")
             const matchesSearch = searchQuery === '' || 
                 title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                description.toLowerCase().includes(searchQuery.toLowerCase());
+                description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                item.region.toLowerCase().includes(searchQuery.toLowerCase());
                 
-            const matchesRegion = selectedRegion === 'all' || item.region === selectedRegion;
+            const matchesRegion = selectedRegion === 'all' || item.region === selectedRegion || 
+                title.toLowerCase().includes(selectedRegion.toLowerCase());
             
             let matchesPrice = true;
             if (selectedPrice === 'budget') matchesPrice = item.price < 50;
             else if (selectedPrice === 'mid') matchesPrice = item.price >= 50 && item.price <= 150;
             else if (selectedPrice === 'premium') matchesPrice = item.price > 150;
 
-            return matchesCategory && matchesSearch && matchesRegion && matchesPrice;
+            return matchesCategory && matchesSubCategory && matchesSearch && matchesRegion && matchesPrice;
         });
 
         // Update Result text
@@ -691,10 +927,12 @@ function renderCatalog() {
     }, 600); // 600ms simulated network delay
 }
 
-// Open Booking Modal for service
+// Open Booking Modal for service (Wizard Setup)
 function openBookingModal(itemId) {
     const item = servicesData.find(s => s.id === itemId);
     if (!item) return;
+
+    selectedServiceForBooking = item;
 
     const dict = translations[currentLanguage];
     let title = item.titleUz;
@@ -712,23 +950,202 @@ function openBookingModal(itemId) {
     
     // Set dynamic description info in modal
     formDynamicDetails.innerHTML = `
-        <div style="background-color: var(--bg-main); padding: 1rem; border-radius: var(--radius-sm); border-left: 4px solid var(--accent-gold);">
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">${description}</p>
-            <div style="display: flex; justify-content: space-between; font-weight: 700;">
+        <div style="background-color: var(--bg-main); padding: 0.75rem 1rem; border-radius: var(--radius-sm); border-left: 4px solid var(--accent-gold);">
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem;">${description}</p>
+            <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 0.9rem;">
                 <span>${dict.priceLabel}:</span>
                 <span style="color: var(--primary-cobalt);">$${item.price}</span>
             </div>
         </div>
     `;
 
-    // Reset Form
+    // Reset Form fields
     formDate.value = '';
     formQuantity.value = '1';
     formNotes.value = '';
-    
+    formUsername.value = '';
+    formChildSeat.checked = false;
+
+    // Show or hide transport-specific options (Child seat)
+    const childSeatRow = document.getElementById('form-child-seat-group');
+    if (item.category === 'transport') {
+        childSeatRow.style.display = 'block';
+    } else {
+        childSeatRow.style.display = 'none';
+    }
+
+    // Reset Wizard steps
+    currentStep = 1;
+    updateWizardUI();
+
     // Open Modal
     bookingModal.classList.add('active');
 }
+
+// Update Step panels and indicators visibilities
+function updateWizardUI() {
+    // Hide all step panels
+    document.querySelectorAll('.step-panel').forEach(panel => {
+        panel.classList.remove('active');
+    });
+
+    // Show active panel
+    document.getElementById(`step-panel-${currentStep}`).classList.add('active');
+
+    // Update progress tracker circles
+    document.querySelectorAll('.wizard-step-node').forEach(node => {
+        const stepNum = parseInt(node.getAttribute('data-step'));
+        node.classList.remove('active', 'completed');
+        if (stepNum === currentStep) {
+            node.classList.add('active');
+        } else if (stepNum < currentStep) {
+            node.classList.add('completed');
+        }
+    });
+
+    // Update buttons
+    if (currentStep === 1) {
+        btnWizardBack.style.display = 'none';
+        btnWizardNext.style.display = 'block';
+        btnModalConfirm.style.display = 'none';
+    } else if (currentStep === 4) {
+        btnWizardBack.style.display = 'block';
+        btnWizardNext.style.display = 'none';
+        btnModalConfirm.style.display = 'block';
+    } else {
+        btnWizardBack.style.display = 'block';
+        btnWizardNext.style.display = 'block';
+        btnModalConfirm.style.display = 'none';
+    }
+}
+
+// Wizard Next Button Trigger
+btnWizardNext.addEventListener('click', () => {
+    // Validate current step input
+    if (currentStep === 1) {
+        if (!formDate.value) {
+            formDate.reportValidity();
+            return;
+        }
+    } else if (currentStep === 2) {
+        if (!formQuantity.value || parseInt(formQuantity.value) < 1) {
+            formQuantity.reportValidity();
+            return;
+        }
+    } else if (currentStep === 3) {
+        if (!formContact.value) {
+            formContact.reportValidity();
+            return;
+        }
+        
+        // Populate Step 4 review data
+        populateReviewSummary();
+    }
+
+    // Go to next step
+    currentStep++;
+    updateWizardUI();
+});
+
+// Wizard Back Button Trigger
+btnWizardBack.addEventListener('click', () => {
+    if (currentStep > 1) {
+        currentStep--;
+        updateWizardUI();
+    }
+});
+
+// Populate Review Summary Table
+function populateReviewSummary() {
+    const dict = translations[currentLanguage];
+    if (!selectedServiceForBooking) return;
+
+    const item = selectedServiceForBooking;
+    const title = currentLanguage === 'uz' ? item.titleUz : (currentLanguage === 'en' ? item.titleEn : item.titleRu);
+    
+    // Service
+    document.getElementById('review-service-title').innerText = title;
+
+    // Date
+    const dateObj = new Date(formDate.value);
+    const formattedDate = isNaN(dateObj.getTime())
+        ? formDate.value
+        : dateObj.toLocaleDateString(currentLanguage === 'uz' ? 'uz-UZ' : 'en-US') + ' ' + dateObj.toLocaleTimeString(currentLanguage === 'uz' ? 'uz-UZ' : 'en-US', {hour: '2-digit', minute:'2-digit'});
+    document.getElementById('review-datetime-val').innerText = formattedDate;
+
+    // Guests
+    document.getElementById('review-guests-val').innerText = `${formQuantity.value} ${dict.itineraryItemGuests}`;
+
+    // Child seat (Transport only)
+    const childSeatRow = document.getElementById('review-child-seat-row');
+    if (item.category === 'transport') {
+        childSeatRow.style.display = 'table-row';
+        document.getElementById('review-child-seat-val').innerText = formChildSeat.checked ? dict.msgYes : dict.msgNo;
+    } else {
+        childSeatRow.style.display = 'none';
+    }
+
+    // Contact details
+    document.getElementById('review-contact-val').innerText = formContact.value;
+
+    // Name
+    document.getElementById('review-name-val').innerText = formUsername.value.trim() || dict.msgNotSpecified;
+
+    // Price calculation: transport is fixed price per route; others are price * qty
+    let total = item.price;
+    if (item.category !== 'transport') {
+        total = item.price * parseInt(formQuantity.value);
+    }
+    document.getElementById('review-price-val').innerText = `$${total.toFixed(2)}`;
+}
+
+// Generate PDF Mock receipt file download
+btnGeneratePdfReceipt.addEventListener('click', () => {
+    if (!selectedServiceForBooking) return;
+    const item = selectedServiceForBooking;
+    const dict = translations[currentLanguage];
+
+    const title = currentLanguage === 'uz' ? item.titleUz : (currentLanguage === 'en' ? item.titleEn : item.titleRu);
+    const qty = formQuantity.value;
+    const date = formDate.value;
+    const contact = formContact.value;
+    const name = formUsername.value || dict.msgNotSpecified;
+    const childSeatVal = formChildSeat.checked ? dict.msgYes : dict.msgNo;
+
+    let total = item.price;
+    if (item.category !== 'transport') {
+        total = item.price * parseInt(qty);
+    }
+
+    const receiptContent = `
+========================================
+       SILKROAD OPERATIONS RECEIPT
+========================================
+Receipt ID:    #SR-${Date.now().toString().slice(-6)}
+Service:       ${title}
+Date & Time:   ${date}
+Quantity:      ${qty} ${dict.itineraryItemGuests}
+Contact:       ${contact}
+Customer:      ${name}
+Child Seat:    ${childSeatVal}
+----------------------------------------
+TOTAL PRICE:   $${total.toFixed(2)}
+========================================
+Thank you for booking with us!
+Welcome to Uzbekistan!
+    `;
+
+    // Download file
+    const blob = new Blob([receiptContent], {type: "text/plain;charset=utf-8"});
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `receipt_SR-${Date.now().toString().slice(-4)}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    alert(dict.alertReceiptGenerated);
+});
 
 // Close Modal
 function closeModal() {
@@ -739,15 +1156,15 @@ function closeModal() {
 bookingForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const id = formItemId.value;
-    const item = servicesData.find(s => s.id === id);
-    if (!item) return;
+    if (!selectedServiceForBooking) return;
+    const item = selectedServiceForBooking;
 
-    let title = item.titleUz;
-    if (currentLanguage === 'en') {
-        title = item.titleEn;
-    } else if (currentLanguage === 'ru') {
-        title = item.titleRu;
+    const title = currentLanguage === 'uz' ? item.titleUz : (currentLanguage === 'en' ? item.titleEn : item.titleRu);
+    const qty = parseInt(formQuantity.value);
+    
+    let total = item.price;
+    if (item.category !== 'transport') {
+        total = item.price * qty;
     }
 
     const bookingItem = {
@@ -755,11 +1172,11 @@ bookingForm.addEventListener('submit', (e) => {
         serviceId: item.id,
         title: title,
         basePrice: item.price,
-        quantity: parseInt(formQuantity.value),
-        totalItemPrice: item.price * parseInt(formQuantity.value),
+        quantity: qty,
+        totalItemPrice: total,
         date: formDate.value,
-        notes: formNotes.value,
-        contact: formContact.value
+        notes: formNotes.value + (formChildSeat.checked ? " [Child Seat Requested]" : ""),
+        contact: formContact.value + (formUsername.value ? ` (${formUsername.value})` : '')
     };
 
     itinerary.push(bookingItem);
@@ -914,6 +1331,7 @@ categoryTabs.forEach(tab => {
         targetTab.classList.add('active');
 
         activeCategory = targetTab.getAttribute('data-category');
+        activeSubCategory = 'all'; // reset transport subcategory
         
         // Update Title dynamically based on active category
         const catName = targetTab.textContent.trim();
@@ -998,12 +1416,12 @@ searchInput.addEventListener('input', (e) => {
         return;
     }
 
-    // Filter services based on title
+    // Filter services based on title or region
     const matches = servicesData.filter(item => {
         let title = item.titleUz;
         if (currentLanguage === 'en') title = item.titleEn;
         else if (currentLanguage === 'ru') title = item.titleRu;
-        return title.toLowerCase().includes(val);
+        return title.toLowerCase().includes(val) || item.region.toLowerCase().includes(val);
     });
 
     if (matches.length === 0) {

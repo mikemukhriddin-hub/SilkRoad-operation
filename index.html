@@ -113,6 +113,9 @@
                 </button>
             </div>
 
+            <!-- Secondary Sub-categories Filter (Appears dynamically) -->
+            <div class="sub-categories-container" id="sub-categories-filter-area" style="display: none;"></div>
+
             <!-- Header of results -->
             <div class="section-header">
                 <h2 class="section-title" id="results-title">Barcha Operatsiyalar & Xizmatlar</h2>
@@ -172,48 +175,121 @@
         </aside>
     </main>
 
-    <!-- Interactive Interactive Booking Modal -->
+    <!-- Interactive Booking Wizard Modal -->
     <div class="modal" id="booking-modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title" id="modal-title-text">Xizmat Tafsilotlari</h3>
                 <button class="modal-close" id="btn-modal-close">&times;</button>
             </div>
+            
+            <!-- Wizard Progress Bar Tracker -->
+            <div class="wizard-progress" id="wizard-progress-bar">
+                <div class="wizard-step-node active" data-step="1" id="wizard-step-node-1">1</div>
+                <div class="wizard-step-node" data-step="2" id="wizard-step-node-2">2</div>
+                <div class="wizard-step-node" data-step="3" id="wizard-step-node-3">3</div>
+                <div class="wizard-step-node" data-step="4" id="wizard-step-node-4">4</div>
+            </div>
+            
             <div class="modal-body">
                 <form id="booking-form">
                     <input type="hidden" id="form-item-id">
                     
                     <!-- Dynamic details area populated by JS -->
-                    <div id="form-dynamic-details" style="margin-bottom: 1.5rem;"></div>
+                    <div id="form-dynamic-details" style="margin-bottom: 1rem;"></div>
 
-                    <!-- Input: Date/Time -->
-                    <div class="form-group">
-                        <label for="form-date" id="lbl-form-date">Sana va vaqt</label>
-                        <input type="datetime-local" id="form-date" required>
+                    <!-- STEP 1: Date & Time -->
+                    <div class="step-panel active" data-step="1" id="step-panel-1">
+                        <div class="form-group">
+                            <label for="form-date" id="lbl-form-date">Sana va vaqt</label>
+                            <input type="datetime-local" id="form-date" required>
+                        </div>
                     </div>
 
-                    <!-- Input: Quantity/Guests -->
-                    <div class="form-group">
-                        <label for="form-quantity" id="lbl-form-quantity">Odamlar soni / Miqdor</label>
-                        <input type="number" id="form-quantity" min="1" max="100" value="1" required>
+                    <!-- STEP 2: Passengers & Add-ons -->
+                    <div class="step-panel" data-step="2" id="step-panel-2">
+                        <div class="form-group">
+                            <label for="form-quantity" id="lbl-form-quantity">Yo'lovchilar soni / Miqdor</label>
+                            <input type="number" id="form-quantity" min="1" max="100" value="1" required>
+                        </div>
+                        <div class="form-group checkbox-group" id="form-child-seat-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="form-child-seat">
+                                <span class="checkmark"></span>
+                                <span id="lbl-form-child-seat">Bolalar o'rindig'i kerakmi? (Bepul)</span>
+                            </label>
+                        </div>
                     </div>
 
-                    <!-- Input: Comments/Special Requests -->
-                    <div class="form-group">
-                        <label for="form-notes" id="lbl-form-notes">Qo'shimcha istaklar va ma'lumotlar</label>
-                        <textarea id="form-notes" rows="3" placeholder="Masalan: Maxsus xizmatlar, parhez, reys raqami..."></textarea>
+                    <!-- STEP 3: Contacts -->
+                    <div class="step-panel" data-step="3" id="step-panel-3">
+                        <div class="form-group">
+                            <label for="form-notes" id="lbl-form-notes">Qo'shimcha istaklar va ma'lumotlar</label>
+                            <textarea id="form-notes" rows="3" placeholder="Masalan: Maxsus xizmatlar, parhez, reys raqami..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-contact" id="lbl-form-contact">Siz bilan bog'lanish uchun raqam (Telegram / WhatsApp / Telefon)</label>
+                            <input type="text" id="form-contact" placeholder="+998 90 123 45 67" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-username" id="lbl-form-username">Ismingiz va Telegram username (ixtiyoriy)</label>
+                            <input type="text" id="form-username" placeholder="Masalan: Muxriddin @mikemukhriddin">
+                        </div>
                     </div>
 
-                    <!-- Contact details -->
-                    <div class="form-group">
-                        <label for="form-contact" id="lbl-form-contact">Siz bilan bog'lanish uchun raqam (Telegram / Telefon)</label>
-                        <input type="text" id="form-contact" placeholder="+998 90 123 45 67" required>
+                    <!-- STEP 4: Review & Confirmation -->
+                    <div class="step-panel" data-step="4" id="step-panel-4">
+                        <div class="review-box">
+                            <h4 id="lbl-review-title">Buyurtma tafsilotlarini tekshiring</h4>
+                            <table class="review-table">
+                                <tr>
+                                    <td id="lbl-review-service">Xizmat:</td>
+                                    <td id="review-service-title" class="val">-</td>
+                                </tr>
+                                <tr>
+                                    <td id="lbl-review-datetime">Sana va vaqt:</td>
+                                    <td id="review-datetime-val" class="val">-</td>
+                                </tr>
+                                <tr>
+                                    <td id="lbl-review-guests">Yo'lovchilar/Miqdor:</td>
+                                    <td id="review-guests-val" class="val">-</td>
+                                </tr>
+                                <tr id="review-child-seat-row" style="display:none;">
+                                    <td id="lbl-review-child-seat">Bolalar o'rindig'i:</td>
+                                    <td id="review-child-seat-val" class="val">-</td>
+                                </tr>
+                                <tr>
+                                    <td id="lbl-review-contact">Aloqa raqami:</td>
+                                    <td id="review-contact-val" class="val">-</td>
+                                </tr>
+                                <tr>
+                                    <td id="lbl-review-name">Buyurtmachi ismi:</td>
+                                    <td id="review-name-val" class="val">-</td>
+                                </tr>
+                                <tr>
+                                    <td id="lbl-review-price">Jami qiymat:</td>
+                                    <td id="review-price-val" class="val font-highlight">-</td>
+                                </tr>
+                            </table>
+                            <div class="pdf-receipt-download" style="margin-top: 1rem; text-align: center;">
+                                <button type="button" class="btn btn-secondary btn-sm" id="btn-generate-pdf-receipt">
+                                    📄 PDF Chek yaratish (Mock)
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="btn-modal-cancel">Bekor qilish</button>
-                <button class="btn btn-primary" type="submit" form="booking-form" id="btn-modal-confirm">Safar rejasiga qo'shish</button>
+            
+            <div class="modal-footer" style="display: flex; justify-content: space-between;">
+                <div>
+                    <button class="btn btn-secondary" id="btn-wizard-back" style="display: none;">Orqaga</button>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-secondary" id="btn-modal-cancel">Bekor qilish</button>
+                    <button class="btn btn-primary" id="btn-wizard-next">Keyingisi</button>
+                    <button class="btn btn-primary" type="submit" form="booking-form" id="btn-modal-confirm" style="display: none;">Safar rejasiga qo'shish</button>
+                </div>
             </div>
         </div>
     </div>
