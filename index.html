@@ -21,9 +21,9 @@
             </a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="#" id="link-catalog">Xizmatlar</a></li>
-                    <li><a href="#" id="link-about">Platforma Haqida</a></li>
-                    <li><a href="#" id="link-contact">Aloqa</a></li>
+                    <li><a href="#catalog-section" id="link-catalog">Xizmatlar</a></li>
+                    <li><a href="#about-section" id="link-about">Platforma Haqida</a></li>
+                    <li><a href="#footer-section" id="link-contact">Aloqa</a></li>
                 </ul>
             </nav>
             <div class="user-actions">
@@ -45,9 +45,10 @@
             
             <!-- Global Search Area -->
             <div class="search-container" id="global-search-container">
-                <div class="search-field">
+                <div class="search-field" style="position: relative;">
                     <label for="search-input">Qidiruv</label>
-                    <input type="text" id="search-input" placeholder="Samarqand, Gid, Avtobus...">
+                    <input type="text" id="search-input" placeholder="Samarqand, Gid, Avtobus..." autocomplete="off">
+                    <div class="search-suggestions" id="search-suggestions-box"></div>
                 </div>
                 <div class="search-field">
                     <label for="filter-region">Viloyat / Shahar</label>
@@ -79,7 +80,7 @@
     <main class="main-layout" id="main-content-area">
         
         <!-- Left Side: Category tabs & Catalog Grid -->
-        <section class="catalog-section">
+        <section class="catalog-section" id="catalog-section">
             <!-- Dynamic Category Slider Tabs -->
             <div class="categories-tabs" id="categories-tabs-container">
                 <button class="category-tab active" data-category="all" id="tab-cat-all">
@@ -213,6 +214,56 @@
             <div class="modal-footer">
                 <button class="btn btn-secondary" id="btn-modal-cancel">Bekor qilish</button>
                 <button class="btn btn-primary" type="submit" form="booking-form" id="btn-modal-confirm">Safar rejasiga qo'shish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Platforma Haqida (About Section) -->
+    <section class="about-section" id="about-section">
+        <div class="about-container">
+            <h2 id="about-title">Platforma Haqida</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">🛡️</div>
+                    <h3 id="about-card1-title">Xavfsiz Xizmatlar</h3>
+                    <p id="about-card1-desc">Barcha transport vositalari va professional gidlar to'liq tekshiruvdan o'tkaziladi.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">⚡</div>
+                    <h3 id="about-card2-title">Tezkor Muvofiqlashtirish</h3>
+                    <p id="about-card2-desc">Buyurtma ma'lumotlarini bir zumda Telegram, WhatsApp yoki Email orqali ulashing.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">🏺</div>
+                    <h3 id="about-card3-title">Milliy Meros</h3>
+                    <p id="about-card3-desc">Amaliy hunarmandchilik master-klasslarida bevosita ishtirok eting va sirlarini o'rganing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title" id="login-modal-title">Tizimga Kirish</h3>
+                <button class="modal-close" id="btn-login-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-username" id="lbl-login-username">Foydalanuvchi nomi / Email</label>
+                        <input type="text" id="login-username" required placeholder="admin@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password" id="lbl-login-password">Mahfiy Parol</label>
+                        <input type="password" id="login-password" required placeholder="••••••••">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-login-cancel">Bekor qilish</button>
+                <button class="btn btn-primary" type="submit" form="login-form" id="btn-login-submit">Kirish</button>
             </div>
         </div>
     </div>

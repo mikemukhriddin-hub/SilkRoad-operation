@@ -184,7 +184,7 @@ const servicesData = [
         titleUz: "Labi Hovuz Milliy Restorani - Kechki ovqat",
         titleEn: "Lyabi Khauz National Restaurant - Dinner Table",
         titleRu: "Национальный ресторан Ляби-Хауз - Ужин",
-        descriptionUz: "Buxoroning qoq markazida joyhazgan qadimiy hovuz bo'yida jonli milliy musiqa jo'rligida mazali shashliklar, so'msa va an'anaviy choy marosimidan bahramand bo'ling.",
+        descriptionUz: "Buxoroning qoq markazida joylashgan qadimiy hovuz bo'yida jonli milliy musiqa jo'rligida mazali shashliklar, so'msa va an'anaviy choy marosimidan bahramand bo'ling.",
         descriptionEn: "Enjoy delicious skewers of shashlik, samosa, and traditional tea ceremonies accompanied by live national music by the ancient pond in central Bukhara.",
         descriptionRu: "Насладитесь вкуснейшими шашлыками, самсой и чайной церемонией под живую национальную музыку у древнего пруда в самом центре Бухары.",
         price: 25,
@@ -252,7 +252,21 @@ const translations = {
         tabCrafts: "Milliy Hunarmandchilik",
         tabTickets: "Avtobus & Aeroport",
         tabHotels: "Mehmonxonalar",
-        tabRestaurants: "Restoranlar"
+        tabRestaurants: "Restoranlar",
+        
+        // About Section & Login Modal Translations
+        aboutTitle: "Platforma Haqida",
+        aboutCard1Title: "Xavfsiz Xizmatlar",
+        aboutCard1Desc: "Barcha transport vositalari va professional gidlar to'liq tekshiruvdan o'tkaziladi.",
+        aboutCard2Title: "Tezkor Muvofiqlashtirish",
+        aboutCard2Desc: "Buyurtma ma'lumotlarini bir zumda Telegram, WhatsApp yoki Email orqali ulashing.",
+        aboutCard3Title: "Milliy Meros",
+        aboutCard3Desc: "Amaliy hunarmandchilik master-klasslarida bevosita ishtirok eting va sirlarini o'rganing.",
+        loginModalTitle: "Tizimga Kirish",
+        lblLoginUsername: "Foydalanuvchi nomi / Email",
+        lblLoginPassword: "Mahfiy Parol",
+        btnLoginSubmit: "Kirish",
+        btnLoginCancel: "Bekor qilish"
     },
     en: {
         langBtn: "🌐 EN",
@@ -308,7 +322,21 @@ const translations = {
         tabCrafts: "National Crafts",
         tabTickets: "Bus & Airport",
         tabHotels: "Hotels",
-        tabRestaurants: "Restaurants"
+        tabRestaurants: "Restaurants",
+
+        // About Section & Login Modal Translations
+        aboutTitle: "About Platform",
+        aboutCard1Title: "Safe Services",
+        aboutCard1Desc: "All transport vehicles and professional guides are fully verified.",
+        aboutCard2Title: "Quick Coordination",
+        aboutCard2Desc: "Share booking details instantly via Telegram, WhatsApp, or Email.",
+        aboutCard3Title: "National Heritage",
+        aboutCard3Desc: "Directly participate in traditional craft masterclasses and learn their secrets.",
+        loginModalTitle: "System Login",
+        lblLoginUsername: "Username / Email",
+        lblLoginPassword: "Secret Password",
+        btnLoginSubmit: "Login",
+        btnLoginCancel: "Cancel"
     },
     ru: {
         langBtn: "🌐 RU",
@@ -364,7 +392,21 @@ const translations = {
         tabCrafts: "Народные ремесла",
         tabTickets: "Автобусы и Аэропорт",
         tabHotels: "Отели",
-        tabRestaurants: "Рестораны"
+        tabRestaurants: "Рестораны",
+
+        // About Section & Login Modal Translations
+        aboutTitle: "О платформе",
+        aboutCard1Title: "Безопасные услуги",
+        aboutCard1Desc: "Все транспортные средства и профессиональные гиды проходят полную проверку.",
+        aboutCard2Title: "Быстрая координация",
+        aboutCard2Desc: "Мгновенно делитесь деталями бронирования через Telegram, WhatsApp или Email.",
+        aboutCard3Title: "Национальное наследие",
+        aboutCard3Desc: "Непосредственно участвуйте в традиционных ремесленных мастер-классах.",
+        loginModalTitle: "Вход в систему",
+        lblLoginUsername: "Имя пользователя / Email",
+        lblLoginPassword: "Секретный пароль",
+        btnLoginSubmit: "Войти",
+        btnLoginCancel: "Отмена"
     }
 };
 
@@ -375,6 +417,7 @@ let activeCategory = 'all';
 let searchQuery = '';
 let selectedRegion = 'all';
 let selectedPrice = 'all';
+let isCatalogLoading = false;
 
 // DOM Elements
 const catalogGrid = document.getElementById('catalog-grid');
@@ -386,6 +429,7 @@ const searchInput = document.getElementById('search-input');
 const filterRegion = document.getElementById('filter-region');
 const filterPrice = document.getElementById('filter-price');
 const btnSearchTrigger = document.getElementById('btn-search-trigger');
+const searchSuggestionsBox = document.getElementById('search-suggestions-box');
 
 const itineraryItemsContainer = document.getElementById('itinerary-items-container');
 const emptyItineraryPlaceholder = document.getElementById('empty-itinerary-placeholder');
@@ -401,7 +445,7 @@ const btnShareEmail = document.getElementById('btn-share-email');
 // Language Selectors
 const langBtns = document.querySelectorAll('.lang-btn');
 
-// Modal Elements
+// Booking Modal Elements
 const bookingModal = document.getElementById('booking-modal');
 const modalTitleText = document.getElementById('modal-title-text');
 const btnModalClose = document.getElementById('btn-modal-close');
@@ -413,6 +457,13 @@ const formDate = document.getElementById('form-date');
 const formQuantity = document.getElementById('form-quantity');
 const formNotes = document.getElementById('form-notes');
 const formContact = document.getElementById('form-contact');
+
+// Login Modal Elements
+const loginModal = document.getElementById('login-modal');
+const btnLogin = document.getElementById('btn-login');
+const btnLoginClose = document.getElementById('btn-login-close');
+const btnLoginCancel = document.getElementById('btn-login-cancel');
+const loginForm = document.getElementById('login-form');
 
 // Helper to update specific tab texts
 function updateCategoryTabText(tabId, text) {
@@ -476,6 +527,15 @@ function translateUI() {
     updateCategoryTabText('tab-cat-hotels', dict.tabHotels);
     updateCategoryTabText('tab-cat-restaurants', dict.tabRestaurants);
 
+    // About Section Texts
+    document.getElementById('about-title').innerText = dict.aboutTitle;
+    document.getElementById('about-card1-title').innerText = dict.aboutCard1Title;
+    document.getElementById('about-card1-desc').innerText = dict.aboutCard1Desc;
+    document.getElementById('about-card2-title').innerText = dict.aboutCard2Title;
+    document.getElementById('about-card2-desc').innerText = dict.aboutCard2Desc;
+    document.getElementById('about-card3-title').innerText = dict.aboutCard3Title;
+    document.getElementById('about-card3-desc').innerText = dict.aboutCard3Desc;
+
     // Sidebar
     document.querySelector('.sidebar-title').childNodes[0].nodeValue = dict.sidebarTitle + ' ';
     emptyItineraryPlaceholder.innerText = dict.emptyItinerary;
@@ -483,7 +543,7 @@ function translateUI() {
     document.querySelector('.summary-row.total span:first-child').innerText = dict.summaryTotal;
     document.querySelector('.share-title').innerText = dict.shareTitle;
 
-    // Modal
+    // Booking Modal
     document.getElementById('lbl-form-date').innerText = dict.lblFormDate;
     document.getElementById('lbl-form-quantity').innerText = dict.lblFormQuantity;
     document.getElementById('lbl-form-notes').innerText = dict.lblFormNotes;
@@ -491,6 +551,13 @@ function translateUI() {
     document.getElementById('lbl-form-contact').innerText = dict.lblFormContact;
     document.getElementById('btn-modal-cancel').innerText = dict.btnModalCancel;
     document.getElementById('btn-modal-confirm').innerText = dict.btnModalConfirm;
+
+    // Login Modal
+    document.getElementById('login-modal-title').innerText = dict.loginModalTitle;
+    document.getElementById('lbl-login-username').innerText = dict.lblLoginUsername;
+    document.getElementById('lbl-login-password').innerText = dict.lblLoginPassword;
+    document.getElementById('btn-login-submit').innerText = dict.btnLoginSubmit;
+    document.getElementById('btn-login-cancel').innerText = dict.btnLoginCancel;
 
     // Refresh Category Title
     if (activeCategory === 'all') {
@@ -503,104 +570,125 @@ function translateUI() {
     }
 }
 
-// Render Catalog Cards
+// Render Catalog Cards (with Skeleton Loader Simulation)
 function renderCatalog() {
     const dict = translations[currentLanguage];
 
-    // Filter services based on state
-    const filtered = servicesData.filter(item => {
-        const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
-        
-        // Dynamic fields based on current language
-        let title = item.titleUz;
-        let description = item.descriptionUz;
-        if (currentLanguage === 'en') {
-            title = item.titleEn;
-            description = item.descriptionEn;
-        } else if (currentLanguage === 'ru') {
-            title = item.titleRu;
-            description = item.descriptionRu;
-        }
-
-        const matchesSearch = searchQuery === '' || 
-            title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-            description.toLowerCase().includes(searchQuery.toLowerCase());
-            
-        const matchesRegion = selectedRegion === 'all' || item.region === selectedRegion;
-        
-        let matchesPrice = true;
-        if (selectedPrice === 'budget') matchesPrice = item.price < 50;
-        else if (selectedPrice === 'mid') matchesPrice = item.price >= 50 && item.price <= 150;
-        else if (selectedPrice === 'premium') matchesPrice = item.price > 150;
-
-        return matchesCategory && matchesSearch && matchesRegion && matchesPrice;
-    });
-
-    // Update Result text
-    resultsCountText.innerText = `${filtered.length} ${dict.resultsCount}`;
-    
-    // Clear catalog
+    // Show Skeletons first
     catalogGrid.innerHTML = '';
-
-    if (filtered.length === 0) {
-        catalogGrid.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-muted); font-style: italic;">
-                ${dict.noResults}
-            </div>
+    for (let i = 0; i < 3; i++) {
+        const skeleton = document.createElement('div');
+        skeleton.className = 'skeleton-card';
+        skeleton.innerHTML = `
+            <div class="skeleton-image"></div>
+            <div class="skeleton-text skeleton-title"></div>
+            <div class="skeleton-text skeleton-desc"></div>
+            <div class="skeleton-text skeleton-price"></div>
+            <div class="skeleton-text skeleton-btn"></div>
         `;
-        return;
+        catalogGrid.appendChild(skeleton);
     }
 
-    // Append Cards
-    filtered.forEach(item => {
-        const card = document.createElement('article');
-        card.className = `card category-${item.category}`;
-        card.id = `card-${item.id}`;
+    // Set results text to loading
+    resultsCountText.innerText = currentLanguage === 'uz' ? "Yuklanmoqda..." : (currentLanguage === 'en' ? "Loading..." : "Загрузка...");
 
-        let title = item.titleUz;
-        let description = item.descriptionUz;
-        if (currentLanguage === 'en') {
-            title = item.titleEn;
-            description = item.descriptionEn;
-        } else if (currentLanguage === 'ru') {
-            title = item.titleRu;
-            description = item.descriptionRu;
-        }
-        
-        // Map region translations
-        const regionName = dict[`opt${item.region.charAt(0).toUpperCase() + item.region.slice(1)}`] || item.region;
+    // Simulate API delay
+    setTimeout(() => {
+        // Filter services based on state
+        const filtered = servicesData.filter(item => {
+            const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
+            
+            // Dynamic fields based on current language
+            let title = item.titleUz;
+            let description = item.descriptionUz;
+            if (currentLanguage === 'en') {
+                title = item.titleEn;
+                description = item.descriptionEn;
+            } else if (currentLanguage === 'ru') {
+                title = item.titleRu;
+                description = item.descriptionRu;
+            }
 
-        card.innerHTML = `
-            <div class="card-image-wrapper">
-                <img src="${item.image}" alt="${title}" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=600'">
-                <span class="card-badge">${item.category === 'crafts' ? dict.badgeMasterclass : dict[`tab${item.category.charAt(0).toUpperCase() + item.category.slice(1)}`] || item.category}</span>
-            </div>
-            <div class="card-content">
-                <div class="card-category">${regionName.toUpperCase()} • RATING ★${item.rating} (${item.reviews})</div>
-                <h3 class="card-title">${title}</h3>
-                <p class="card-description">${description}</p>
-                <div class="card-footer">
-                    <div class="card-price">
-                        <span class="price-label">${dict.priceLabel}</span>
-                        <span class="price-amount">$${item.price}</span>
-                    </div>
-                    <button class="btn btn-primary btn-book" data-id="${item.id}" id="btn-book-${item.id}">
-                        ${dict.btnBook}
-                    </button>
-                </div>
-            </div>
-        `;
+            const matchesSearch = searchQuery === '' || 
+                title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                description.toLowerCase().includes(searchQuery.toLowerCase());
+                
+            const matchesRegion = selectedRegion === 'all' || item.region === selectedRegion;
+            
+            let matchesPrice = true;
+            if (selectedPrice === 'budget') matchesPrice = item.price < 50;
+            else if (selectedPrice === 'mid') matchesPrice = item.price >= 50 && item.price <= 150;
+            else if (selectedPrice === 'premium') matchesPrice = item.price > 150;
 
-        catalogGrid.appendChild(card);
-    });
-
-    // Bind Book Buttons
-    document.querySelectorAll('.btn-book').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const id = e.target.getAttribute('data-id');
-            openBookingModal(id);
+            return matchesCategory && matchesSearch && matchesRegion && matchesPrice;
         });
-    });
+
+        // Update Result text
+        resultsCountText.innerText = `${filtered.length} ${dict.resultsCount}`;
+        
+        // Clear catalog
+        catalogGrid.innerHTML = '';
+
+        if (filtered.length === 0) {
+            catalogGrid.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-muted); font-style: italic;">
+                    ${dict.noResults}
+                </div>
+            `;
+            return;
+        }
+
+        // Append Cards
+        filtered.forEach(item => {
+            const card = document.createElement('article');
+            card.className = `card category-${item.category}`;
+            card.id = `card-${item.id}`;
+
+            let title = item.titleUz;
+            let description = item.descriptionUz;
+            if (currentLanguage === 'en') {
+                title = item.titleEn;
+                description = item.descriptionEn;
+            } else if (currentLanguage === 'ru') {
+                title = item.titleRu;
+                description = item.descriptionRu;
+            }
+            
+            // Map region translations
+            const regionName = dict[`opt${item.region.charAt(0).toUpperCase() + item.region.slice(1)}`] || item.region;
+
+            card.innerHTML = `
+                <div class="card-image-wrapper">
+                    <img src="${item.image}" alt="${title}" class="card-image" onerror="this.src='https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=600'">
+                    <span class="card-badge">${item.category === 'crafts' ? dict.badgeMasterclass : dict[`tab${item.category.charAt(0).toUpperCase() + item.category.slice(1)}`] || item.category}</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-category">${regionName.toUpperCase()} • RATING ★${item.rating} (${item.reviews})</div>
+                    <h3 class="card-title">${title}</h3>
+                    <p class="card-description">${description}</p>
+                    <div class="card-footer">
+                        <div class="card-price">
+                            <span class="price-label">${dict.priceLabel}</span>
+                            <span class="price-amount">$${item.price}</span>
+                        </div>
+                        <button class="btn btn-primary btn-book" data-id="${item.id}" id="btn-book-${item.id}">
+                            ${dict.btnBook}
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            catalogGrid.appendChild(card);
+        });
+
+        // Bind Book Buttons
+        document.querySelectorAll('.btn-book').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = e.target.getAttribute('data-id');
+                openBookingModal(id);
+            });
+        });
+    }, 600); // 600ms simulated network delay
 }
 
 // Open Booking Modal for service
@@ -868,12 +956,92 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
     });
 });
 
-// Close Modal Bindings
-btnModalClose.addEventListener('click', closeModal);
-btnModalCancel.addEventListener('click', closeModal);
+// Close Modals Helper
+function closeAllModals() {
+    bookingModal.classList.remove('active');
+    loginModal.classList.remove('active');
+}
+
+// Booking Modal Close Buttons
+btnModalClose.addEventListener('click', () => bookingModal.classList.remove('active'));
+btnModalCancel.addEventListener('click', () => bookingModal.classList.remove('active'));
+
+// Login Modal Buttons & Form
+btnLogin.addEventListener('click', () => loginModal.classList.add('active'));
+btnLoginClose.addEventListener('click', () => loginModal.classList.remove('active'));
+btnLoginCancel.addEventListener('click', () => loginModal.classList.remove('active'));
+
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const alertMsg = currentLanguage === 'uz' 
+        ? "Tizimga muvaffaqiyatli kirdingiz!" 
+        : (currentLanguage === 'en' ? "Successfully logged in!" : "Вы успешно вошли в систему!");
+    alert(alertMsg);
+    loginModal.classList.remove('active');
+});
+
+// Click outside modal to close
 window.addEventListener('click', (e) => {
-    if (e.target === bookingModal) {
-        closeModal();
+    if (e.target === bookingModal || e.target === loginModal) {
+        closeAllModals();
+    }
+});
+
+// Search Autocomplete Suggestion Logic
+searchInput.addEventListener('input', (e) => {
+    const val = e.target.value.trim().toLowerCase();
+    
+    // Hide suggestions if search is short
+    if (val.length < 3) {
+        searchSuggestionsBox.classList.remove('active');
+        searchSuggestionsBox.innerHTML = '';
+        return;
+    }
+
+    // Filter services based on title
+    const matches = servicesData.filter(item => {
+        let title = item.titleUz;
+        if (currentLanguage === 'en') title = item.titleEn;
+        else if (currentLanguage === 'ru') title = item.titleRu;
+        return title.toLowerCase().includes(val);
+    });
+
+    if (matches.length === 0) {
+        searchSuggestionsBox.classList.remove('active');
+        searchSuggestionsBox.innerHTML = '';
+        return;
+    }
+
+    // Populate suggestions
+    searchSuggestionsBox.innerHTML = '';
+    matches.slice(0, 5).forEach(item => {
+        let title = item.titleUz;
+        if (currentLanguage === 'en') title = item.titleEn;
+        else if (currentLanguage === 'ru') title = item.titleRu;
+
+        const div = document.createElement('div');
+        div.className = 'suggestion-item';
+        div.innerText = title;
+        
+        div.addEventListener('click', () => {
+            searchInput.value = title;
+            searchQuery = title;
+            searchSuggestionsBox.classList.remove('active');
+            searchSuggestionsBox.innerHTML = '';
+            // Trigger search directly
+            renderCatalog();
+        });
+        
+        searchSuggestionsBox.appendChild(div);
+    });
+
+    searchSuggestionsBox.classList.add('active');
+});
+
+// Close suggestions dropdown when clicking outside
+document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !searchSuggestionsBox.contains(e.target)) {
+        searchSuggestionsBox.classList.remove('active');
     }
 });
 
