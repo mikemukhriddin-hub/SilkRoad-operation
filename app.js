@@ -243,7 +243,11 @@ const servicesData = [
         reviews: 145,
         region: "bukhara",
         priceCategory: "budget",
-        image: "assets/pottery.png"
+        image: "assets/pottery.png",
+        durationMinutes: 90,
+        maxCapacity: 12,
+        timeSlots: ["10:00", "12:00", "14:00", "16:00"],
+        coordinates: "40.1012, 64.3804"
     },
     {
         id: "craft-paper-konigil",
@@ -259,7 +263,11 @@ const servicesData = [
         reviews: 98,
         region: "samarkand",
         priceCategory: "budget",
-        image: "assets/pottery.png"
+        image: "assets/pottery.png",
+        durationMinutes: 120,
+        maxCapacity: 15,
+        timeSlots: ["09:00", "11:00", "14:00", "16:00"],
+        coordinates: "39.6583, 66.9748"
     },
 
     // --- HOTELS ---
@@ -443,7 +451,15 @@ const translations = {
         lblFormGuideLang: "Muloqot tili",
         lblFormMessengerType: "Afzal ko'rilgan messenjer",
         lblReviewGuideLang: "Muloqot tili:",
-        lblReviewMessenger: "Aloqa messenjeri:"
+        lblReviewMessenger: "Aloqa messenjeri:",
+
+        // Craft wizard specific
+        lblFormCraftDate: "Sana",
+        lblFormCraftSlot: "Bo'sh seanslar",
+        lblReviewCraftDuration: "Davomiyligi:",
+        lblReviewCraftSlot: "Seans vaqti:",
+        lblReviewCraftCoords: "Koordinatalar:",
+        errMaxCapacity: "Maksimal sig'imdan oshib ketdi! Ushbu master-klassda ko'pi bilan {max} kishi qatnasha oladi."
     },
     en: {
         langBtn: "🌐 EN",
@@ -555,7 +571,15 @@ const translations = {
         lblFormGuideLang: "Communication Language",
         lblFormMessengerType: "Preferred Messenger",
         lblReviewGuideLang: "Spoken Language:",
-        lblReviewMessenger: "Contact Messenger:"
+        lblReviewMessenger: "Contact Messenger:",
+
+        // Craft wizard specific
+        lblFormCraftDate: "Date",
+        lblFormCraftSlot: "Available Sessions",
+        lblReviewCraftDuration: "Duration:",
+        lblReviewCraftSlot: "Session Time:",
+        lblReviewCraftCoords: "Coordinates:",
+        errMaxCapacity: "Max capacity exceeded! Maximum of {max} people can participate in this masterclass."
     },
     ru: {
         langBtn: "🌐 RU",
@@ -667,7 +691,15 @@ const translations = {
         lblFormGuideLang: "Язык общения",
         lblFormMessengerType: "Предпочтительный мессенджер",
         lblReviewGuideLang: "Язык общения:",
-        lblReviewMessenger: "Мессенджер:"
+        lblReviewMessenger: "Мессенджер:",
+
+        // Craft wizard specific
+        lblFormCraftDate: "Дата",
+        lblFormCraftSlot: "Доступные сеансы",
+        lblReviewCraftDuration: "Длительность:",
+        lblReviewCraftSlot: "Время сеанса:",
+        lblReviewCraftCoords: "Координаты:",
+        errMaxCapacity: "Превышена максимальная вместимость! В этом мастер-классе могут участвовать не более {max} человек."
     }
 };
 
@@ -735,6 +767,10 @@ const formStartDate = document.getElementById('form-start-date');
 const formEndDate = document.getElementById('form-end-date');
 const formGuideLang = document.getElementById('form-guide-lang');
 const formMessengerType = document.getElementById('form-messenger-type');
+
+// Crafts Wizard specific inputs
+const formCraftDate = document.getElementById('form-craft-date');
+const formCraftSlot = document.getElementById('form-craft-slot');
 
 // PDF Mock Receipt button
 const btnGeneratePdfReceipt = document.getElementById('btn-generate-pdf-receipt');
@@ -851,6 +887,10 @@ function translateUI() {
     document.getElementById('lbl-form-guide-lang').innerText = dict.lblFormGuideLang;
     document.getElementById('lbl-form-messenger-type').innerText = dict.lblFormMessengerType;
 
+    // Craft Specific wizard labels
+    document.getElementById('lbl-form-craft-date').innerText = dict.lblFormCraftDate;
+    document.getElementById('lbl-form-craft-slot').innerText = dict.lblFormCraftSlot;
+
     // Wizard Review Table Labels
     document.getElementById('lbl-review-title').innerText = dict.lblReviewTitle;
     document.getElementById('lbl-review-service').innerText = dict.lblReviewService;
@@ -859,6 +899,9 @@ function translateUI() {
     document.getElementById('lbl-review-child-seat').innerText = dict.lblReviewChildSeat;
     document.getElementById('lbl-review-guide-lang').innerText = dict.lblReviewGuideLang;
     document.getElementById('lbl-review-messenger').innerText = dict.lblReviewMessenger;
+    document.getElementById('lbl-review-craft-duration').innerText = dict.lblReviewCraftDuration;
+    document.getElementById('lbl-review-craft-slot').innerText = dict.lblReviewCraftSlot;
+    document.getElementById('lbl-review-craft-coords').innerText = dict.lblReviewCraftCoords;
     document.getElementById('lbl-review-contact').innerText = dict.lblReviewContact;
     document.getElementById('lbl-review-name').innerText = dict.lblReviewName;
     document.getElementById('lbl-review-price').innerText = dict.lblReviewPrice;
@@ -1130,7 +1173,10 @@ function openBookingModal(itemId) {
     formDate.value = '';
     formStartDate.value = '';
     formEndDate.value = '';
+    formCraftDate.value = '';
+    formCraftSlot.innerHTML = '';
     formQuantity.value = '1';
+    formQuantity.removeAttribute('max');
     formNotes.value = '';
     formUsername.value = '';
     formChildSeat.checked = false;
@@ -1138,19 +1184,46 @@ function openBookingModal(itemId) {
     // STEP 1 Form Layout Adjustments
     const singleDateDiv = document.getElementById('form-single-date-group');
     const rangeDateDiv = document.getElementById('form-date-range-group');
+    const craftDateSlotsDiv = document.getElementById('form-craft-date-slots-group');
 
     if (item.category === 'guides' && item.guideType === 'virtual') {
         singleDateDiv.style.display = 'none';
         rangeDateDiv.style.display = 'flex';
+        craftDateSlotsDiv.style.display = 'none';
         formStartDate.setAttribute('required', 'required');
         formEndDate.setAttribute('required', 'required');
         formDate.removeAttribute('required');
+        formCraftDate.removeAttribute('required');
+        formCraftSlot.removeAttribute('required');
+    } else if (item.category === 'crafts') {
+        singleDateDiv.style.display = 'none';
+        rangeDateDiv.style.display = 'none';
+        craftDateSlotsDiv.style.display = 'flex';
+        formCraftDate.setAttribute('required', 'required');
+        formCraftSlot.setAttribute('required', 'required');
+        formDate.removeAttribute('required');
+        formStartDate.removeAttribute('required');
+        formEndDate.removeAttribute('required');
+
+        // Populate craft time slots
+        formCraftSlot.innerHTML = '';
+        if (item.timeSlots) {
+            item.timeSlots.forEach(slot => {
+                const opt = document.createElement('option');
+                opt.value = slot;
+                opt.text = slot;
+                formCraftSlot.appendChild(opt);
+            });
+        }
     } else {
         singleDateDiv.style.display = 'block';
         rangeDateDiv.style.display = 'none';
+        craftDateSlotsDiv.style.display = 'none';
         formDate.setAttribute('required', 'required');
         formStartDate.removeAttribute('required');
         formEndDate.removeAttribute('required');
+        formCraftDate.removeAttribute('required');
+        formCraftSlot.removeAttribute('required');
     }
 
     // STEP 2 Form Layout Adjustments
@@ -1177,6 +1250,12 @@ function openBookingModal(itemId) {
                 formGuideLang.appendChild(opt);
             });
         }
+    } else if (item.category === 'crafts') {
+        quantityDiv.style.display = 'block';
+        childSeatDiv.style.display = 'none';
+        guideLangDiv.style.display = 'none';
+        // Set maximum capacity limit
+        formQuantity.max = item.maxCapacity;
     } else {
         quantityDiv.style.display = 'block';
         childSeatDiv.style.display = 'none';
@@ -1254,6 +1333,15 @@ btnWizardNext.addEventListener('click', () => {
             } else {
                 formEndDate.setCustomValidity("");
             }
+        } else if (item.category === 'crafts') {
+            if (!formCraftDate.value) {
+                formCraftDate.reportValidity();
+                return;
+            }
+            if (!formCraftSlot.value) {
+                formCraftSlot.reportValidity();
+                return;
+            }
         } else {
             if (!formDate.value) {
                 formDate.reportValidity();
@@ -1265,6 +1353,18 @@ btnWizardNext.addEventListener('click', () => {
             if (!formQuantity.value || parseInt(formQuantity.value) < 1) {
                 formQuantity.reportValidity();
                 return;
+            }
+            // Capacity validation for crafts
+            if (item.category === 'crafts') {
+                const qty = parseInt(formQuantity.value);
+                if (qty > item.maxCapacity) {
+                    const msg = translations[currentLanguage].errMaxCapacity.replace('{max}', item.maxCapacity);
+                    formQuantity.setCustomValidity(msg);
+                    formQuantity.reportValidity();
+                    return;
+                } else {
+                    formQuantity.setCustomValidity("");
+                }
             }
         }
     } else if (currentStep === 3) {
@@ -1317,6 +1417,10 @@ function populateReviewSummary() {
         const startStr = start.toLocaleDateString(currentLanguage === 'uz' ? 'uz-UZ' : 'en-US');
         const endStr = end.toLocaleDateString(currentLanguage === 'uz' ? 'uz-UZ' : 'en-US');
         dateStr = `${startStr} ➔ ${endStr} (${diffDays} ${currentLanguage === 'uz' ? 'kun' : (currentLanguage === 'en' ? 'days' : 'дней')})`;
+    } else if (item.category === 'crafts') {
+        const cDate = new Date(formCraftDate.value);
+        const craftDateStr = isNaN(cDate.getTime()) ? formCraftDate.value : cDate.toLocaleDateString(currentLanguage === 'uz' ? 'uz-UZ' : 'en-US');
+        dateStr = `${craftDateStr} (${formCraftSlot.value})`;
     } else {
         const dateObj = new Date(formDate.value);
         dateStr = isNaN(dateObj.getTime())
@@ -1349,6 +1453,23 @@ function populateReviewSummary() {
         document.getElementById('review-guide-lang-val').innerText = formGuideLang.value.toUpperCase();
     } else {
         guideLangRow.style.display = 'none';
+    }
+
+    // Craft Details (Crafts only)
+    const craftDurationRow = document.getElementById('review-craft-duration-row');
+    const craftSlotRow = document.getElementById('review-craft-slot-row');
+    const craftCoordsRow = document.getElementById('review-craft-coords-row');
+    if (item.category === 'crafts') {
+        craftDurationRow.style.display = 'table-row';
+        craftSlotRow.style.display = 'table-row';
+        craftCoordsRow.style.display = 'table-row';
+        document.getElementById('review-craft-duration-val').innerText = `${item.durationMinutes} ${currentLanguage === 'uz' ? 'daqiqa' : (currentLanguage === 'en' ? 'minutes' : 'минут')}`;
+        document.getElementById('review-craft-slot-val').innerText = formCraftSlot.value;
+        document.getElementById('review-craft-coords-val').innerHTML = `<a href="https://maps.google.com/?q=${item.coordinates}" target="_blank" style="color: var(--primary-cobalt); text-decoration: underline;">${item.coordinates}</a>`;
+    } else {
+        craftDurationRow.style.display = 'none';
+        craftSlotRow.style.display = 'none';
+        craftCoordsRow.style.display = 'none';
     }
 
     // Messenger & Name
@@ -1389,6 +1510,9 @@ btnGeneratePdfReceipt.addEventListener('click', () => {
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
         total = item.price * diffDays;
         dateStr = `${formStartDate.value} to ${formEndDate.value} (${diffDays} days)`;
+    } else if (item.category === 'crafts') {
+        total = item.price * parseInt(formQuantity.value);
+        dateStr = `${formCraftDate.value} (${formCraftSlot.value})`;
     } else {
         dateStr = formDate.value;
         if (item.category !== 'transport' && item.category !== 'guides') {
@@ -1397,9 +1521,12 @@ btnGeneratePdfReceipt.addEventListener('click', () => {
     }
 
     const isGuide = item.category === 'guides';
-    const filename = isGuide ? `voucher_SR-${Date.now().toString().slice(-4)}.txt` : `receipt_SR-${Date.now().toString().slice(-4)}.txt`;
+    const isCraft = item.category === 'crafts';
+    const filename = (isGuide || isCraft) ? `voucher_SR-${Date.now().toString().slice(-4)}.txt` : `receipt_SR-${Date.now().toString().slice(-4)}.txt`;
     
-    const docHeader = isGuide ? "SILKROAD TOURIST VOUCHER" : "SILKROAD SERVICE RECEIPT";
+    let docHeader = "SILKROAD SERVICE RECEIPT";
+    if (isGuide) docHeader = "SILKROAD TOURIST VOUCHER";
+    else if (isCraft) docHeader = "SILKROAD CRAFT WORKSHOP VOUCHER";
 
     let detailsStr = '';
     if (isGuide) {
@@ -1408,6 +1535,16 @@ Guide Type:    ${item.guideType.toUpperCase()}
 Language:      ${formGuideLang.value.toUpperCase()}
 Messenger:     ${messenger} (${name})
 Date/Period:   ${dateStr}
+        `;
+    } else if (isCraft) {
+        detailsStr = `
+Duration:      ${item.durationMinutes} minutes
+Time Slot:     ${formCraftSlot.value}
+Quantity:      ${formQuantity.value} pax
+Coordinates:   ${item.coordinates}
+Location URL:  https://maps.google.com/?q=${item.coordinates}
+Messenger:     ${messenger} (${name})
+Date:          ${formCraftDate.value}
         `;
     } else {
         detailsStr = `
@@ -1432,7 +1569,7 @@ Contact phone: ${contact}
 TOTAL PRICE:   $${total.toFixed(2)}
 ========================================
 Thank you for booking with SilkRoad Operations!
-Automatic notification sent to guide/operator.
+Automatic notification sent to guide/operator/artisan.
 Welcome to Uzbekistan!
     `;
 
@@ -1445,7 +1582,7 @@ Welcome to Uzbekistan!
     link.click();
     document.body.removeChild(link);
 
-    alert(isGuide ? "PDF Vaucher yuklab olindi (MOCK voucher.txt)" : dict.alertReceiptGenerated);
+    alert((isGuide || isCraft) ? "PDF Vaucher yuklab olindi (MOCK voucher.txt)" : dict.alertReceiptGenerated);
 });
 
 // Close Modal
@@ -1472,6 +1609,9 @@ bookingForm.addEventListener('submit', (e) => {
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
         total = item.price * diffDays;
         dateVal = `${formStartDate.value} ➔ ${formEndDate.value}`;
+    } else if (item.category === 'crafts') {
+        total = item.price * qty;
+        dateVal = `${formCraftDate.value} (${formCraftSlot.value})`;
     } else {
         dateVal = formDate.value;
         if (item.category !== 'transport' && item.category !== 'guides') {
@@ -1484,6 +1624,8 @@ bookingForm.addEventListener('submit', (e) => {
     if (formChildSeat.checked) customNotes += " [Child Seat]";
     if (item.category === 'guides') {
         customNotes += ` [Lang: ${formGuideLang.value.toUpperCase()}]`;
+    } else if (item.category === 'crafts') {
+        customNotes += ` [Slot: ${formCraftSlot.value}] [Duration: ${item.durationMinutes}m]`;
     }
 
     const bookingItem = {
