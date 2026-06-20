@@ -145,6 +145,38 @@ h1, h2, h3, h4 {
     align-items: center;
 }
 
+/* Language Selector Group */
+.lang-selector-container {
+    display: flex;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: 20px;
+    padding: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-radius: 18px;
+    transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+    color: var(--primary-cobalt);
+}
+
+.lang-btn.active {
+    background-color: var(--primary-cobalt);
+    color: var(--text-light);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .btn {
     padding: 0.6rem 1.2rem;
     border-radius: var(--radius-sm);

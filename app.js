@@ -375,7 +375,6 @@ let activeCategory = 'all';
 let searchQuery = '';
 let selectedRegion = 'all';
 let selectedPrice = 'all';
-let hasToggledLang = false;
 
 // DOM Elements
 const catalogGrid = document.getElementById('catalog-grid');
@@ -399,8 +398,8 @@ const btnShareTelegram = document.getElementById('btn-share-telegram');
 const btnShareWhatsApp = document.getElementById('btn-share-whatsapp');
 const btnShareEmail = document.getElementById('btn-share-email');
 
-// Language Selector
-const btnLangSelector = document.getElementById('btn-lang-selector');
+// Language Selectors
+const langBtns = document.querySelectorAll('.lang-btn');
 
 // Modal Elements
 const bookingModal = document.getElementById('booking-modal');
@@ -429,12 +428,14 @@ function updateCategoryTabText(tabId, text) {
 function translateUI() {
     const dict = translations[currentLanguage];
 
-    // Language Button - initially "Tillar" (Languages/Языки), then toggled to UZ/EN/RU
-    if (hasToggledLang) {
-        btnLangSelector.innerText = dict.langBtn;
-    } else {
-        btnLangSelector.innerText = currentLanguage === 'uz' ? 'Tillar' : (currentLanguage === 'en' ? 'Languages' : 'Языки');
-    }
+    // Update active class in Language buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        if (btn.getAttribute('data-lang') === currentLanguage) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
 
     // Header Links
     document.getElementById('link-catalog').innerText = dict.linkCatalog;
@@ -854,22 +855,17 @@ searchInput.addEventListener('keypress', (e) => {
     }
 });
 
-// Language Switch Event Listener (UZ -> EN -> RU -> UZ)
-btnLangSelector.addEventListener('click', () => {
-    hasToggledLang = true;
-    if (currentLanguage === 'uz') {
-        currentLanguage = 'en';
-    } else if (currentLanguage === 'en') {
-        currentLanguage = 'ru';
-    } else {
-        currentLanguage = 'uz';
-    }
-    localStorage.setItem('silkroad_lang', currentLanguage);
-    
-    // Refresh page texts
-    translateUI();
-    renderCatalog();
-    renderItinerary();
+// Language Switch Event Listeners (UZ / EN / RU)
+document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        currentLanguage = e.target.getAttribute('data-lang');
+        localStorage.setItem('silkroad_lang', currentLanguage);
+        
+        // Refresh page texts
+        translateUI();
+        renderCatalog();
+        renderItinerary();
+    });
 });
 
 // Close Modal Bindings
