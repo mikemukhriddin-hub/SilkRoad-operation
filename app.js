@@ -2464,6 +2464,170 @@ function closeModal() {
     bookingModal.classList.remove('active');
 }
 
+// Send Booking Data to Live n8n Webhook
+async function sendBookingToN8n(bookingItem, item) {
+    const webhookUrl = 'https://loyiha1-n8n.p3ddj3.easypanel.host/webhook-test/silkroad-booking';
+    
+    // 1. Construct dynamic category-specific details
+    let details = {};
+    if (item.category === 'transport') {
+        const qtyVal = document.getElementById('form-quantity') ? parseInt(document.getElementById('form-quantity').value) || 1 : 1;
+        const childSeatEl = document.getElementById('form-child-seat');
+        const childSeatVal = childSeatEl ? childSeatEl.checked : false;
+        details = {
+            quantity: qtyVal,
+            childSeat: childSeatVal,
+            region: item.region,
+            vehicleType: item.vehicleType
+        };
+    } else if (item.category === 'guides') {
+        const guideLangEl = document.getElementById('form-guide-lang');
+        const guideLangVal = guideLangEl ? guideLangEl.value : '';
+        details = {
+            guideType: item.guideType,
+            spokenLanguage: guideLangVal,
+            region: item.region
+        };
+    } else if (item.category === 'crafts') {
+        const qtyVal = document.getElementById('form-quantity') ? parseInt(document.getElementById('form-quantity').value) || 1 : 1;
+        const craftDateEl = document.getElementById('form-craft-date');
+        const craftSlotEl = document.getElementById('form-craft-slot');
+        details = {
+            quantity: qtyVal,
+            workshopDate: craftDateEl ? craftDateEl.value : '',
+            timeSlot: craftSlotEl ? craftSlotEl.value : '',
+            durationMinutes: item.durationMinutes,
+            coordinates: item.coordinates,
+            region: item.region
+        };
+    } else if (item.category === 'hotels') {
+        const checkInEl = document.getElementById('form-hotel-checkin');
+        const checkOutEl = document.getElementById('form-hotel-checkout');
+        const roomsEl = document.getElementById('form-hotel-rooms');
+        const adultsEl = document.getElementById('form-hotel-adults');
+        const childrenEl = document.getElementById('form-hotel-children');
+        
+        const checkInVal = checkInEl ? checkInEl.value : '';
+        const checkOutVal = checkOutEl ? checkOutEl.value : '';
+        const rooms = roomsEl ? parseInt(roomsEl.value) || 1 : 1;
+        const adults = adultsEl ? parseInt(adultsEl.value) || 1 : 1;
+        const children = childrenEl ? parseInt(childrenEl.value) || 0 : 0;
+        
+        let addonsList = [];
+        const camelEl = document.getElementById('form-hotel-addon-camel');
+        const dinnerEl = document.getElementById('form-hotel-addon-dinner');
+        const musicEl = document.getElementById('form-hotel-addon-music');
+        if (camelEl && camelEl.checked) addonsList.push("Camel Riding");
+        if (dinnerEl && dinnerEl.checked) addonsList.push("National Dinner");
+        if (musicEl && musicEl.checked) addonsList.push("Campfire Music");
+
+        const start = new Date(checkInVal);
+        const end = new Date(checkOutVal);
+        const diffTime = Math.abs(end - start);
+        const nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) || 1;
+
+        details = {
+            checkIn: checkInVal,
+            checkOut: checkOutVal,
+            nights: nights,
+            rooms: rooms,
+            adults: adults,
+            children: children,
+            totalGuests: adults + children,
+            addons: addonsList,
+            coordinates: item.coordinates,
+            region: item.region
+        };
+    } else if (item.category === 'restaurants') {
+        const guestsEl = document.getElementById('form-restaurant-guests');
+        const resDateEl = document.getElementById('form-restaurant-date');
+        const resTimeEl = document.getElementById('form-restaurant-time');
+        const tableLocEl = document.getElementById('form-restaurant-table-type');
+        
+        const guests = guestsEl ? parseInt(guestsEl.value) || 1 : 1;
+        const resDateVal = resDateEl ? resDateEl.value : '';
+        const resTimeVal = resTimeEl ? resTimeEl.value : '';
+        const tableLocVal = tableLocEl ? tableLocEl.value : '';
+        
+        details = {
+            guests: guests,
+            reservationDate: resDateVal,
+            reservationTime: resTimeVal,
+            tableType: tableLocVal,
+            pricingType: item.pricingType,
+            coordinates: item.coordinates,
+            region: item.region
+        };
+    }
+
+    const usernameEl = document.getElementById('form-username');
+    const contactEl = document.getElementById('form-contact');
+    const messengerEl = document.getElementById('form-messenger-type');
+
+    // 2. Prepare JSON payload
+    const payload = {
+        bookingId: bookingItem.bookingId,
+        serviceId: bookingItem.serviceId,
+        category: item.category,
+        title: bookingItem.title,
+        basePrice: bookingItem.basePrice,
+        quantity: bookingItem.quantity,
+        totalPrice: bookingItem.totalItemPrice,
+        date: bookingItem.date,
+        notes: bookingItem.notes,
+        customerName: usernameEl ? usernameEl.value.trim() : '',
+        contactPhone: contactEl ? contactEl.value : '',
+        messengerChannel: messengerEl ? messengerEl.value.toUpperCase() : '',
+        language: currentLanguage,
+        timestamp: new Date().toISOString(),
+        details: details
+    };
+
+    // 3. Generate user-facing notification alert
+    let webhookMsg = '';
+    const name = payload.customerName;
+    const phone = payload.contactPhone;
+    const title = payload.title;
+
+    if (item.category === 'hotels') {
+        webhookMsg = `🔔 [n8n Webhook Sent] Yangi mehmonxona broni: ${title}, ${details.nights} kecha, ${details.totalGuests} kishi. Mijoz: ${name} (${phone})`;
+    } else if (item.category === 'restaurants') {
+        const restShortName = title.split(' - ')[0];
+        let tableLocText = details.tableType === 'indoor' ? 'Zal ichida' : (details.tableType === 'outdoor' ? "Ochiq havoda / Hovuz bo'yida" : 'VIP xona');
+        webhookMsg = `🔔 [n8n Webhook Sent] Yangi restoran broni: ${restShortName}, ${details.reservationDate} ${details.reservationTime} ga, ${details.guests} kishi, ${tableLocText}. Mijoz: ${name} (${phone})`;
+    } else if (item.category === 'transport') {
+        webhookMsg = `🔔 [n8n Webhook Sent] Yangi transport broni: ${title}, ${payload.quantity} ta mashina. Mijoz: ${name} (${phone})`;
+    } else if (item.category === 'guides') {
+        webhookMsg = `🔔 [n8n Webhook Sent] Yangi gid broni: ${title}, Tili: ${details.spokenLanguage.toUpperCase()}, Sanasi: ${payload.date}. Mijoz: ${name} (${phone})`;
+    } else if (item.category === 'crafts') {
+        webhookMsg = `🔔 [n8n Webhook Sent] Yangi master-klass broni: ${title}, Soni: ${payload.quantity} kishi, ${payload.date}. Mijoz: ${name} (${phone})`;
+    } else {
+        webhookMsg = `🔔 [n8n Webhook Sent] Yangi bron: ${title}. Mijoz: ${name} (${phone})`;
+    }
+
+    console.log(webhookMsg, payload);
+    alert(webhookMsg);
+
+    // 4. Send asynchronous HTTP POST request
+    try {
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+        
+        if (response.ok) {
+            console.log("Booking successfully sent to n8n webhook!", response.status);
+        } else {
+            console.error("Failed to send booking to n8n. Status:", response.status);
+        }
+    } catch (err) {
+        console.error("Error sending booking to n8n webhook:", err);
+    }
+}
+
 // Add Item to Itinerary Form Handler
 bookingForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -2477,6 +2641,7 @@ bookingForm.addEventListener('submit', (e) => {
     let dateVal = '';
     let total = item.price;
     let customNotes = formNotes.value;
+    let guests = 1;
 
     if (item.category === 'guides' && item.guideType === 'virtual') {
         const start = new Date(formStartDate.value);
@@ -2525,13 +2690,8 @@ bookingForm.addEventListener('submit', (e) => {
         if (addonsList.length > 0) {
             customNotes += ` [Add-ons: ${addonsList.join(', ')}]`;
         }
-
-        // n8n & Telegram Webhook simulation
-        const webhookMsg = `🔔 [n8n Telegram Webhook] Yangi bron: ${title}, ${nights} kecha, ${totalGuests} kishi. Mijoz: ${formContact.value}`;
-        console.log(webhookMsg);
-        alert(webhookMsg);
     } else if (item.category === 'restaurants') {
-        const guests = parseInt(formRestaurantGuests.value) || 1;
+        guests = parseInt(formRestaurantGuests.value) || 1;
         const isVip = formRestaurantTableType.value === 'vip';
         const vipPremium = isVip ? 10 : 0;
         if (item.pricingType === 'fee') {
@@ -2546,12 +2706,6 @@ bookingForm.addEventListener('submit', (e) => {
         const pricingDesc = item.pricingType === 'fee' ? 'Booking Fee' : 'Deposit';
 
         customNotes += ` [Time: ${formRestaurantTime.value}] [Guests: ${guests}] [Table: ${tableLocText}] [Type: ${pricingDesc}]`;
-
-        // n8n & Telegram Webhook simulation
-        const restShortName = title.split(' - ')[0];
-        const webhookMsg = `🔔 [n8n Telegram Webhook] Yangi bron: ${restShortName}, ${formRestaurantDate.value} ${formRestaurantTime.value} ga, ${guests} kishi, ${tableLocText}. Mijoz: ${formUsername.value.trim()} (${formContact.value})`;
-        console.log(webhookMsg);
-        alert(webhookMsg);
     } else {
         dateVal = formDate.value;
         if (item.category !== 'transport' && item.category !== 'guides') {
@@ -2575,6 +2729,7 @@ bookingForm.addEventListener('submit', (e) => {
     saveItinerary();
     renderItinerary();
     closeModal();
+    sendBookingToN8n(bookingItem, item);
 });
 
 // Remove Item from Itinerary
