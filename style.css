@@ -1447,3 +1447,221 @@ html {
     opacity: 0.6;
 }
 
+/* Authentication & Dashboard Styles */
+.auth-tabs {
+    display: flex;
+    border-bottom: 2px solid var(--border-light);
+    margin-bottom: 1.5rem;
+}
+
+.auth-tab {
+    flex: 1;
+    text-align: center;
+    padding: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+}
+
+.auth-tab.active {
+    color: var(--primary-cobalt);
+    border-bottom-color: var(--primary-cobalt);
+}
+
+.password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-wrapper input {
+    width: 100%;
+    padding-right: 2.5rem;
+}
+
+.password-toggle-icon {
+    position: absolute;
+    right: 0.75rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    user-select: none;
+    font-size: 1.1rem;
+}
+
+.password-toggle-icon:hover {
+    color: var(--text-main);
+}
+
+.social-auth {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-light);
+    text-align: center;
+}
+
+.social-auth-title {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+}
+
+.social-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-light);
+    background: white;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.social-btn:hover {
+    background: var(--bg-main);
+    border-color: var(--text-muted);
+}
+
+/* Dashboard Styles */
+.dashboard-section {
+    display: none;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.dashboard-section.active {
+    display: block;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-badge {
+    background: var(--primary-cobalt);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-card {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border-left: 5px solid var(--primary-cobalt);
+}
+
+.dashboard-card.accent {
+    border-left-color: var(--accent-gold);
+}
+
+.dashboard-card h4 {
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.dashboard-card .value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.dashboard-table-container {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    overflow-x: auto;
+    margin-bottom: 2rem;
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.dashboard-table th, .dashboard-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.dashboard-table th {
+    background: var(--bg-main);
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.badge-status {
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.status-pending { background: #fef3c7; color: #d97706; }
+.status-approved { background: #d1fae5; color: #059669; }
+.status-active { background: #dbeafe; color: #2563eb; }
+
+/* OTP Screen */
+.otp-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+}
+
+.otp-digit {
+    width: 3.5rem;
+    height: 3.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    background: var(--bg-main);
+}
+
+.otp-digit:focus {
+    border-color: var(--primary-cobalt);
+    background: white;
+}
+

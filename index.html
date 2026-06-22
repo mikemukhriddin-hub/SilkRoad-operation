@@ -492,28 +492,284 @@
         </div>
     </section>
 
-    <!-- Interactive Login Modal -->
+    <!-- Traveler Dashboard Section -->
+    <section class="dashboard-section" id="dashboard-traveler">
+        <div class="dashboard-header">
+            <div class="dashboard-user-info">
+                <h2 id="traveler-name">Traveler Profile</h2>
+                <span class="user-badge">Sayyoh</span>
+            </div>
+            <button class="btn btn-secondary btn-logout" id="btn-traveler-logout">Tizimdan chiqish</button>
+        </div>
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h4>Faol buyurtmalar soni</h4>
+                <div class="value" id="traveler-active-bookings">0</div>
+            </div>
+            <div class="dashboard-card accent">
+                <h4>Jami sarflangan summa</h4>
+                <div class="value" id="traveler-total-spent">$0</div>
+            </div>
+        </div>
+        <div class="dashboard-table-container">
+            <h3 style="margin-bottom: 1rem; color: var(--primary-cobalt);">Buyurtmalar tarixi va Vaucherlar</h3>
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Buyurtma ID</th>
+                        <th>Xizmat nomi</th>
+                        <th>Sana</th>
+                        <th>Miqdor</th>
+                        <th>Jami to'lov</th>
+                        <th>Holati</th>
+                        <th>Vaucher</th>
+                    </tr>
+                </thead>
+                <tbody id="traveler-bookings-list">
+                    <!-- Loaded dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Vendor Dashboard Section -->
+    <section class="dashboard-section" id="dashboard-vendor">
+        <div class="dashboard-header">
+            <div class="dashboard-user-info">
+                <h2 id="vendor-name">Vendor Panel</h2>
+                <span class="user-badge" style="background-color: var(--accent-gold); color: var(--text-main);">Hamkor</span>
+            </div>
+            <button class="btn btn-secondary btn-logout" id="btn-vendor-logout">Tizimdan chiqish</button>
+        </div>
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h4>Mening transportlarim</h4>
+                <div class="value" id="vendor-car-count">3 ta</div>
+            </div>
+            <div class="dashboard-card accent">
+                <h4>Xonalar / Stol bandligi</h4>
+                <div class="value" id="vendor-occupancy-rate">75%</div>
+            </div>
+            <div class="dashboard-card">
+                <h4>Kutilayotgan daromad</h4>
+                <div class="value" id="vendor-revenue">$420</div>
+            </div>
+        </div>
+        
+        <!-- Vendor Service Manager Tabs -->
+        <div class="dashboard-table-container">
+            <h3 style="margin-bottom: 1rem; color: var(--primary-cobalt);">Xizmatlarni boshqarish paneli</h3>
+            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                <button class="btn btn-primary btn-sm" id="btn-vendor-add-car">+ Yangi Mashina qo'shish</button>
+                <button class="btn btn-secondary btn-sm" id="btn-vendor-add-room">+ Yangi Xona qo'shish</button>
+                <button class="btn btn-secondary btn-sm" id="btn-vendor-add-table">+ Yangi Stol qo'shish</button>
+            </div>
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Xizmat turi</th>
+                        <th>Nomi (Uz)</th>
+                        <th>Viloyat</th>
+                        <th>Narxi (Sutka/Safar)</th>
+                        <th>Holati</th>
+                        <th>Boshqarish</th>
+                    </tr>
+                </thead>
+                <tbody id="vendor-services-list">
+                    <!-- Mocks loaded dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Vendor Calendar View -->
+        <div class="dashboard-table-container">
+            <h3 style="margin-bottom: 1rem; color: var(--primary-cobalt);">Bronlar kalendari</h3>
+            <div style="background-color: var(--bg-main); padding: 1.5rem; border-radius: var(--radius-sm); font-family: monospace; font-size: 0.9rem;" id="vendor-calendar-view">
+                <!-- Mock calendar dynamically built -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Super Admin Dashboard Section -->
+    <section class="dashboard-section" id="dashboard-admin">
+        <div class="dashboard-header">
+            <div class="dashboard-user-info">
+                <h2>Super Admin Panel</h2>
+                <span class="user-badge" style="background-color: var(--accent-emerald);">Admin</span>
+            </div>
+            <button class="btn btn-secondary btn-logout" id="btn-admin-logout">Tizimdan chiqish</button>
+        </div>
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h4>Platformadagi jami buyurtmalar</h4>
+                <div class="value" id="admin-total-bookings">12 ta</div>
+            </div>
+            <div class="dashboard-card accent">
+                <h4>Tasdiqlash kutilayotgan gidlar</h4>
+                <div class="value" id="admin-pending-guides">2 ta</div>
+            </div>
+            <div class="dashboard-card">
+                <h4>n8n Webhook faolligi</h4>
+                <div class="value" style="color: var(--accent-emerald);">ONLINE</div>
+            </div>
+        </div>
+
+        <div class="dashboard-table-container">
+            <h3 style="margin-bottom: 1rem; color: var(--primary-cobalt);">Tizimdagi barcha buyurtmalar monitoringi</h3>
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Buyurtma ID</th>
+                        <th>Mijoz</th>
+                        <th>Xizmat turi</th>
+                        <th>Nomi</th>
+                        <th>Jami to'lov</th>
+                        <th>N8N Webhook status</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-bookings-list">
+                    <!-- Dynamic mock list -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="dashboard-table-container">
+            <h3 style="margin-bottom: 1rem; color: var(--primary-cobalt);">Yangi Gidlar tasdiqlash ro'yxati</h3>
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Gid ismi</th>
+                        <th>Viloyat</th>
+                        <th>Tillar</th>
+                        <th>Turi</th>
+                        <th>Holati</th>
+                        <th>Amallar</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-guides-list">
+                    <!-- Mock list of guides waiting for approval -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Simulated n8n Webhook log viewer -->
+        <div class="dashboard-table-container">
+            <h3 style="margin-bottom: 1rem; color: var(--primary-cobalt);">Simulyatsiya qilingan n8n Webhook jurnali (Live logs)</h3>
+            <div style="background-color: #1e1e1e; color: #a9ffaf; padding: 1.5rem; border-radius: var(--radius-sm); font-family: monospace; font-size: 0.85rem; max-height: 250px; overflow-y: auto;" id="admin-webhook-logs">
+                [SYSTEM] n8n Webhook monitoring started...<br>
+                [SYSTEM] Webhook URL: https://loyiha1-n8n.p3ddj3.easypanel.host/webhook/partner-register<br>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Auth/Login Modal -->
     <div class="modal" id="login-modal">
-        <div class="modal-content" style="max-width: 400px;">
+        <div class="modal-content" style="max-width: 450px;">
             <div class="modal-header">
                 <h3 class="modal-title" id="login-modal-title">Tizimga Kirish</h3>
                 <button class="modal-close" id="btn-login-close">&times;</button>
             </div>
             <div class="modal-body">
-                <form id="login-form">
-                    <div class="form-group">
-                        <label for="login-username" id="lbl-login-username">Foydalanuvchi nomi / Email</label>
-                        <input type="text" id="login-username" required placeholder="admin@example.com">
+                <!-- Auth Tabs Toggle -->
+                <div class="auth-tabs" id="auth-modal-tabs">
+                    <div class="auth-tab active" id="tab-signin-btn">Kirish (Sign In)</div>
+                    <div class="auth-tab" id="tab-signup-btn">Ro'yxatdan o'tish (Sign Up)</div>
+                </div>
+
+                <!-- Sign In View -->
+                <div id="auth-view-signin">
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-username" id="lbl-login-username">Telefon raqami / Email</label>
+                            <input type="text" id="login-username" required placeholder="admin@example.com yoki +998901234567">
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password" id="lbl-login-password">Maxfiy Parol</label>
+                            <div class="password-input-wrapper">
+                                <input type="password" id="login-password" required placeholder="••••••••">
+                                <span class="password-toggle-icon" id="toggle-signin-password">👁️</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right; margin-top: -0.5rem; margin-bottom: 1rem;">
+                            <a href="#" id="link-forgot-password" style="font-size: 0.85rem; color: var(--primary-cobalt); text-decoration: none;">Parolni unutdingizmi?</a>
+                        </div>
+                        <button class="btn btn-primary" type="submit" style="width: 100%; margin-bottom: 1rem;" id="btn-login-submit">Kirish</button>
+                    </form>
+                    
+                    <div class="social-auth">
+                        <div class="social-auth-title">Tezkor kirish (Google / Telegram)</div>
+                        <div class="social-buttons">
+                            <button class="social-btn" id="btn-google-login">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" width="16" height="16"> Google
+                            </button>
+                            <button class="social-btn" id="btn-telegram-login">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" width="16" height="16"> Telegram
+                            </button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="login-password" id="lbl-login-password">Mahfiy Parol</label>
-                        <input type="password" id="login-password" required placeholder="••••••••">
+                </div>
+
+                <!-- Sign Up View -->
+                <div id="auth-view-signup" style="display: none;">
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="register-name">To'liq ismingiz</label>
+                            <input type="text" id="register-name" required placeholder="Alisher Qodirov">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-username">Email yoki Telefon raqami</label>
+                            <input type="text" id="register-username" required placeholder="user@example.com yoki +998901234567">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Maxfiy Parol</label>
+                            <div class="password-input-wrapper">
+                                <input type="password" id="register-password" required placeholder="••••••••">
+                                <span class="password-toggle-icon" id="toggle-signup-password">👁️</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-role">Sizning rolingiz</label>
+                            <select id="register-role" required>
+                                <option value="traveler">Sayyoh (Traveler)</option>
+                                <option value="partner">Xizmat ko'rsatuvchi (Partner/Provider)</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" type="submit" style="width: 100%;">Ro'yxatdan o'tish</button>
+                    </form>
+                </div>
+
+                <!-- OTP Verification View -->
+                <div id="auth-view-otp" style="display: none; text-align: center;">
+                    <h4 style="margin-bottom: 0.5rem;" id="otp-title-text">Tasdiqlash kodi</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;" id="otp-info-text">
+                        Kodni telefon raqamingiz/emailingizga yubordik. Uni pastga kiriting.
+                    </p>
+                    <div class="otp-inputs">
+                        <input type="text" class="otp-digit" maxlength="1" id="otp-1">
+                        <input type="text" class="otp-digit" maxlength="1" id="otp-2">
+                        <input type="text" class="otp-digit" maxlength="1" id="otp-3">
+                        <input type="text" class="otp-digit" maxlength="1" id="otp-4">
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="btn-login-cancel">Bekor qilish</button>
-                <button class="btn btn-primary" type="submit" form="login-form" id="btn-login-submit">Kirish</button>
+                    <button class="btn btn-primary" id="btn-otp-verify" style="width: 100%; margin-top: 1rem;">Kodni tasdiqlash</button>
+                    <div style="margin-top: 1rem;">
+                        <button class="btn-link" id="btn-otp-resend" style="background: none; border: none; color: var(--primary-cobalt); cursor: pointer; font-size: 0.85rem;">Kodni qayta yuborish</button>
+                    </div>
+                </div>
+
+                <!-- Forgot Password View -->
+                <div id="auth-view-forgot" style="display: none;">
+                    <form id="forgot-form">
+                        <div class="form-group">
+                            <label for="forgot-username">Email yoki Telefon raqami</label>
+                            <input type="text" id="forgot-username" required placeholder="user@example.com yoki +998901234567">
+                        </div>
+                        <button class="btn btn-primary" type="submit" style="width: 100%; margin-bottom: 1rem;">Tiklash kodini yuborish</button>
+                        <div style="text-align: center;">
+                            <a href="#" id="link-forgot-back" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">Kirish sahifasiga qaytish</a>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>

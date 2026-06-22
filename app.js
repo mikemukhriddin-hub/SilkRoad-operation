@@ -1320,7 +1320,8 @@ function translateUI() {
     document.getElementById('lbl-login-username').innerText = dict.lblLoginUsername;
     document.getElementById('lbl-login-password').innerText = dict.lblLoginPassword;
     document.getElementById('btn-login-submit').innerText = dict.btnLoginSubmit;
-    document.getElementById('btn-login-cancel').innerText = dict.btnLoginCancel;
+    const btnCancel = document.getElementById('btn-login-cancel');
+    if (btnCancel) btnCancel.innerText = dict.btnLoginCancel;
 
     // Refresh Category Title
     if (activeCategory === 'all') {
@@ -2932,26 +2933,588 @@ function closeAllModals() {
 btnModalClose.addEventListener('click', () => bookingModal.classList.remove('active'));
 btnModalCancel.addEventListener('click', () => bookingModal.classList.remove('active'));
 
-// Login Modal Buttons & Form
-btnLogin.addEventListener('click', () => loginModal.classList.add('active'));
-btnLoginClose.addEventListener('click', () => loginModal.classList.remove('active'));
-btnLoginCancel.addEventListener('click', () => loginModal.classList.remove('active'));
+// Auth Store & JWT Simulation
+const seededUsers = [
+    { id: 'usr-admin', name: 'Super Admin', username: 'admin@silkroad.uz', role: 'admin', isActive: true },
+    { id: 'usr-partner', name: 'Alisher Qodirov (Hamkor)', username: '+998901234567', role: 'partner', isActive: true },
+    { id: 'usr-traveler', name: 'John Doe (Traveler)', username: 'traveler@example.com', role: 'traveler', isActive: true }
+];
 
-loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const alertMsg = currentLanguage === 'uz' 
-        ? "Tizimga muvaffaqiyatli kirdingiz!" 
-        : (currentLanguage === 'en' ? "Successfully logged in!" : "Вы успешно вошли в систему!");
-    alert(alertMsg);
-    loginModal.classList.remove('active');
-});
+const seededCredentials = {
+    'admin@silkroad.uz': 'admin123',
+    '+998901234567': 'partner123',
+    'traveler@example.com': 'traveler123'
+};
 
-// Click outside modal to close
-window.addEventListener('click', (e) => {
-    if (e.target === bookingModal || e.target === loginModal) {
-        closeAllModals();
+let authState = {
+    currentUser: null,
+    isAuthenticated: false,
+    accessToken: null,
+    refreshToken: null
+};
+
+// Initialize Auth
+function initAuth() {
+    // Setup login trigger button in header
+    updateLoginButtonState();
+    
+    // Bind all Auth UI events
+    setupAuthUIEvents();
+    
+    const savedAuth = localStorage.getItem('silkroad_auth');
+    if (savedAuth) {
+        try {
+            authState = JSON.parse(savedAuth);
+            if (authState.isAuthenticated && authState.currentUser) {
+                updateLoginButtonState();
+                renderDashboard(authState.currentUser.role);
+            }
+        } catch (e) {
+            console.error("Failed to parse saved auth state", e);
+        }
     }
+}
+
+// Bind all UI Actions
+function setupAuthUIEvents() {
+    const tabSigninBtn = document.getElementById('tab-signin-btn');
+    const tabSignupBtn = document.getElementById('tab-signup-btn');
+    const authViewSignin = document.getElementById('auth-view-signin');
+    const authViewSignup = document.getElementById('auth-view-signup');
+    const authViewOtp = document.getElementById('auth-view-otp');
+    const authViewForgot = document.getElementById('auth-view-forgot');
+
+    function showAuthView(viewName) {
+        authViewSignin.style.display = 'none';
+        authViewSignup.style.display = 'none';
+        authViewOtp.style.display = 'none';
+        authViewForgot.style.display = 'none';
+        
+        if (viewName === 'signin') {
+            authViewSignin.style.display = 'block';
+            tabSigninBtn.classList.add('active');
+            tabSignupBtn.classList.remove('active');
+            document.getElementById('auth-modal-tabs').style.display = 'flex';
+        } else if (viewName === 'signup') {
+            authViewSignup.style.display = 'block';
+            tabSigninBtn.classList.remove('active');
+            tabSignupBtn.classList.add('active');
+            document.getElementById('auth-modal-tabs').style.display = 'flex';
+        } else if (viewName === 'otp') {
+            authViewOtp.style.display = 'block';
+            document.getElementById('auth-modal-tabs').style.display = 'none';
+        } else if (viewName === 'forgot') {
+            authViewForgot.style.display = 'block';
+            document.getElementById('auth-modal-tabs').style.display = 'none';
+        }
+    }
+
+    tabSigninBtn.addEventListener('click', () => showAuthView('signin'));
+    tabSignupBtn.addEventListener('click', () => showAuthView('signup'));
+
+    // Close Modal
+    btnLoginClose.addEventListener('click', () => loginModal.classList.remove('active'));
+    if (btnLoginCancel) {
+        btnLoginCancel.addEventListener('click', () => loginModal.classList.remove('active'));
+    }
+
+    // Eye toggles for password fields
+    const toggleSigninPassword = document.getElementById('toggle-signin-password');
+    const toggleSignupPassword = document.getElementById('toggle-signup-password');
+    const loginPasswordInput = document.getElementById('login-password');
+    const registerPasswordInput = document.getElementById('register-password');
+
+    toggleSigninPassword.addEventListener('click', () => {
+        const isPass = loginPasswordInput.type === 'password';
+        loginPasswordInput.type = isPass ? 'text' : 'password';
+        toggleSigninPassword.innerText = isPass ? '🔒' : '👁️';
+    });
+
+    toggleSignupPassword.addEventListener('click', () => {
+        const isPass = registerPasswordInput.type === 'password';
+        registerPasswordInput.type = isPass ? 'text' : 'password';
+        toggleSignupPassword.innerText = isPass ? '🔒' : '👁️';
+    });
+
+    // Forgot password links
+    const linkForgotPassword = document.getElementById('link-forgot-password');
+    const linkForgotBack = document.getElementById('link-forgot-back');
+
+    linkForgotPassword.addEventListener('click', (e) => {
+        e.preventDefault();
+        showAuthView('forgot');
+    });
+
+    linkForgotBack.addEventListener('click', (e) => {
+        e.preventDefault();
+        showAuthView('signin');
+    });
+
+    document.getElementById('forgot-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = document.getElementById('forgot-username').value;
+        alert(`Parolni tiklash kodi ${username} raqamiga/emailiga yuborildi (MOCK).`);
+        showAuthView('signin');
+    });
+
+    // Social Login buttons
+    document.getElementById('btn-google-login').addEventListener('click', () => {
+        simulateSocialLogin('Google');
+    });
+
+    document.getElementById('btn-telegram-login').addEventListener('click', () => {
+        simulateSocialLogin('Telegram');
+    });
+
+    function simulateSocialLogin(provider) {
+        const email = provider === 'Google' ? 'traveler.google@example.com' : 'traveler.telegram@example.com';
+        const name = provider === 'Google' ? 'Google User' : 'Telegram User';
+        
+        const userObj = {
+            id: 'usr-' + Date.now(),
+            name: name,
+            username: email,
+            role: 'traveler',
+            isActive: true
+        };
+        
+        completeLogin(userObj);
+    }
+
+    // OTP Code Handling
+    let pendingRegistration = null;
+    let currentOtpCode = '';
+
+    function startOtpVerification(userObj) {
+        pendingRegistration = userObj;
+        currentOtpCode = Math.floor(1000 + Math.random() * 9000).toString();
+        alert(`🔐 [SMS/Email OTP] Tasdiqlash kodi: ${currentOtpCode}`);
+        
+        otpDigits.forEach(el => el.value = '');
+        otpDigits[0].focus();
+        showAuthView('otp');
+    }
+
+    const otpDigits = [
+        document.getElementById('otp-1'),
+        document.getElementById('otp-2'),
+        document.getElementById('otp-3'),
+        document.getElementById('otp-4')
+    ];
+
+    otpDigits.forEach((el, idx) => {
+        el.addEventListener('input', (e) => {
+            if (e.target.value.length === 1 && idx < 3) {
+                otpDigits[idx + 1].focus();
+            }
+        });
+        el.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && e.target.value.length === 0 && idx > 0) {
+                otpDigits[idx - 1].focus();
+            }
+        });
+    });
+
+    document.getElementById('btn-otp-verify').addEventListener('click', () => {
+        const code = otpDigits.map(el => el.value).join('');
+        if (code === currentOtpCode) {
+            pendingRegistration.isActive = true;
+            
+            let users = JSON.parse(localStorage.getItem('silkroad_users') || '[]');
+            users.push(pendingRegistration);
+            localStorage.setItem('silkroad_users', JSON.stringify(users));
+            
+            if (pendingRegistration.role === 'partner') {
+                triggerPartnerWebhook(pendingRegistration);
+            }
+            
+            alert("Siz muvaffaqiyatli ro'yxatdan o'tdingiz va hisobingiz faollashdi!");
+            completeLogin(pendingRegistration);
+            pendingRegistration = null;
+        } else {
+            alert("Tasdiqlash kodi xato! Iltimos qayta urinib ko'ring.");
+        }
+    });
+
+    document.getElementById('btn-otp-resend').addEventListener('click', () => {
+        currentOtpCode = Math.floor(1000 + Math.random() * 9000).toString();
+        alert(`🔐 [SMS/Email OTP] Yangi tasdiqlash kodi: ${currentOtpCode}`);
+        otpDigits[0].focus();
+    });
+
+    // Register submit handler
+    document.getElementById('register-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('register-name').value.trim();
+        const username = document.getElementById('register-username').value.trim();
+        const password = document.getElementById('register-password').value;
+        const role = document.getElementById('register-role').value;
+        
+        let users = JSON.parse(localStorage.getItem('silkroad_users') || '[]');
+        const existsInSeeded = seededUsers.some(u => u.username.toLowerCase() === username.toLowerCase());
+        const existsInDb = users.some(u => u.username.toLowerCase() === username.toLowerCase());
+        
+        if (existsInSeeded || existsInDb) {
+            alert("Bu email/telefon raqami allaqachon ro'yxatdan o'tgan!");
+            return;
+        }
+        
+        const newUser = {
+            id: 'usr-' + Date.now(),
+            name: name,
+            username: username,
+            role: role,
+            isActive: false
+        };
+        
+        let creds = JSON.parse(localStorage.getItem('silkroad_creds') || '{}');
+        creds[username] = password;
+        localStorage.setItem('silkroad_creds', JSON.stringify(creds));
+        
+        startOtpVerification(newUser);
+    });
+
+    // Login Form Submit Handler
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = document.getElementById('login-username').value.trim();
+        const password = document.getElementById('login-password').value;
+        
+        let matchedUser = null;
+        if (seededCredentials[username] === password) {
+            matchedUser = seededUsers.find(u => u.username === username);
+        } else {
+            let creds = JSON.parse(localStorage.getItem('silkroad_creds') || '{}');
+            if (creds[username] === password) {
+                let users = JSON.parse(localStorage.getItem('silkroad_users') || '[]');
+                matchedUser = users.find(u => u.username === username);
+            }
+        }
+        
+        if (matchedUser) {
+            if (!matchedUser.isActive) {
+                alert("Hisobingiz hali faollashtirilmagan! Iltimos, OTP kodi yordamida ro'yxatdan o'tishni yakunlang.");
+                return;
+            }
+            alert(currentLanguage === 'uz' ? "Tizimga muvaffaqiyatli kirdingiz!" : (currentLanguage === 'en' ? "Successfully logged in!" : "Вы успешно вошли в систему!"));
+            completeLogin(matchedUser);
+        } else {
+            alert(currentLanguage === 'uz' ? "Foydalanuvchi nomi yoki maxfiy parol xato!" : "Invalid username or password!");
+        }
+    });
+
+    // Click outside modal to close
+    window.addEventListener('click', (e) => {
+        if (e.target === loginModal) {
+            loginModal.classList.remove('active');
+        }
+    });
+
+    // Bind logout buttons
+    document.getElementById('btn-traveler-logout').addEventListener('click', logout);
+    document.getElementById('btn-vendor-logout').addEventListener('click', logout);
+    document.getElementById('btn-admin-logout').addEventListener('click', logout);
+}
+
+// Trigger n8n Webhook for Partner Registration
+async function triggerPartnerWebhook(partnerUser) {
+    const webhookUrl = 'https://loyiha1-n8n.p3ddj3.easypanel.host/webhook/partner-register';
+    const logViewer = document.getElementById('admin-webhook-logs');
+    
+    const payload = {
+        userId: partnerUser.id,
+        name: partnerUser.name,
+        phone: partnerUser.username,
+        role: partnerUser.role,
+        region: 'samarkand',
+        status: 'pending_approval',
+        timestamp: new Date().toISOString()
+    };
+    
+    if (logViewer) {
+        logViewer.innerHTML += `<br>[${new Date().toLocaleTimeString()}] Calling n8n webhook...<br>${JSON.stringify(payload, null, 2)}`;
+    }
+    
+    try {
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        if (response.ok) {
+            if (logViewer) logViewer.innerHTML += `<br><span style="color: var(--accent-emerald)">[n8n Success] Webhook called successfully! Status: ${response.status}</span>`;
+            console.log("Partner registration sent to n8n webhook successfully!");
+        } else {
+            if (logViewer) logViewer.innerHTML += `<br><span style="color: var(--accent-terracotta)">[n8n Fail] Webhook failed! Status: ${response.status}</span>`;
+            console.error("Failed to send partner registration to n8n webhook");
+        }
+    } catch (err) {
+        if (logViewer) logViewer.innerHTML += `<br><span style="color: var(--accent-terracotta)">[n8n Error] ${err.message}</span>`;
+        console.error("Error triggering partner registration webhook:", err);
+    }
+}
+
+// Login & Logout Core Logic
+function completeLogin(userObj) {
+    const mockAccessToken = 'access-jwt-' + Math.random().toString(36).substring(2);
+    const mockRefreshToken = 'refresh-jwt-' + Math.random().toString(36).substring(2);
+    
+    authState = {
+        currentUser: userObj,
+        isAuthenticated: true,
+        accessToken: mockAccessToken,
+        refreshToken: mockRefreshToken
+    };
+    
+    localStorage.setItem('silkroad_auth', JSON.stringify(authState));
+    document.cookie = `refresh_token=${mockRefreshToken}; max-age=${7*24*60*60}; path=/; SameSite=Strict; Secure`;
+    
+    loginModal.classList.remove('active');
+    updateLoginButtonState();
+    renderDashboard(userObj.role);
+}
+
+function logout() {
+    authState = {
+        currentUser: null,
+        isAuthenticated: false,
+        accessToken: null,
+        refreshToken: null
+    };
+    localStorage.removeItem('silkroad_auth');
+    document.cookie = "refresh_token=; max-age=0; path=/;";
+    
+    document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.remove('active'));
+    
+    const catalogHeader = document.querySelector('.hero-section');
+    const catalogContent = document.querySelector('.catalog-section');
+    const partnersContent = document.querySelector('.partners-section');
+    const featuredContent = document.querySelector('.featured-section');
+    if (catalogHeader) catalogHeader.style.display = 'block';
+    if (catalogContent) catalogContent.style.display = 'block';
+    if (partnersContent) partnersContent.style.display = 'block';
+    if (featuredContent) featuredContent.style.display = 'block';
+    
+    updateLoginButtonState();
+    alert("Tizimdan muvaffaqiyatli chiqdingiz!");
+}
+
+function updateLoginButtonState() {
+    const btn = document.getElementById('btn-login');
+    if (btn) {
+        if (authState.isAuthenticated && authState.currentUser) {
+            btn.innerText = authState.currentUser.name.split(' ')[0] + " (Chiqish)";
+            btn.onclick = logout;
+        } else {
+            btn.innerText = currentLanguage === 'uz' ? "Kirish" : (currentLanguage === 'en' ? "Login" : "Войти");
+            btn.onclick = () => {
+                // reset modal view to signin
+                const tabSigninBtn = document.getElementById('tab-signin-btn');
+                const authViewSignin = document.getElementById('auth-view-signin');
+                const authViewSignup = document.getElementById('auth-view-signup');
+                const authViewOtp = document.getElementById('auth-view-otp');
+                const authViewForgot = document.getElementById('auth-view-forgot');
+                
+                authViewSignin.style.display = 'block';
+                authViewSignup.style.display = 'none';
+                authViewOtp.style.display = 'none';
+                authViewForgot.style.display = 'none';
+                document.getElementById('auth-modal-tabs').style.display = 'flex';
+                tabSigninBtn.classList.add('active');
+                document.getElementById('tab-signup-btn').classList.remove('active');
+                
+                loginModal.classList.add('active');
+            };
+        }
+    }
+}
+
+// Dashboard Rendering Systems
+function renderDashboard(role) {
+    const catalogHeader = document.querySelector('.hero-section');
+    const catalogContent = document.querySelector('.catalog-section');
+    const partnersContent = document.querySelector('.partners-section');
+    const featuredContent = document.querySelector('.featured-section');
+    
+    if (catalogHeader) catalogHeader.style.display = 'none';
+    if (catalogContent) catalogContent.style.display = 'none';
+    if (partnersContent) partnersContent.style.display = 'none';
+    if (featuredContent) featuredContent.style.display = 'none';
+
+    document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.remove('active'));
+
+    if (role === 'traveler') {
+        const sec = document.getElementById('dashboard-traveler');
+        sec.classList.add('active');
+        
+        document.getElementById('traveler-name').innerText = authState.currentUser.name;
+        document.getElementById('traveler-active-bookings').innerText = itinerary.length;
+        
+        const totalSpent = itinerary.reduce((sum, item) => sum + (item.totalItemPrice || 0), 0);
+        document.getElementById('traveler-total-spent').innerText = `$${totalSpent}`;
+        
+        const listContainer = document.getElementById('traveler-bookings-list');
+        listContainer.innerHTML = '';
+        if (itinerary.length === 0) {
+            listContainer.innerHTML = `<tr><td colspan="7" style="text-align:center; color: var(--text-muted);">Hozircha buyurtmalar mavjud emas. Katalog bo'limidan buyurtma bering.</td></tr>`;
+        } else {
+            itinerary.forEach(b => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>#${b.bookingId}</td>
+                    <td><strong>${b.title}</strong></td>
+                    <td>${b.date}</td>
+                    <td>${b.quantity}</td>
+                    <td>$${b.totalItemPrice}</td>
+                    <td><span class="badge-status status-active">Muvaffaqiyatli</span></td>
+                    <td><button class="btn btn-sm btn-primary" onclick="alert('PDF Vaucher yuklab olindi (MOCK voucher_${b.bookingId}.txt)')">Yuklab olish 📥</button></td>
+                `;
+                listContainer.appendChild(tr);
+            });
+        }
+    } else if (role === 'partner') {
+        const sec = document.getElementById('dashboard-vendor');
+        sec.classList.add('active');
+        
+        document.getElementById('vendor-name').innerText = authState.currentUser.name;
+        renderVendorServices();
+        renderVendorCalendar();
+    } else if (role === 'admin') {
+        const sec = document.getElementById('dashboard-admin');
+        sec.classList.add('active');
+        
+        renderAdminBookings();
+        renderAdminGuides();
+    }
+}
+
+// Vendor Dashboard Mock Services
+let vendorServices = [
+    { type: 'Transport', name: 'Chevrolet Cobalt (Sedan)', region: 'Samarqand', price: 30, status: 'approved' },
+    { type: 'Transport', name: 'Hyundai H-1 (Minivan)', region: 'Toshkent', price: 60, status: 'approved' },
+    { type: 'Mehmonxona', name: 'Yurt Camp Oasis', region: 'Buxoro', price: 45, status: 'approved' }
+];
+
+function renderVendorServices() {
+    const list = document.getElementById('vendor-services-list');
+    list.innerHTML = '';
+    vendorServices.forEach((s, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${s.type}</td>
+            <td><strong>${s.name}</strong></td>
+            <td>${s.region}</td>
+            <td>$${s.price}</td>
+            <td><span class="badge-status status-approved">${s.status === 'approved' ? 'Tasdiqlangan' : 'Kutilmoqda'}</span></td>
+            <td><button class="btn btn-sm btn-secondary" onclick="deleteVendorService(${idx})">O'chirish</button></td>
+        `;
+        list.appendChild(tr);
+    });
+    
+    document.getElementById('vendor-car-count').innerText = `${vendorServices.filter(s => s.type === 'Transport').length} ta`;
+}
+
+function deleteVendorService(idx) {
+    vendorServices.splice(idx, 1);
+    renderVendorServices();
+}
+
+// Add mock services
+document.getElementById('btn-vendor-add-car').addEventListener('click', () => {
+    const name = prompt("Mashina modelini kiriting:", "Chevrolet Lacetti");
+    if (!name) return;
+    const price = parseInt(prompt("Sutkalik ijara narxini ($):", "25")) || 25;
+    vendorServices.push({ type: 'Transport', name: name, region: 'Samarqand', price: price, status: 'approved' });
+    renderVendorServices();
 });
+
+document.getElementById('btn-vendor-add-room').addEventListener('click', () => {
+    const name = prompt("Mehmonxona/Yurt nomini kiriting:", "Boutique Hotel Samarkand");
+    if (!name) return;
+    const price = parseInt(prompt("Xona narxini ($):", "50")) || 50;
+    vendorServices.push({ type: 'Mehmonxona', name: name, region: 'Samarqand', price: price, status: 'approved' });
+    renderVendorServices();
+});
+
+document.getElementById('btn-vendor-add-table').addEventListener('click', () => {
+    const name = prompt("Restoran stol nomini kiriting:", "Chorsu Choyxonasi (Stol #4)");
+    if (!name) return;
+    const price = parseInt(prompt("Depozit narxini ($):", "15")) || 15;
+    vendorServices.push({ type: 'Restoran', name: name, region: 'Samarqand', price: price, status: 'approved' });
+    renderVendorServices();
+});
+
+function renderVendorCalendar() {
+    const cal = document.getElementById('vendor-calendar-view');
+    cal.innerHTML = `
+        <strong>IYUN 2026 Bandlik taqvimi:</strong><br><br>
+        [01-05 Iyun]: Chevrolet Cobalt ➔ Band (Mijoz: Muxriddin)<br>
+        [06-10 Iyun]: Chevrolet Cobalt ➔ Bo'sh<br>
+        [11-15 Iyun]: Yurt Camp Oasis ➔ Band (Mijoz: John Doe)<br>
+        [16-30 Iyun]: Hyundai H-1 ➔ Bo'sh (Mavjud)<br>
+    `;
+}
+
+// Admin Dashboard Mock Bookings
+let mockAdminBookings = [
+    { id: '1782117499209', customer: 'Muxriddin', type: 'Gid', name: "Samarqand Gidi", total: 40, webhook: 'sent' },
+    { id: '1782117499210', customer: 'John Doe', type: 'Transport', name: "Cobalt Transfer", total: 30, webhook: 'sent' }
+];
+
+function renderAdminBookings() {
+    const list = document.getElementById('admin-bookings-list');
+    list.innerHTML = '';
+    mockAdminBookings.forEach(b => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>#${b.id}</td>
+            <td><strong>${b.customer}</strong></td>
+            <td>${b.type}</td>
+            <td>${b.name}</td>
+            <td>$${b.total}</td>
+            <td><span class="badge-status status-active">${b.webhook === 'sent' ? 'Yuborildi' : 'Kutilmoqda'}</span></td>
+        `;
+        list.appendChild(tr);
+    });
+    
+    document.getElementById('admin-total-bookings').innerText = `${mockAdminBookings.length} ta`;
+}
+
+// Admin Pending Guides List
+let mockAdminGuides = [
+    { name: 'Gid Alisher', region: 'Samarqand', languages: 'UZ, EN', type: 'Jonli', status: 'pending' },
+    { name: 'Gid Sabina', region: 'Buxoro', languages: 'RU, EN', type: 'Virtual', status: 'pending' }
+];
+
+function renderAdminGuides() {
+    const list = document.getElementById('admin-guides-list');
+    list.innerHTML = '';
+    mockAdminGuides.forEach((g, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><strong>${g.name}</strong></td>
+            <td>${g.region}</td>
+            <td>${g.languages}</td>
+            <td>${g.type}</td>
+            <td><span class="badge-status status-pending">${g.status === 'pending' ? 'Kutilmoqda' : 'Tasdiqlandi'}</span></td>
+            <td>
+                ${g.status === 'pending' 
+                    ? `<button class="btn btn-sm btn-primary" onclick="approveGuide(${idx})">Tasdiqlash ✔️</button>` 
+                    : `<span style="color: var(--accent-emerald); font-weight: bold;">Tasdiqlandi</span>`
+                }
+            </td>
+        `;
+        list.appendChild(tr);
+    });
+    
+    document.getElementById('admin-pending-guides').innerText = `${mockAdminGuides.filter(g => g.status === 'pending').length} ta`;
+}
+
+function approveGuide(idx) {
+    mockAdminGuides[idx].status = 'approved';
+    renderAdminGuides();
+    alert(`${mockAdminGuides[idx].name} platformada faollashtirildi!`);
+}
 
 // Search Autocomplete Suggestion Logic
 searchInput.addEventListener('input', (e) => {
@@ -3016,4 +3579,5 @@ document.addEventListener('DOMContentLoaded', () => {
     translateUI();
     renderCatalog();
     renderItinerary();
+    initAuth();
 });
