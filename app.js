@@ -2466,7 +2466,7 @@ function closeModal() {
 
 // Send Booking Data to Live n8n Webhook
 async function sendBookingToN8n(bookingItem, item) {
-    const webhookUrl = 'https://loyiha1-n8n.p3ddj3.easypanel.host/webhook-test/silkroad-booking';
+    const webhookUrl = 'https://loyiha1-n8n.p3ddj3.easypanel.host/webhook/silkroad-booking';
     
     // 1. Construct dynamic category-specific details
     let details = {};
