@@ -2470,7 +2470,7 @@ async function sendBookingToN8n(bookingItem, item) {
     
     // 1. Construct dynamic category-specific details
     let details = {};
-    if (item.category === 'transport') {
+    if (item.category === 'transport' || item.category === 'tickets') {
         const qtyVal = document.getElementById('form-quantity') ? parseInt(document.getElementById('form-quantity').value) || 1 : 1;
         const childSeatEl = document.getElementById('form-child-seat');
         const childSeatVal = childSeatEl ? childSeatEl.checked : false;
@@ -2478,7 +2478,7 @@ async function sendBookingToN8n(bookingItem, item) {
             quantity: qtyVal,
             childSeat: childSeatVal,
             region: item.region,
-            vehicleType: item.vehicleType
+            vehicleType: item.category === 'tickets' ? 'Bus/Shuttle' : item.vehicleType
         };
     } else if (item.category === 'guides') {
         const guideLangEl = document.getElementById('form-guide-lang');
@@ -2568,7 +2568,7 @@ async function sendBookingToN8n(bookingItem, item) {
     const payload = {
         bookingId: bookingItem.bookingId,
         serviceId: bookingItem.serviceId,
-        category: item.category,
+        category: item.category === 'tickets' ? 'transport' : item.category,
         title: bookingItem.title,
         basePrice: bookingItem.basePrice,
         quantity: bookingItem.quantity,
@@ -2595,8 +2595,9 @@ async function sendBookingToN8n(bookingItem, item) {
         const restShortName = title.split(' - ')[0];
         let tableLocText = details.tableType === 'indoor' ? 'Zal ichida' : (details.tableType === 'outdoor' ? "Ochiq havoda / Hovuz bo'yida" : 'VIP xona');
         webhookMsg = `🔔 [n8n Webhook Sent] Yangi restoran broni: ${restShortName}, ${details.reservationDate} ${details.reservationTime} ga, ${details.guests} kishi, ${tableLocText}. Mijoz: ${name} (${phone})`;
-    } else if (item.category === 'transport') {
-        webhookMsg = `🔔 [n8n Webhook Sent] Yangi transport broni: ${title}, ${payload.quantity} ta mashina. Mijoz: ${name} (${phone})`;
+    } else if (item.category === 'transport' || item.category === 'tickets') {
+        const unit = item.category === 'tickets' ? 'chipta' : 'ta mashina';
+        webhookMsg = `🔔 [n8n Webhook Sent] Yangi transport broni: ${title}, ${payload.quantity} ${unit}. Mijoz: ${name} (${phone})`;
     } else if (item.category === 'guides') {
         webhookMsg = `🔔 [n8n Webhook Sent] Yangi gid broni: ${title}, Tili: ${details.spokenLanguage.toUpperCase()}, Sanasi: ${payload.date}. Mijoz: ${name} (${phone})`;
     } else if (item.category === 'crafts') {
